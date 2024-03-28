@@ -1,13 +1,11 @@
 package tr.edu.ku.comp302;
 
-/**
- * Hello world!
- *
- */
+import visual.LevelPanel.java;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        LevelPanel lp = new LevelPanel("Lance");
     }
 }

@@ -1,3 +1,4 @@
+package elements.barriers;
 import java.awt.Dimension;
 import java.awt.Point;
 
@@ -5,7 +6,7 @@ public class SimpleBarrier extends Barrier {
 
     private static Integer DEFAULT_HP = 1;
     private static Integer DEFAULT_VALUE = 100;
-    private static String DEFAULT_IMAGE_PATH = "Graphical-Assets/BlueGem.png";
+    private static String DEFAULT_IMAGE_PATH = "Game/Graphical-Assets/BlueGem.png";
     private static Integer DEFAULT_WIDTH = 50;
     private static Integer DEFAULT_HEIGHT = 20;
     public SimpleBarrier(Point p) {

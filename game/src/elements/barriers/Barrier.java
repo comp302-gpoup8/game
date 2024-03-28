@@ -1,8 +1,10 @@
+package elements.barriers;
+import elements.GameElement;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import java.awt.Dimension;
 
+import java.awt.Dimension;
 
 public abstract class Barrier extends GameElement {
     /** Hitpoints of the barrier */

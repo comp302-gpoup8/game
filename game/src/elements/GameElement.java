@@ -1,3 +1,4 @@
+package elements;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -11,21 +12,21 @@ import javax.swing.JPanel;
      * such as the fireball, the staff, and the different barrier types.
      * It is anything within a level that has a image, and can intersect with another element.
  */
-public abstract class GameElement extends JPanel {
+public abstract class GameElement extends JPanel{
     protected Point point; //Top left corner of the element.
     protected Dimension size;
-    protected ImageIcon imageIcon;
+    public ImageIcon imageIcon;
 
     public GameElement(Point p, Dimension s, String iPath){
         point = p;
         size = s;
-        imageIcon = new ImageIcon("iPath");
+        imageIcon = new ImageIcon(iPath);
     }
 
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(imageIcon.getImage(), point.x, point.y, (int) size.getWidth(), (int) size.getHeight(), this);
+        g2d.drawImage(imageIcon.getImage(), 0, 0, size.width, size.height, this);
     }
 
     public Point getPoint(){
