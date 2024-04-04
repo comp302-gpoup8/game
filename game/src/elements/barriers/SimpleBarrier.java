@@ -1,16 +1,15 @@
-package elements.barriers;
+package domain.barriers;
+
 import java.awt.Dimension;
 import java.awt.Point;
 
 public class SimpleBarrier extends Barrier {
 
-    private static Integer DEFAULT_HP = 1;
-    private static Integer DEFAULT_VALUE = 100;
-    private static String DEFAULT_IMAGE_PATH = "Game/Graphical-Assets/BlueGem.png";
-    private static Integer DEFAULT_WIDTH = 50;
-    private static Integer DEFAULT_HEIGHT = 20;
-    public SimpleBarrier(Point p) {
-        super(p, new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT), DEFAULT_IMAGE_PATH, DEFAULT_HP, DEFAULT_VALUE);
+    protected static Integer DEFAULT_HITPOINTS = 1;
+    protected static String DEFAULT_IMAGE_PATH = "Game/Graphical-Assets/BlueGem.png";
+
+    public SimpleBarrier(Point position, Dimension size) {
+        super(position, size, DEFAULT_HITPOINTS, DEFAULT_IMAGE_PATH);
     }
-    
+
 }

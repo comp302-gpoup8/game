@@ -1,51 +1,28 @@
-package elements.barriers;
-import elements.GameElement;
+package domain.barriers;
+
+import javax.swing.JLabel;
 import java.awt.Point;
-import java.awt.Rectangle;
-
-
 import java.awt.Dimension;
+import java.awt.Rectangle;
+import javax.swing.ImageIcon;
 
-public abstract class Barrier extends GameElement {
-    /** Hitpoints of the barrier */
-    protected Integer hitPoints;
-    /** The score that the player will gain upon destroying the barrier */
-    protected Integer value;
-    /** The rectangle that the image is placed in. */
-    protected Rectangle rectangle;
+public abstract class Barrier extends JLabel {
+    protected Point position;
+    protected Dimension size;
+    protected Rectangle hitbox;
+    protected Integer hitpoints;
+    protected ImageIcon image;
 
-    public Barrier(Point p, Dimension s, String iPath, int hp, int v){
-        super(p, s, iPath);
-        hitPoints = hp;
-        value = v;
-        rectangle = new Rectangle(p, s);
+    public Barrier(Point position, Dimension size, Integer hitpoints, String imagePath) {
+        this.position = position;
+        this.size = size;
+        this.hitpoints = hitpoints;
+        this.image = new ImageIcon(imagePath);
+        this.hitbox = new Rectangle(position, size);
+
+        // Set the JLabel properties
+        setIcon(this.image);
+        setSize(this.size);
+        setLocation(this.position.x, this.position.y);
     }
-    
-    // GAME RELEVANT METHODS
-    public void hit(){
-        hitPoints--;
-    }
-
-    public boolean isDestroyed(){
-        return hitPoints <= 0;
-    }
-
-    // GET METHODS
-    public int getHp(){
-        return hitPoints;
-    }
-
-    public int getValue(){
-        return value;
-    }
-
-    // SET METHODS
-    public void setHp(int hp){
-        hitPoints = hp;
-    }
-
-    public void setVal(int v){
-        value = v;
-    }
-
 }
