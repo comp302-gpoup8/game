@@ -6,11 +6,12 @@ import java.awt.Rectangle;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
 /**
  * Abstract Barrier:
  * Contains the fields shared for every barrier type and the constructor
  */
-public abstract class Barrier extends JLabel { 
+public abstract class Barrier extends JLabel implements BarrierITF { 
     protected Rectangle hitBox;
     protected Integer hitpoints;
 
