@@ -28,13 +28,11 @@ public class GamePanel extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         bLabel = new BackgroundLabel();
-        bLabel.setBounds(0, 0, getWidth(), getHeight());
         add(bLabel);
+
     }
 
     private void displayGamePanel(){
-        staff.setVisible(true);
-        bLabel.setVisible(true);
         revalidate();
         repaint();
         setVisible(true);
@@ -42,12 +40,14 @@ public class GamePanel extends JFrame{
     }
 
     public void addLevel(Level level){
-        // getContentPane().removeAll();
+        getContentPane().removeAll();
         LevelInterface.placeBarriers(level);
         level.barriers.forEach(e -> add(e));
-        Point staffPosition = new Point(getWidth() / 2, getHeight() - 100);
-        Dimension staffSize = new Dimension(120, 20);
+        level.barriers.forEach(e -> e.setVisible(true));
+        Point staffPosition = new Point((getWidth() / 2) - 85, getHeight() - 100);
+        Dimension staffSize = new Dimension(170, 32);
         staff = new Staff(staffPosition, staffSize);
+        add(staff);
     }
 
 

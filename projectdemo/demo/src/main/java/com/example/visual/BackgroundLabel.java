@@ -10,5 +10,6 @@ public class BackgroundLabel extends JLabel {
 
     public BackgroundLabel(){
         backgroundImage = new ImageIcon(DEFAULT_IMG_PATH);
+        setIcon(backgroundImage);
     }
 }
