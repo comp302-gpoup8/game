@@ -17,7 +17,7 @@ public class Staff extends JLabel implements StaffMovement {
     public Staff (Point p, Dimension d){
         createHitbox(p, d);
         placeImageIcon(DEFAULT_IMG_PATH);
-        speed = 5;
+        speed = 120;
     }
     
     private void createHitbox(Point p, Dimension d) {

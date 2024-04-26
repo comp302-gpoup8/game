@@ -12,6 +12,7 @@ public class Main {
         Level level = new Level("RandomLevel");
         LevelRandomizer.randomizeLevel(level, 75);
         Game gp = new Game(level);
+        gp.run();
         
     }
 

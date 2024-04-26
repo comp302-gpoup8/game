@@ -73,6 +73,11 @@ public class GamePanel extends JFrame{
         add(bLabel);
     }
 
+    public void refreshLevel(){
+        revalidate();
+        repaint();
+    }
+
     public Controller getController(){
         return controller;
     }

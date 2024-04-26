@@ -14,6 +14,7 @@ public class Game implements Serializable {
 
     private static final long serialVersionIUD = 1L;
     public GamePanel panel;
+    public Controller controller;
     public Level level;
     public FireBall fBall;
     public Integer remainingLives;
@@ -24,21 +25,21 @@ public class Game implements Serializable {
         panel = new GamePanel(level);
         remainingLives = 3;
         score = 0;
+        controller = panel.getController();
     }
 
     public void run(){
-        Controller ct = panel.getController();
-        createFireBall();
         while (continuePlaying()){
             panel.displayGamePanel();
-            while (ct.direction == 0){
-                int command = ct.getDirection();
+            while (controller.direction == 0){
+                int command = controller.getDirection();
                 switch (command) {
                     case -1 -> StaffMovement.moveLeft(panel.getStaff());
                     case 1 -> StaffMovement.moveRight(panel.getStaff());
-                    case 2 -> BallMovement.launch(fBall);
+                    case 2 -> initFireBall();
                 }
             }
+            panel.refreshLevel();
         }
     }
 
@@ -46,8 +47,10 @@ public class Game implements Serializable {
         return remainingLives > 0 && !LevelInterface.cleared(level);
     }
 
-    private void createFireBall(){
-        FireBall fBall = new FireBall(panel.getStaff().getLocation());
+    public void initFireBall(){
+        fBall = new FireBall(panel.getStaff().getLocation());
         panel.add(fBall);
+        panel.refreshLevel();
+        BallMovement.launch(fBall);
     }
 }
