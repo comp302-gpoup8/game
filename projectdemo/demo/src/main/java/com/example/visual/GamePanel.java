@@ -69,10 +69,7 @@ public class GamePanel extends JFrame{
         add(staff);
         bLabel = new BackgroundLabel();
         bLabel.setBounds(0, 0, 1204, 678);
-        add(bLabel);
         placeBarriers(level);
+        add(bLabel);
     }
-
-
-
 }
