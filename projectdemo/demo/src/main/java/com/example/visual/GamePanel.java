@@ -23,12 +23,11 @@ public class GamePanel extends JFrame{
     }
 
     private void initGameFrame(){
-        setSize(1210, 680);
+        setSize(1204, 678);
         setTitle("Single Player");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        bLabel = new BackgroundLabel();
-        add(bLabel);
+
 
     }
 
@@ -41,13 +40,16 @@ public class GamePanel extends JFrame{
 
     public void addLevel(Level level){
         getContentPane().removeAll();
-        LevelInterface.placeBarriers(level);
-        level.barriers.forEach(e -> add(e));
-        level.barriers.forEach(e -> e.setVisible(true));
+
         Point staffPosition = new Point((getWidth() / 2) - 85, getHeight() - 100);
         Dimension staffSize = new Dimension(170, 32);
         staff = new Staff(staffPosition, staffSize);
         add(staff);
+        bLabel = new BackgroundLabel();
+        bLabel.setBounds(0, 0, 1204, 678);
+        add(bLabel);
+        LevelInterface.placeBarriers(level);
+        level.barriers.forEach(e -> add(e));
     }
 
 
