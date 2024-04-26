@@ -30,14 +30,13 @@ public class GamePanel extends JFrame{
         bLabel = new BackgroundLabel();
         bLabel.setBounds(0, 0, getWidth(), getHeight());
         add(bLabel);
-        bLabel.setVisible(true);
-
     }
 
     private void displayGamePanel(){
         staff.setVisible(true);
-        // revalidate();
-        // repaint();
+        bLabel.setVisible(true);
+        revalidate();
+        repaint();
         setVisible(true);
         setFocusable(true);
     }
