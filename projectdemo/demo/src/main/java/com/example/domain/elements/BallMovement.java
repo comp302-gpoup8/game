@@ -1,4 +1,4 @@
-package com.example.elements;
+package com.example.domain.elements;
 
 import java.awt.Point;
 

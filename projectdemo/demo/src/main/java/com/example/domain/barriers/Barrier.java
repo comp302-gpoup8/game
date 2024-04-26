@@ -1,4 +1,4 @@
-package com.example.barriers;
+package com.example.domain.barriers;
 
 import java.awt.Point;
 import java.awt.Dimension; 

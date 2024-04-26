@@ -1,4 +1,4 @@
-package com.example.barriers;
+package com.example.domain.barriers;
 
 public interface BarrierITF {
 
