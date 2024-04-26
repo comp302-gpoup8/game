@@ -31,7 +31,7 @@ public class GamePanel extends JFrame{
 
     }
 
-    private void displayGamePanel(){
+    public void displayGamePanel(){
         revalidate();
         repaint();
         setVisible(true);
@@ -71,5 +71,13 @@ public class GamePanel extends JFrame{
         bLabel.setBounds(0, 0, 1204, 678);
         placeBarriers(level);
         add(bLabel);
+    }
+
+    public Controller getController(){
+        return controller;
+    }
+
+    public Staff getStaff(){
+        return staff;
     }
 }

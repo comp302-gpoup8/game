@@ -20,6 +20,7 @@ public class Controller {
                switch (keyCode){
                 case KeyEvent.VK_LEFT, KeyEvent.VK_A -> direction = -1;
                 case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> direction = 1;
+                case KeyEvent.VK_SPACE -> direction = 2;
                }
             }
 
