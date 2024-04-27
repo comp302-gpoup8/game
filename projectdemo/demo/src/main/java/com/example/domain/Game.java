@@ -1,5 +1,6 @@
 package com.example.domain;
 
+import java.awt.Point;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -33,9 +34,14 @@ public class Game implements Serializable {
             while (controller.direction == 0){
                 int command = controller.getDirection();
                 switch (command) {
-                    case -1 -> StaffMovement.moveLeft(panel.getStaff());
-                    case 1 -> StaffMovement.moveRight(panel.getStaff());
-                    case 2 -> BallMovement.launch(panel.getBall());
+                    case -1:
+                        StaffMovement.moveLeft(panel.getStaff());
+                        break;
+                    case 1:
+                        StaffMovement.moveRight(panel.getStaff());
+                        break;
+                    case 2:
+                        BallMovement.launch(panel.getBall(), new Point(1, 1));
                 }
                 panel.refreshLevel();
             }
