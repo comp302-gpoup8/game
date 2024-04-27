@@ -12,7 +12,7 @@ public interface BallMovement {
     public static void move(FireBall f){
         addPoints(f.position, f.direction);
         checkBounds(f);
-        updatePosition(f);
+        // updatePosition(f);
     }
 
     public static Point addPoints(Point p, Point q){
@@ -25,7 +25,7 @@ public interface BallMovement {
         if (y - rad <= 0 || y + rad >= 1200) f.direction.y = -f.direction.y;
     }
 
-    public static void updatePosition(FireBall f){
-        f.setLocation(f.position.x - 11, f.position.y - 11);
-    }
+    // public static void updatePosition(FireBall f){
+    //     f.setLocation(f.position.x - 11, f.position.y - 11);
+    // }
 }

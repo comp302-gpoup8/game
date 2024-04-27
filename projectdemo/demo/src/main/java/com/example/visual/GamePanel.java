@@ -5,6 +5,7 @@ import java.awt.Point;
 import javax.swing.JFrame;
 
 import com.example.domain.barriers.Barrier;
+import com.example.domain.elements.FireBall;
 import com.example.domain.elements.Staff;
 import com.example.domain.levels.Level;
 
@@ -13,6 +14,7 @@ public class GamePanel extends JFrame{
     BackgroundLabel bLabel;
     Controller controller;
     Staff staff;
+    FireBall ball;
 
     public GamePanel(Level level){
         initGameFrame();
@@ -27,8 +29,6 @@ public class GamePanel extends JFrame{
         setTitle("Single Player");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-
-
     }
 
     public void displayGamePanel(){
@@ -62,16 +62,33 @@ public class GamePanel extends JFrame{
 
     public void addLevel(Level level){
         getContentPane().removeAll();
+ 
+        addFireBall();
+        addStaff();
+        placeBarriers(level);
+        addBackgroundImage();
+    }
 
+    public void addFireBall() {
+        Point ballStart = new Point((getWidth() / 2) - 20, getHeight() - 130);
+        Dimension ballSize = new Dimension(44, 44);
+        ball = new FireBall(ballStart, ballSize);
+        add(ball);
+    }
+
+    public void addStaff(){
         Point staffPosition = new Point((getWidth() / 2) - 85, getHeight() - 100);
         Dimension staffSize = new Dimension(170, 32);
         staff = new Staff(staffPosition, staffSize);
         add(staff);
+    }
+
+    public void addBackgroundImage(){
         bLabel = new BackgroundLabel();
         bLabel.setBounds(0, 0, 1204, 678);
-        placeBarriers(level);
         add(bLabel);
     }
+
 
     public void refreshLevel(){
         revalidate();
@@ -84,5 +101,9 @@ public class GamePanel extends JFrame{
 
     public Staff getStaff(){
         return staff;
+    }
+
+    public FireBall getBall() {
+        return ball;
     }
 }
