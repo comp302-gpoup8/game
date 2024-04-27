@@ -12,6 +12,7 @@ public abstract class Barrier extends GameObject {
     public Barrier(Point p, Dimension d, String imagePath, Integer hp){
         super(p, d, imagePath);
         hitPoints = hp;
+
     }
 
     public void reduceHp(int damage){

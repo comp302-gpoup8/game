@@ -11,10 +11,13 @@ public abstract class GameObject extends JLabel {
     
     protected Rectangle hitBox;
     protected ImageIcon icon;
+    protected Integer speed;
+    protected Point direction;
 
     public GameObject(Point p, Dimension d, String imagePath){
         createHitbox(p, d);
         placeImageIcon(imagePath);
+        defaultMovement();
     }
 
     private void createHitbox(Point p, Dimension d){
@@ -28,12 +31,25 @@ public abstract class GameObject extends JLabel {
         setLocation(hitBox.getLocation());
     }
 
+    private void defaultMovement(){
+        speed = 0;
+        direction = new Point(0, 0);
+    }
+
     public Rectangle getHitBox(){
         return hitBox;
     }
 
     public ImageIcon getIcon(){
         return icon;
+    }
+
+    public int getSpeed(){
+        return speed;
+    }
+
+    public void setSpeed(int s){
+        speed = s;
     }
 
 }
