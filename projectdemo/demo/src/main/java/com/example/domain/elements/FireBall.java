@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class FireBall extends JLabel implements BallMovement{
-    public static String DEFAULT_IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/200Fireball.png";
+    public static String DEFAULT_IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/Fireball.png";
     public Point position, direction;
     public Dimension size;
     public Integer speed;
@@ -16,7 +16,8 @@ public class FireBall extends JLabel implements BallMovement{
 
     public FireBall(Point p, Dimension d){
         createHitbox(p, d);
-        speed = 20;
+        direction = new Point(-1,-1);
+        speed = 0;
         placeImageIcon(DEFAULT_IMG_PATH);
     }
     

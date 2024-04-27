@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 
 import com.example.domain.barriers.Barrier;
 import com.example.domain.barriers.BarrierITF;
+import com.example.domain.barriers.ExplosiveBarrier;
+import com.example.domain.barriers.ReinforcedBarrier;
+import com.example.domain.barriers.RewardingBarrier;
+import com.example.domain.barriers.SimpleBarrier;
 import com.example.domain.elements.FireBall;
 import com.example.domain.elements.Staff;
 
@@ -26,6 +30,11 @@ public class GameManager {
                 checkBounds(ball);
             }
         }
+    }
+
+    public void launch(FireBall f){
+        f.speed = 20;
+        move(f);
     }
 
     public void move(FireBall f){
@@ -67,10 +76,10 @@ public class GameManager {
 
     public void collision(FireBall f, JLabel e){
         if (e instanceof Barrier){
-            Barrier bar = (Barrier) e;
-            BarrierITF.reduceHp(bar);
+            Barrier bar = barrierParser((Barrier) e);
             if (BarrierITF.isDestroyed(bar)){
                 game.level.barriers.remove(bar);
+                elements.remove(bar);
                 game.panel.refreshLevel();
             }
             bounce(f);
@@ -82,5 +91,16 @@ public class GameManager {
     public void bounce(FireBall f){
         f.direction.x = -f.direction.x;
         f.direction.y = -f.direction.y;
+    }
+
+    public Barrier barrierParser(Barrier e){
+        if (e instanceof SimpleBarrier){
+            return (SimpleBarrier) e;
+        } else if (e instanceof RewardingBarrier){
+            return (RewardingBarrier) e;
+        } else if (e instanceof ExplosiveBarrier){
+            return (ExplosiveBarrier) e;
+        }
+        return (ReinforcedBarrier) e;
     }
 }

@@ -12,8 +12,8 @@ import javax.swing.ImageIcon;
  * Contains the fields shared for every barrier type and the constructor
  */
 public abstract class Barrier extends JLabel implements BarrierITF { 
-    protected Rectangle hitBox;
-    protected Integer hitpoints;
+    public Rectangle hitBox;
+    public Integer hitpoints;
 
     public Barrier(Point p, Dimension d, Integer hp, String imagePath){
         createHitbox(p, d);

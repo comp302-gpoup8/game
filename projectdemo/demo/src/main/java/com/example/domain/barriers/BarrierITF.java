@@ -7,6 +7,10 @@ public interface BarrierITF {
     }
 
     public static boolean isDestroyed(Barrier barrier){
-        return barrier.hitpoints <= 0;
+        try{
+            return barrier.hitpoints <= 0;
+        } catch (NullPointerException e){
+            return true;
+        }
     }
 }

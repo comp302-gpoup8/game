@@ -71,7 +71,7 @@ public class GamePanel extends JFrame{
 
     public void addFireBall() {
         Point ballStart = new Point((getWidth() / 2) - 20, getHeight() - 130);
-        Dimension ballSize = new Dimension(44, 44);
+        Dimension ballSize = new Dimension(22, 22);
         ball = new FireBall(ballStart, ballSize);
         add(ball);
     }

@@ -1,10 +1,11 @@
 package com.example.domain;
 
-import java.awt.Point;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import com.example.domain.elements.BallMovement;
+import javax.swing.JLabel;
+
 import com.example.domain.elements.StaffMovement;
 import com.example.domain.levels.Level;
 import com.example.domain.levels.LevelInterface;
@@ -15,6 +16,7 @@ public class Game implements Serializable {
     @Serial
     private static final long serialVersionIUD = 1L;
     public GamePanel panel;
+    public GameManager gManager;
     public Controller controller;
     public Level level;
     public Integer remainingLives;
@@ -26,26 +28,47 @@ public class Game implements Serializable {
         remainingLives = 3;
         score = 0;
         controller = panel.getController();
+        loadGameManager();
     }
 
-    public void run(){
-        while (continuePlaying()){
+    public void loadGameManager(){
+        ArrayList<JLabel> elements = new ArrayList<>();
+        elements.add(panel.getBall());
+        elements.add(panel.getStaff());
+        level.barriers.forEach(e -> elements.add(e));
+        gManager = new GameManager(this, elements);
+    }
+
+    public void run() {
+        while (continuePlaying()) {
             panel.displayGamePanel();
-            while (controller.direction == 0){
+
+            gManager.updateElements(); 
+            gManager.checkCollisions();
+            if (panel.getBall().speed > 0) {
+                gManager.move(panel.getBall());
+            }
+
+            if (controller.direction == 0) {
                 int command = controller.getDirection();
                 switch (command) {
-                    case -1:
+                    case -1: 
                         StaffMovement.moveLeft(panel.getStaff());
                         break;
-                    case 1:
+                    case 1: 
                         StaffMovement.moveRight(panel.getStaff());
                         break;
-                    case 2:
-                        BallMovement.launch(panel.getBall(), new Point(1, 1));
+                    case 2: 
+                        gManager.launch(panel.getBall());
+                        break;
                 }
-                panel.refreshLevel();
+                panel.refreshLevel(); 
+                try {
+                    Thread.sleep(16);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
-            panel.refreshLevel();
         }
     }
 
