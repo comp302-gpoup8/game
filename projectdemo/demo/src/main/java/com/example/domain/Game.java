@@ -48,26 +48,25 @@ public class Game implements Serializable {
             if (panel.getBall().speed > 0) {
                 gManager.move(panel.getBall());
             }
-
-            if (controller.direction == 0) {
-                int command = controller.getDirection();
-                switch (command) {
-                    case -1: 
-                        StaffMovement.moveLeft(panel.getStaff());
-                        break;
-                    case 1: 
-                        StaffMovement.moveRight(panel.getStaff());
-                        break;
-                    case 2: 
-                        gManager.launch(panel.getBall());
-                        break;
-                }
-                panel.refreshLevel(); 
-                try {
-                    Thread.sleep(16);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+            int command = controller.getDirection();
+            switch (command) {
+                case -1: 
+                    StaffMovement.moveLeft(panel.getStaff());
+                    break;
+                case 1: 
+                    StaffMovement.moveRight(panel.getStaff());
+                    break;
+                case 2: 
+                    gManager.launch(panel.getBall());
+                    break;
+                default:
+                    break;
+            }
+            panel.refreshLevel(); 
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }
     }

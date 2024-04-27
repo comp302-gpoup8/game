@@ -18,6 +18,7 @@ public abstract class Barrier extends JLabel implements BarrierITF {
     public Barrier(Point p, Dimension d, Integer hp, String imagePath){
         createHitbox(p, d);
         placeImageIcon(imagePath);
+        hitpoints = hp;
     }
 
     private void createHitbox(Point p, Dimension d){

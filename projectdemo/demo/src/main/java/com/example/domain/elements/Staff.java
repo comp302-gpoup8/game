@@ -12,7 +12,7 @@ public class Staff extends JLabel implements StaffMovement {
     protected Rectangle hitBox;
     protected Integer speed;
     protected ImageIcon image;
-    protected static String DEFAULT_IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/200Player.png";
+    protected static String DEFAULT_IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/Player.png";
 
     public Staff (Point p, Dimension d){
         createHitbox(p, d);

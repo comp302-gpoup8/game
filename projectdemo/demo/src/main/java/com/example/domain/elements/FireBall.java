@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class FireBall extends JLabel implements BallMovement{
+public class FireBall extends JLabel{
     public static String DEFAULT_IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/Fireball.png";
     public Point position, direction;
     public Dimension size;

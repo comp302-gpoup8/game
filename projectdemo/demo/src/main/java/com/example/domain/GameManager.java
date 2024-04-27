@@ -1,6 +1,8 @@
 package com.example.domain;
 
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.Serializable;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -13,7 +15,7 @@ import com.example.domain.barriers.SimpleBarrier;
 import com.example.domain.elements.FireBall;
 import com.example.domain.elements.Staff;
 
-public class GameManager {
+public class GameManager implements Serializable {
     private Game game;
     private List<JLabel> elements;
     
@@ -33,7 +35,7 @@ public class GameManager {
     }
 
     public void launch(FireBall f){
-        f.speed = 20;
+        f.speed = 4;
         move(f);
     }
 
@@ -46,11 +48,11 @@ public class GameManager {
     public void checkBounds(FireBall f){
         int x = f.position.x, y = f.position.y, r = f.size.height / 2;
 
-        if (x - r <= 0 || x + r >= 800){
+        if (x - r <= 0 || x + r >= 1200){
             f.direction.x = -f.direction.x;
         }
 
-        if (y - r <= 0 || y + r >= 1200){
+        if (y - r <= 0 || y + r >= 680){
             f.direction.y = -f.direction.y;
         }
     }
@@ -76,21 +78,23 @@ public class GameManager {
 
     public void collision(FireBall f, JLabel e){
         if (e instanceof Barrier){
+            bounce(f, e);
             Barrier bar = barrierParser((Barrier) e);
+            BarrierITF.reduceHp(bar);
             if (BarrierITF.isDestroyed(bar)){
-                game.level.barriers.remove(bar);
                 elements.remove(bar);
                 game.panel.refreshLevel();
             }
-            bounce(f);
         } else if (e instanceof Staff){
-            bounce(f);
+            bounce(f, e);
         }
     }
 
-    public void bounce(FireBall f){
-        f.direction.x = -f.direction.x;
-        f.direction.y = -f.direction.y;
+    public void bounce(FireBall f, JLabel e) {
+        Point normal = new Point(0, (f.position.y < e.getY()) ? 1 : -1);
+        int dotProduct = f.direction.x * normal.x + f.direction.y * normal.y;
+        f.direction.x = f.direction.x - 2 * dotProduct * normal.x;
+        f.direction.y = f.direction.y - 2 * dotProduct * normal.y;
     }
 
     public Barrier barrierParser(Barrier e){
