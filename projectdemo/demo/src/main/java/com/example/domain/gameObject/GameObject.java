@@ -52,4 +52,12 @@ public abstract class GameObject extends JLabel {
         speed = s;
     }
 
+    public Point getDirection(){
+        return direction;
+    }
+
+    public void setDirection(Point p){
+        direction = p;
+    }
+
 }
