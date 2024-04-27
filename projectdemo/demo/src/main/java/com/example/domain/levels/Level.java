@@ -17,4 +17,16 @@ public class Level implements Serializable{
         levelName = name;
         barriers = new ArrayList<>();
     }
+
+    public void addBarrier(Barrier bar){
+        barriers.add(bar);
+    }
+
+    public void removeBarrier(Barrier bar){
+        barriers.remove(bar);
+    }
+
+    public boolean isCleared(){
+        return barriers.isEmpty();
+    }
 }
