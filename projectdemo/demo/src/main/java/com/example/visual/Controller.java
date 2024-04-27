@@ -33,13 +33,6 @@ public class Controller {
     }
 
     public int getDirection(){
-        // while (direction == 0) {
-        //     try {
-        //         Thread.sleep(10);
-        //     } catch (InterruptedException e){
-        //         e.printStackTrace();
-        //     }
-        // }
         int temp = direction;
         direction = 0;
         return temp;

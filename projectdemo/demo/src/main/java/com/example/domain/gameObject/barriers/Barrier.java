@@ -22,4 +22,8 @@ public abstract class Barrier extends GameObject {
     public boolean isDestroyed(){
         return hitPoints <= 0;
     }
+
+    public int getHitpoints(){
+        return hitPoints;
+    }
 }

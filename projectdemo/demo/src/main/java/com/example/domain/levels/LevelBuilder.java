@@ -16,7 +16,7 @@ public class LevelBuilder {
     private Dimension BARRIER_SIZE = new Dimension(51, 20);
     private Integer difficulty, simpleCount, expCount, firmCount, rewCount;
 
-    public void prompt(){
+    public Level prompt(){
         Scanner sc = new Scanner(System.in);
         Level level = new Level("Single-Player Level");
         askDifficulty(sc);
@@ -24,6 +24,8 @@ public class LevelBuilder {
             case 1,2,3 -> randomizeLevel(level, difficulty);
             case 0 -> buildMode(level, sc);
         }
+        sc.close();
+        return level;
     }
 
     public void randomizeLevel(Level level, int difficulty){
@@ -57,7 +59,7 @@ public class LevelBuilder {
         System.out.println("3: Hard");
         
         int choice = s.nextInt();
-        switch (difficulty) {
+        switch (choice) {
             case 0,1,2,3 -> difficulty = choice;
             default -> difficulty = 2;
         }

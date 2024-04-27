@@ -33,7 +33,7 @@ public abstract class GameObject extends JLabel {
 
     private void defaultMovement(){
         speed = 0;
-        direction = new Point(0, 0);
+        direction = new Point(-1, -1);
     }
 
     public Rectangle getHitBox(){
