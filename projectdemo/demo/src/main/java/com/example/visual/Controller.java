@@ -21,6 +21,7 @@ public class Controller {
                 case KeyEvent.VK_LEFT, KeyEvent.VK_A -> direction = -1;
                 case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> direction = 1;
                 case KeyEvent.VK_SPACE -> direction = 2;
+                case KeyEvent.VK_X -> direction = 9;
                }
             }
 

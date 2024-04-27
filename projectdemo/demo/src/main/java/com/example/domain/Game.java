@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import com.example.SaveManager;
 import com.example.domain.elements.StaffMovement;
 import com.example.domain.levels.Level;
 import com.example.domain.levels.LevelInterface;
@@ -17,18 +18,21 @@ public class Game implements Serializable {
     private static final long serialVersionIUD = 1L;
     public GamePanel panel;
     public GameManager gManager;
-    public Controller controller;
     public Level level;
     public Integer remainingLives;
     public Integer score;
+    public transient Controller controller;
+
 
     public Game(Level lv){
-        level = lv;
-        panel = new GamePanel(level);
-        remainingLives = 3;
-        score = 0;
-        controller = panel.getController();
-        loadGameManager();
+        if (!load()){
+            level = lv;
+            panel = new GamePanel(level);
+            remainingLives = 3;
+            score = 0;
+            controller = panel.getController();
+            loadGameManager();
+        }
     }
 
     public void loadGameManager(){
@@ -59,6 +63,8 @@ public class Game implements Serializable {
                 case 2: 
                     gManager.launch(panel.getBall());
                     break;
+                case 9:
+                    saveAndExit();
                 default:
                     break;
             }
@@ -73,5 +79,34 @@ public class Game implements Serializable {
 
     private boolean continuePlaying(){
         return remainingLives > 0 && !LevelInterface.cleared(level);
+    }
+
+    public boolean load(){
+        SaveManager sv = new SaveManager();
+        Game savedGame = sv.loadSave("projectdemo/demo/src/main/java/com/example/game.sr");
+        if (savedGame != null){
+            panel = savedGame.panel;
+            panel.resetController();
+            panel.getBall().speed = 0;
+            gManager = savedGame.gManager;
+            controller = panel.getController();
+            level = savedGame.level;
+            remainingLives = savedGame.remainingLives;
+            score = savedGame.score;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void save(){
+        SaveManager sv = new SaveManager();
+        sv.saveGame(this, "projectdemo/demo/src/main/java/com/example/game.sr");
+    }
+
+    public void saveAndExit(){
+        save();
+        System.out.println("Saved! Exitting!");
+        System.exit(0);
     }
 }

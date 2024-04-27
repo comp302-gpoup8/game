@@ -13,7 +13,7 @@ import com.example.domain.levels.Level;
 public class GamePanel extends JFrame{
     
     BackgroundLabel bLabel;
-    Controller controller;
+    transient Controller controller;
     Staff staff;
     FireBall ball;
     Level cLevel;
@@ -106,6 +106,12 @@ public class GamePanel extends JFrame{
 
     public Controller getController(){
         return controller;
+    }
+
+    public void resetController() {
+        // removeKeyListener(controller.keyListener);
+        controller = new Controller();
+        addKeyListener(controller.keyListener);
     }
 
     public Staff getStaff(){
