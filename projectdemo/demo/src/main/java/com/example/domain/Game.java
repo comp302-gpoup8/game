@@ -46,7 +46,7 @@ public class Game implements Serializable {
             }
             panel.refreshLevel();
             try {
-                Thread.sleep(20);
+                Thread.sleep(16);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
