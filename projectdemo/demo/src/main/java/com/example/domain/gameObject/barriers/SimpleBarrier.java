@@ -1,7 +1,6 @@
 package com.example.domain.gameObject.barriers;
 
 import java.awt.Point;
-import java.awt.Dimension;
 
 public class SimpleBarrier extends Barrier {
 

@@ -104,7 +104,7 @@ public class Game implements Serializable {
     }
 
     public void saveAndExit() {
-        save();
+        // save();
         System.out.println("Saved! Exitting!");
         System.exit(0);
     }

@@ -8,7 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
         LevelBuilder builder = new LevelBuilder();
-        Level level = builder.prompt();
+        Level level = new Level("CurrentLevel");
+        builder.randomizeLevel(level, 1);
         Game game = new Game("Single-Player Mode", level);
         game.run();
     }
