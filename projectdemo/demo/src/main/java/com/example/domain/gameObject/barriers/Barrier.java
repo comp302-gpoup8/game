@@ -8,9 +8,10 @@ import com.example.domain.gameObject.GameObject;
 public abstract class Barrier extends GameObject {
 
     protected Integer hitPoints;
+    protected static Dimension DEFAULT_BARRIER_SIZE = new Dimension(51, 15);
 
-    public Barrier(Point p, Dimension d, String imagePath, Integer hp){
-        super(p, d, imagePath);
+    public Barrier(Point p, String imagePath, Integer hp){
+        super(p, DEFAULT_BARRIER_SIZE, imagePath);
         hitPoints = hp;
 
     }

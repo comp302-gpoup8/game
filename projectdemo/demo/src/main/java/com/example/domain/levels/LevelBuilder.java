@@ -1,6 +1,5 @@
 package com.example.domain.levels;
 
-import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Collections;
 import java.util.Random;
@@ -13,7 +12,6 @@ import com.example.domain.gameObject.barriers.RewardingBarrier;
 
 public class LevelBuilder {
     
-    private Dimension BARRIER_SIZE = new Dimension(51, 20);
     private Integer difficulty, simpleCount, expCount, firmCount, rewCount;
 
     public Level prompt(){
@@ -86,19 +84,19 @@ public class LevelBuilder {
 
     private void addBarriers(Level l){
         for (int i = 0; i < simpleCount; i++) {
-            l.addBarrier(new SimpleBarrier(new Point(), BARRIER_SIZE));
+            l.addBarrier(new SimpleBarrier(new Point()));
         }
 
         for (int i = 0; i < firmCount; i++) {
-            l.addBarrier(new ReinforcedBarrier(new Point(), BARRIER_SIZE));
+            l.addBarrier(new ReinforcedBarrier(new Point()));
         }
 
         for (int i = 0; i < expCount; i++) {
-            l.addBarrier(new ExplosiveBarrier(new Point(), BARRIER_SIZE));
+            l.addBarrier(new ExplosiveBarrier(new Point()));
         }
 
         for (int i = 0; i < rewCount; i++) {
-            l.addBarrier(new RewardingBarrier(new Point(), BARRIER_SIZE));
+            l.addBarrier(new RewardingBarrier(new Point()));
         }
         Collections.shuffle(l.barriers);
     }
