@@ -13,17 +13,22 @@ import com.example.domain.levels.LevelBuilder;
 public class MainMenuPanel extends JPanel {
     private JButton quickPlayButton;
     private JButton buildModeButton;
+    private JButton loadGameButton;
     private Game game;
 
     public MainMenuPanel() {
-        setLayout(new GridLayout(2, 1));
+        setLayout(new GridLayout(3, 1));
 
+        loadGameButton = new JButton("Load Game");
         quickPlayButton = new JButton("Quick Play");
         buildModeButton = new JButton("Build Mode");
 
         quickPlayButton.addActionListener(e -> makeGameWithRandomDifficulty());
+        buildModeButton.addActionListener(e -> makeCustomGame());
+        loadGameButton.addActionListener(e -> loadGame());
         add(quickPlayButton);
         add(buildModeButton);
+        add(loadGameButton);
     }
 
     private void makeGameWithRandomDifficulty() {
@@ -35,6 +40,16 @@ public class MainMenuPanel extends JPanel {
         LevelBuilder builder = new LevelBuilder();
         Level level = new Level("CurrentLevel");
         builder.randomizeLevel(level, difficultyLevel);
+        game = new Game("Single-Player Mode", level);
+    }
+
+    public void loadGame(){
+
+    }
+
+    public void makeCustomGame() {
+        LevelBuilder builder = new LevelBuilder();
+        Level level = builder.prompt();
         game = new Game("Single-Player Mode", level);
     }
 

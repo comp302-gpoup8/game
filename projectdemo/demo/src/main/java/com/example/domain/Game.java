@@ -27,13 +27,15 @@ public class Game implements Serializable {
     private GameManager gm;
     private Level level;
 
+    public Game (String pName){
+        load();
+    }
+
     public Game (String pName, Level lv){
-        if (!load()){
-            level = lv;
-            panel = new GamePanel(lv);
-            player = new Player(pName);
-            loadGameManager();
-        }
+        level = lv;
+        panel = new GamePanel(lv);
+        player = new Player(pName);
+        loadGameManager();
     }
 
     /**
