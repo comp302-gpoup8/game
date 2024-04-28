@@ -164,7 +164,7 @@ public class Game implements Serializable {
      * TODO: Should be way more detailed.
      */
     public void scoreDisplay(){
-        System.out.printf("Final score : d%\n", player.score);
+        System.out.printf("Final score : %d\n", player.score);
         if (player.remainingLives > 0) {
             System.out.println("You've won! Yay!");
         } else {
@@ -172,15 +172,13 @@ public class Game implements Serializable {
         }
     }
 
-    /**
-     * Get method for the panel, which allows the GameManager to access basically all gameObjects.
-     * @return GUI
-     */
+
+    //Get methods
     public GamePanel getPanel(){
         return panel;
     }
 
-
-
- 
+    public Player getPlayer(){
+        return player;
+    }
 }
