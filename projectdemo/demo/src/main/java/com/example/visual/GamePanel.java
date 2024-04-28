@@ -156,39 +156,7 @@ public class GamePanel extends JFrame{
      * Gets the number of lives a player has in order to use it in methods that display hearts.
      */
 
-    public int getRemainingLives(){
-        if (player == null){
-            player = new Player("New Player");
-        }
-        return player.remainingLives;
-    }
-
-
-
-    /**
-     * Initializes the heart images that represents players lives for the panel.
-     */
-    private void initLivesDisplay() {
-        for (int i = 0; i < lifeIcons.length; i++) {
-            lifeIcons[i] = new JLabel(new ImageIcon("projectdemo/demo/src/main/java/com/example/Graphical-Assets/Heart.png"));
-            lifeIcons[i].setBounds(1100 + (i * 30), 610,28, 28);
-            add(lifeIcons[i]);
-        }
-        updateLivesDisplay();
-    }
-    /**
-     * Updates the panel and number of hearts due to the remaining lives of the player.
-     */
-    public void updateLivesDisplay() {
-        for (int i = 0; i < lifeIcons.length; i++) {
-            if (i < getRemainingLives()) {
-                lifeIcons[i].setVisible(true);
-            } else {
-                lifeIcons[i].setVisible(false);
-            }
-        }
-    }
-
+ 
     /**
      * Gets the number of lives a player has in order to use it in methods that display hearts.
      */
