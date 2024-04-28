@@ -26,9 +26,19 @@ public class BallMovementManager implements Serializable {
      * @return
      */
     public Point nextPoint(){
-        int x = ball.getX() + (ball.getDirection().x * ball.getSpeed());
-        int y = ball.getY() + (ball.getDirection().y * ball.getSpeed());
+        Point ballDirection = validateBallDirection();
+        int x = ball.getX() + (ballDirection.x * ball.getSpeed());
+        int y = ball.getY() + (ballDirection.y * ball.getSpeed());
         return new Point(x, y);
+    }
+
+    public Point validateBallDirection(){
+        Point direction = ball.getDirection();
+        if (direction == null){
+            direction = new Point(-1, -1);
+            ball.setDirection(direction);
+        }
+        return direction;
     }
 
     public void moveFireBall(){
