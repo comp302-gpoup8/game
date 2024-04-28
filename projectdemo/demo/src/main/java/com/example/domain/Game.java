@@ -155,7 +155,7 @@ public class Game implements Serializable {
     public void saveAndExit() {
         //UNCOMMENT THE LINE BELOW TO TEST IT.
         //Works fine when uncommented. Use x to save.
-         save();
+        save();
         System.out.println("Saved! Exitting!");
         System.exit(0);
     }
