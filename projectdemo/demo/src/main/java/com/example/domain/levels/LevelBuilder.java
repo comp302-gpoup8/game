@@ -9,10 +9,20 @@ import com.example.domain.gameObject.barriers.ReinforcedBarrier;
 import com.example.domain.gameObject.barriers.SimpleBarrier;
 import com.example.domain.gameObject.barriers.RewardingBarrier;
 
+/**
+ * LevelBuilder Class
+ * Creates a level with pre-determined inputs or allows the User to build their custom level.
+ */
 public class LevelBuilder {
     
     private Integer difficulty, simpleCount, expCount, firmCount, rewCount;
 
+    /**
+     * Asks the user input to determine the operation.
+     * 1,2,3 are inputs representing pre-determined levels with different difficulties.
+     * 0 allows the user to build their custom level.
+     * @return the created Level
+     */
     public Level prompt(){
         Scanner sc = new Scanner(System.in);
         Level level = new Level("Single-Player Level");
@@ -25,6 +35,12 @@ public class LevelBuilder {
         return level;
     }
 
+    /**
+     * Creates a level based on the difficulty choice.
+     * NOTE: It used to randomize the level based on difficulty but that's removed to ensure the proper barrier count.
+     * @param level
+     * @param difficulty
+     */
     public void randomizeLevel(Level level, int difficulty){
         if (difficulty == 1){
             simpleCount = 60;
@@ -47,6 +63,10 @@ public class LevelBuilder {
         addBarriers(level);
     }
 
+    /**
+     * Prompts the user to choose the difficulty of the level when appropriate.
+     * @param s
+     */
     private void askDifficulty(Scanner s){
         System.out.println("Please choose a difficulty:");
         System.out.println("0: Custom");
@@ -61,6 +81,12 @@ public class LevelBuilder {
         }
     }
 
+    /**
+     * Prompts the user to choose the count of each barrier type when appropriate.
+     * If there are less than 100 barriers, simple barriers are added to the level to make up for missing barriers.
+     * TODO : Probably should add limits for other counts too so it doesn't have more than 100.
+     * @param s
+     */
     private void askBarrierCounts(Scanner s){
         System.out.println("Please enter the number of Simple Barriers: ");
         simpleCount = s.nextInt();
@@ -80,11 +106,21 @@ public class LevelBuilder {
         }
     }
 
+    /**
+     * Calls the buildmode operations. Just for readability.
+     * @param l
+     * @param s
+     */
     private void buildMode(Level l, Scanner s){
         askBarrierCounts(s);
         addBarriers(l);
     }
 
+    /**
+     * Adds the barriers determined by the inputs to the level, then shuffles them
+     * So they are placed randomly.
+     * @param l
+     */
     private void addBarriers(Level l){
         for (int i = 0; i < simpleCount; i++) {
             l.addBarrier(new SimpleBarrier(new Point()));
