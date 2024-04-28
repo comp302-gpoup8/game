@@ -44,7 +44,7 @@ public class MainMenuPanel extends JPanel {
     }
 
     public void loadGame(){
-
+        game = new Game("Single-player Mode");
     }
 
     public void makeCustomGame() {
