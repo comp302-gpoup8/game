@@ -10,33 +10,27 @@ import com.example.domain.gameObject.barriers.RewardingBarrier;
 import com.example.domain.gameObject.barriers.SimpleBarrier;
 
 import java.awt.Point;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class GameManager implements Serializable {
+public class GameManager extends BallMovementManager {
     private Game game;
     private List<GameObject> elements;
 
     public GameManager(Game g, List<GameObject> e){
+        super(g.getPanel().getBall());
         game = g;
         elements = e;
     }
 
     public void launchBall(FireBall f){
-        f.setSpeed(4);
-        moveBall(f);
+        super.launchFireBall();
     }
 
     public void moveBall(FireBall f){
-        int ballX = f.getX();
-        int ballY = f.getY();
-        int moveX = f.getDirection().x * f.getSpeed();
-        int moveY = f.getDirection().y * f.getSpeed();
-        f.setLocation(new Point(ballX + moveX, ballY + moveY));
-        f.getHitBox().setLocation(f.getLocation());
+        super.moveFireBall();
     }
 
     public void moveStaff(Staff s, int x) {

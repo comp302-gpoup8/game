@@ -57,7 +57,7 @@ public class GamePanel extends JFrame{
             barrier.setLocation(x, y);
             barrier.getHitBox().setLocation(x, y);
             x += barrier.getWidth() + 8; // To put barriers next to each other
-            maxHeightInRow = Math.max(maxHeightInRow, barrier.getHeight()); 
+            maxHeightInRow = Math.max(maxHeightInRow, barrier.getHeight() + 8); 
         }
         level.barriers.forEach(e -> add(e));
 
@@ -84,7 +84,7 @@ public class GamePanel extends JFrame{
 
     public void addStaff(){
         Point staffPosition = new Point((getWidth() / 2) - 85, getHeight() - 100);
-        Dimension staffSize = new Dimension(85, 16);
+        Dimension staffSize = new Dimension(85, 15);
         staff = new Staff(staffPosition, staffSize);
         add(staff);
     }
