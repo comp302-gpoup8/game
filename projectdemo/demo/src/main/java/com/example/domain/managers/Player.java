@@ -15,6 +15,30 @@ public class Player implements Serializable {
     public Integer score;
     public String name;
 
+    public Integer getRemainingLives() {
+        return remainingLives;
+    }
+
+    public void setRemainingLives(Integer remainingLives) {
+        this.remainingLives = remainingLives;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Player(String n){
         name = n;
         score = 0;
