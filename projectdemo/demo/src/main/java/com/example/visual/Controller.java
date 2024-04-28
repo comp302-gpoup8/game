@@ -3,6 +3,10 @@ package com.example.visual;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Controller logic for the GamePanel
+ * TODO: Extend it for additional keyboard and mouse inputs!
+ */
 public class Controller {
     
     public volatile int direction = 0;

@@ -12,7 +12,10 @@ import com.example.domain.interfaces.BallManager;
 import com.example.domain.levels.Level;
 
 
-
+/**
+ * GamePanel Class
+ * The Panel for the Single Player Game
+ */
 public class GamePanel extends JFrame{
     private BackgroundLabel backgroundLabel;
     private transient Controller controller;
@@ -31,6 +34,9 @@ public class GamePanel extends JFrame{
         displayGamePanel();
     }
 
+    /**
+     * Initializes the main frame.
+     */
     private void initGameFrame(){
         setSize(1200, 680);
         setTitle("Single Player");
@@ -38,6 +44,9 @@ public class GamePanel extends JFrame{
         setLayout(null);
     }
 
+    /**
+     * Makes the panel and its components visible.
+     */
     public void displayGamePanel(){
         revalidate();
         repaint();
@@ -46,6 +55,10 @@ public class GamePanel extends JFrame{
         setResizable(false);
     }
     
+    /**
+     * Places the barriers on the Game Panel.
+     * @param level : The level that contains the Barriers.
+     */
     private void placeBarriers(Level level){
         int x = 10; 
         int y = 0;
@@ -65,9 +78,20 @@ public class GamePanel extends JFrame{
 
     }
 
+    /**
+     * Helper method for placing the barriers to the game panel appropriately.
+     * @param x
+     * @param barrierWidth
+     * @return
+     */
     private boolean rowOverflow(int x, int barrierWidth) {
         return (x + barrierWidth > this.getWidth());
     }
+
+    /**
+     * Adds the level to the GamePanel and sets up the other required elements.
+     * @param level
+     */
     public void addLevel(Level level){
         getContentPane().removeAll();
  
@@ -78,6 +102,9 @@ public class GamePanel extends JFrame{
         addBackgroundImage();
     }
 
+    /**
+     * Initializes the FireBall on the Panel.
+     */
     public void addFireBall() {
         Point ballStart = new Point((getWidth() / 2) - 20, getHeight() - 130);
         Dimension ballSize = new Dimension(22, 22);
@@ -85,6 +112,9 @@ public class GamePanel extends JFrame{
         add(ball);
     }
 
+    /**
+     * Initializes the staff on the panel.
+     */
     public void addStaff(){
         Point staffPosition = new Point((getWidth() / 2) - 85, getHeight() - 100);
         Dimension staffSize = new Dimension(85, 15);
@@ -92,6 +122,9 @@ public class GamePanel extends JFrame{
         add(staff);
     }
 
+    /**
+     * Initializes the Background image for the panel.
+     */
     public void addBackgroundImage(){
         backgroundLabel = new BackgroundLabel();
         backgroundLabel.setBounds(0, 0, 1204, 678);
@@ -99,6 +132,9 @@ public class GamePanel extends JFrame{
     }
 
 
+    /**
+     * Refreshes the panel to remove the barriers that are destroyed. 
+     */
     public void refreshLevel() {
         for (Barrier bar : cLevel.barriers) {
             if (bar.isDestroyed()) {
@@ -109,13 +145,18 @@ public class GamePanel extends JFrame{
         repaint();
     }
 
-    public Controller getController(){
-        return controller;
-    }
-
+    /**
+     * Resets the controller
+     * Necessary for relaunch.
+     */
     public void resetController() {
         controller = new Controller();
         addKeyListener(controller.keyListener);
+    }
+
+    // Get Methods
+    public Controller getController(){
+        return controller;
     }
 
     public Staff getStaff(){
