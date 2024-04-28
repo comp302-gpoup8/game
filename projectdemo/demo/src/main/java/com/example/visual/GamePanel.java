@@ -138,12 +138,19 @@ public class GamePanel extends JFrame{
 
     public void updateLivesDisplay() {
         for (int i = 0; i < lifeIcons.length; i++) {
-            if (i < player.getRemainingLives()) {
+            if (i < getRemainingLives()) {
                 lifeIcons[i].setVisible(true);
             } else {
                 lifeIcons[i].setVisible(false);
             }
         }
+    }
+
+    public int getRemainingLives(){
+        if (player == null){
+            player = new Player("New Player");
+        }
+        return player.remainingLives;
     }
 
 
