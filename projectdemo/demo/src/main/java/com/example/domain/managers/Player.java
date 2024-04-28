@@ -15,6 +15,9 @@ public class Player implements Serializable {
     public Integer score;
     public String name;
 
+    /**
+     * Getters and setters to access remainingLives, score and name
+     */
     public Integer getRemainingLives() {
         return remainingLives;
     }
