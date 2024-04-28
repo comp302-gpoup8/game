@@ -2,7 +2,6 @@ package com.example.domain.levels;
 
 import java.awt.Point;
 import java.util.Collections;
-import java.util.Random;
 import java.util.Scanner;
 
 import com.example.domain.gameObject.barriers.ExplosiveBarrier;
@@ -27,24 +26,23 @@ public class LevelBuilder {
     }
 
     public void randomizeLevel(Level level, int difficulty){
-        Random random = new Random();
         if (difficulty == 1){
-            simpleCount = random.nextInt(40, 45);
-            rewCount = random.nextInt(8, 11);
-            expCount = random.nextInt(15, 20);
-            firmCount = random.nextInt(15, 20);
+            simpleCount = 60;
+            rewCount = 10;
+            expCount = 10;
+            firmCount = 20;
         }
         if (difficulty == 2) {
-            simpleCount = random.nextInt(30, 35);
-            rewCount = random.nextInt(5, 9);
-            expCount = random.nextInt(25, 30);
-            firmCount = random.nextInt(25, 35);
+            simpleCount = 45;
+            rewCount = 5;
+            expCount = 15;
+            firmCount = 35;
         }
         if (difficulty == 3) {
-            simpleCount = random.nextInt(10, 20);
-            rewCount = random.nextInt(3, 7);
-            expCount = random.nextInt(30, 35);
-            firmCount = random.nextInt(35, 40);
+            simpleCount = 35;
+            rewCount = 5;
+            expCount = 20;
+            firmCount = 40;
         }
         addBarriers(level);
     }
@@ -75,6 +73,11 @@ public class LevelBuilder {
 
         System.out.println("Please enter the number of Rewarding Barriers: ");
         rewCount = s.nextInt();
+
+        int barrierCount = simpleCount + firmCount + expCount + rewCount;
+        while (barrierCount < 100) {
+         simpleCount++;   
+        }
     }
 
     private void buildMode(Level l, Scanner s){

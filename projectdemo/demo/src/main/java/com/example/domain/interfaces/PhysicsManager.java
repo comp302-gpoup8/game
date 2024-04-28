@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.domain.interfaces;
 
 import java.awt.Point;
 import com.example.domain.gameObject.FireBall;
@@ -27,23 +27,13 @@ public interface PhysicsManager {
         }
     }
     
-    public static void bounceFromObject(FireBall ball, GameObject e){
-        Point ballCenter = getObjectCenter(ball);
-        Point objectCenter = getObjectCenter(e);
-        Point normal = ComputationHelper.normal(ballCenter, objectCenter);
-        Point reflection = ComputationHelper.reflectionCalculator(ball.getDirection(), normal);
-        ball.setDirection(reflection);
-    }
-
-    public static void bounceFromStaff(FireBall ball, GameObject e) {
+    public static void bounce(FireBall ball, GameObject e) {
         Point ballCenter = getObjectCenter(ball);
         Point staffCenter = getObjectCenter(e);
 
         int hitPoint = ballCenter.x - staffCenter.x;
         ball.getDirection().x += 2 * hitPoint / e.getWidth();
         ball.getDirection().y *= -1;
-
-        // ComputationHelper.normalize(ball.getDirection());
     }
 
 

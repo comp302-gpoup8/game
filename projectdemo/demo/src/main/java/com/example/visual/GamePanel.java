@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.Staff;
 import com.example.domain.gameObject.barriers.Barrier;
+import com.example.domain.interfaces.BallManager;
 import com.example.domain.levels.Level;
 
 
@@ -56,8 +57,8 @@ public class GamePanel extends JFrame{
             }
             barrier.setLocation(x, y);
             barrier.getHitBox().setLocation(x, y);
-            x += barrier.getWidth() + 8; // To put barriers next to each other
-            maxHeightInRow = Math.max(maxHeightInRow, barrier.getHeight() + 8); 
+            x += barrier.getWidth() + 10; // To put barriers next to each other
+            maxHeightInRow = Math.max(maxHeightInRow, barrier.getHeight() + 10); 
         }
         level.barriers.forEach(e -> add(e));
 
@@ -71,6 +72,7 @@ public class GamePanel extends JFrame{
  
         addFireBall();
         addStaff();
+        BallManager.placeBallAtStaff(ball, staff);
         placeBarriers(level);
         addBackgroundImage();
     }

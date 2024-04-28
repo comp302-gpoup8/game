@@ -1,8 +1,13 @@
-package com.example.domain;
+package com.example.domain.managers;
 
+import com.example.domain.Game;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.GameObject;
 import com.example.domain.gameObject.Staff;
+import com.example.domain.interfaces.BallManager;
+import com.example.domain.interfaces.CollisionHandler;
+import com.example.domain.interfaces.PhysicsManager;
+import com.example.domain.interfaces.StaffManager;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -27,8 +32,9 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
     }
 
     public void moveBall(){
-        BallManager.moveFireBall(ball);
+        updateElements();
         checkBounds();
+        BallManager.moveFireBall(ball);
     }
 
     public void moveStaff(Staff s, int x) {
@@ -43,7 +49,6 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
     }
     
     public void updateElements() {
-        BallManager.moveFireBall(ball);
         PhysicsManager.checkBounds(ball, game.getPanel().getHeight(), game.getPanel().getWidth());
     }
 
@@ -65,21 +70,13 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         for (int i = 0; i < elements.size(); i++) {
             for (int j = i + 1; j < elements.size(); j++) {
                 GameObject destroyedObject = CollisionHandler.checkCollision(elements.get(i), elements.get(j));
-                if (destroyedObject != null && !toRemove.contains(destroyedObject)){
+                if (destroyedObject != null){
                     toRemove.add(destroyedObject);
                 }
             }
         }
         elements.removeAll(toRemove);
         game.getPanel().refreshLevel();
-
-    }
-    public void bounce(FireBall f, GameObject e) {
-        if (e instanceof Staff){
-            PhysicsManager.bounceFromStaff(f, e);
-        } else {
-            PhysicsManager.bounceFromObject(f, e);
-        }
     }
 
 }

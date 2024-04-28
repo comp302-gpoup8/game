@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.domain.interfaces;
 
 import java.awt.Point;
 import com.example.domain.gameObject.FireBall;

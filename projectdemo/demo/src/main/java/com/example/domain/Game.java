@@ -4,10 +4,12 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.example.SaveManager;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.GameObject;
 import com.example.domain.levels.Level;
+import com.example.domain.managers.GameManager;
+import com.example.domain.managers.Player;
+import com.example.domain.managers.SaveManager;
 import com.example.visual.GamePanel;
 
 
@@ -33,9 +35,8 @@ public class Game implements Serializable {
         while (continuePlaying()) {
             panel.displayGamePanel();
             int command = panel.getController().getDirection();
-
-            gm.updateElements();
             gm.checkCollisions();
+            gm.updateElements();
             keepMotion();
             switch(command){
                 case -1 -> gm.moveStaff(panel.getStaff(), command);
@@ -45,7 +46,7 @@ public class Game implements Serializable {
             }
             panel.refreshLevel();
             try {
-                Thread.sleep(16);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -86,6 +87,7 @@ public class Game implements Serializable {
     }
 
     private void keepMotion(){
+
         FireBall ball = panel.getBall();
         if (ball.getSpeed() > 0){
             gm.moveBall();
