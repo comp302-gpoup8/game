@@ -35,6 +35,7 @@ public class Game implements Serializable {
         level = lv;
         panel = new GamePanel(lv);
         player = new Player(pName);
+        panel.player = player;
         loadGameManager();
     }
 

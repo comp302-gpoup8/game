@@ -1,15 +1,16 @@
 package com.example.visual;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-
+import com.example.domain.Game;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.Staff;
 import com.example.domain.gameObject.barriers.Barrier;
 import com.example.domain.interfaces.BallManager;
 import com.example.domain.levels.Level;
+import com.example.domain.managers.Player;
+
+
+import javax.swing.*;
+import java.awt.*;
 
 
 /**
@@ -22,15 +23,19 @@ public class GamePanel extends JFrame{
     private Staff staff;
     private FireBall ball;
     private Level cLevel;
+    public Player player;
+    private JLabel[] lifeIcons = new JLabel[3];
 
 
 
     public GamePanel(Level level){
+
         initGameFrame();
         controller = new Controller();
         cLevel = level;
         addKeyListener(controller.keyListener);
         addLevel(level);
+        initLivesDisplay();
         displayGamePanel();
     }
 
@@ -54,25 +59,25 @@ public class GamePanel extends JFrame{
         setFocusable(true);
         setResizable(false);
     }
-    
+
     /**
      * Places the barriers on the Game Panel.
      * @param level : The level that contains the Barriers.
      */
     private void placeBarriers(Level level){
-        int x = 10; 
+        int x = 10;
         int y = 0;
-        int maxHeightInRow = 0; 
+        int maxHeightInRow = 0;
         for (Barrier barrier : level.barriers) {
-            if (rowOverflow(x, barrier.getWidth())) { 
-                x = 10; 
-                y += maxHeightInRow; 
-                maxHeightInRow = 0; 
+            if (rowOverflow(x, barrier.getWidth())) {
+                x = 10;
+                y += maxHeightInRow;
+                maxHeightInRow = 0;
             }
             barrier.setLocation(x, y);
             barrier.getHitBox().setLocation(x, y);
             x += barrier.getWidth() + 10; // To put barriers next to each other
-            maxHeightInRow = Math.max(maxHeightInRow, barrier.getHeight() + 10); 
+            maxHeightInRow = Math.max(maxHeightInRow, barrier.getHeight() + 10);
         }
         level.barriers.forEach(e -> add(e));
 
@@ -94,7 +99,7 @@ public class GamePanel extends JFrame{
      */
     public void addLevel(Level level){
         getContentPane().removeAll();
- 
+
         addFireBall();
         addStaff();
         BallManager.placeBallAtStaff(ball, staff);
@@ -122,6 +127,27 @@ public class GamePanel extends JFrame{
         add(staff);
     }
 
+    private void initLivesDisplay() {
+        for (int i = 0; i < lifeIcons.length; i++) {
+            lifeIcons[i] = new JLabel(new ImageIcon("projectdemo/demo/src/main/java/com/example/Graphical-Assets/Heart.png"));
+            lifeIcons[i].setBounds(1100 + (i * 30), 20, 28, 28);
+            add(lifeIcons[i]);
+        }
+        updateLivesDisplay();
+    }
+
+    public void updateLivesDisplay() {
+        for (int i = 0; i < lifeIcons.length; i++) {
+            if (i < player.getRemainingLives()) {
+                lifeIcons[i].setVisible(true);
+            } else {
+                lifeIcons[i].setVisible(false);
+            }
+        }
+    }
+
+
+
     /**
      * Initializes the Background image for the panel.
      */
@@ -132,8 +158,9 @@ public class GamePanel extends JFrame{
     }
 
 
+
     /**
-     * Refreshes the panel to remove the barriers that are destroyed. 
+     * Refreshes the panel to remove the barriers that are destroyed.
      */
     public void refreshLevel() {
         for (Barrier bar : cLevel.barriers) {
