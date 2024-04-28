@@ -79,7 +79,16 @@ public class Game implements Serializable {
         switch (command) {
             case -1, 1 -> gm.moveStaff(panel.getStaff(), command);
             case 2 -> gm.launchBall();
+            case 3 -> pauseUnpause();
             case 9 -> saveAndExit();
+        }
+    }
+
+    public void pauseUnpause(){
+        if (panel.getBall().getSpeed() > 0){
+            panel.getBall().setSpeed(0);
+        } else if (panel.getBall().getSpeed() == 0){
+            panel.getBall().setSpeed(4);
         }
     }
 
