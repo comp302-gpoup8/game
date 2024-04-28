@@ -40,10 +40,17 @@ public interface BallManager {
      * @param ball
      * @param p
      */
+    /**
+     * Used to launch the FireBall from the Staff at the beginning of each try.
+     * @param ball
+     * @param p
+     */
     public static void launchFireBall(FireBall ball, Point p){
-        ball.setDirection(p);
-        ball.setSpeed(4);
-        moveFireBall(ball);
+        if (ball.getSpeed() == 0) {
+            ball.setDirection(p);
+            ball.setSpeed(4);
+            moveFireBall(ball);
+        }
     }
 
     /**
