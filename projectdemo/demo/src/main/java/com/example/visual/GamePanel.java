@@ -35,7 +35,6 @@ public class GamePanel extends JFrame{
         cLevel = level;
         addKeyListener(controller.keyListener);
         addLevel(level);
-        initLivesDisplay();
         displayGamePanel();
     }
 
@@ -104,6 +103,7 @@ public class GamePanel extends JFrame{
         addStaff();
         BallManager.placeBallAtStaff(ball, staff);
         placeBarriers(level);
+        initLivesDisplay();
         addBackgroundImage();
     }
 
@@ -130,7 +130,7 @@ public class GamePanel extends JFrame{
     private void initLivesDisplay() {
         for (int i = 0; i < lifeIcons.length; i++) {
             lifeIcons[i] = new JLabel(new ImageIcon("projectdemo/demo/src/main/java/com/example/Graphical-Assets/Heart.png"));
-            lifeIcons[i].setBounds(1100 + (i * 30), 20, 28, 28);
+            lifeIcons[i].setBounds(1100 + (i * 30), 610,28, 28);
             add(lifeIcons[i]);
         }
         updateLivesDisplay();
@@ -175,6 +175,7 @@ public class GamePanel extends JFrame{
                 remove(bar);
             }
         }
+        updateLivesDisplay();
         revalidate();
         repaint();
     }
