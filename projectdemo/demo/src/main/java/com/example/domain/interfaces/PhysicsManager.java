@@ -34,6 +34,7 @@ public interface PhysicsManager {
         int hitPoint = ballCenter.x - staffCenter.x;
         ball.getDirection().x += 2 * hitPoint / e.getWidth();
         ball.getDirection().y *= -1;
+        BallManager.moveFireBall(ball);
     }
 
 

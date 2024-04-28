@@ -3,6 +3,7 @@ package com.example.visual;
 import java.awt.Dimension;
 import java.awt.Point;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.Staff;
@@ -98,9 +99,9 @@ public class GamePanel extends JFrame{
     }
 
 
-    public void refreshLevel(){
-        for (Barrier bar : cLevel.barriers){
-            if (bar.isDestroyed()){
+    public void refreshLevel() {
+        for (Barrier bar : cLevel.barriers) {
+            if (bar.isDestroyed()) {
                 remove(bar);
             }
         }

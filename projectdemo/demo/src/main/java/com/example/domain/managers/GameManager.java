@@ -40,6 +40,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
     public void moveStaff(Staff s, int x) {
         StaffManager.moveStaff(s,x, game.getPanel().getWidth());
         moveBallBeforeLaunch();
+        game.getPanel().refreshLevel();
     }
 
     private void moveBallBeforeLaunch(){
@@ -50,6 +51,8 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
     
     public void updateElements() {
         PhysicsManager.checkBounds(ball, game.getPanel().getHeight(), game.getPanel().getWidth());
+        game.getPanel().refreshLevel();
+
     }
 
     public void checkBounds() {

@@ -32,26 +32,42 @@ public class Game implements Serializable {
     }
 
     public void run() {
+        long lastTime = System.currentTimeMillis();
+        final int TARGET_FPS = 60;
+        final long OPTIMAL_TIME = 1000 / TARGET_FPS;
+
         while (continuePlaying()) {
+            long now = System.currentTimeMillis();
+            long updateLength = now - lastTime;
+            lastTime = now;
+            double delta = updateLength / ((double) OPTIMAL_TIME);
+
             panel.displayGamePanel();
-            int command = panel.getController().getDirection();
+            processInput();
             gm.checkCollisions();
             gm.updateElements();
             keepMotion();
-            switch(command){
-                case -1 -> gm.moveStaff(panel.getStaff(), command);
-                case 1 -> gm.moveStaff(panel.getStaff(), command);
-                case 2 -> gm.launchBall();
-                case 9 -> saveAndExit();
-            }
             panel.refreshLevel();
+
             try {
-                Thread.sleep(16);
+                long sleep = (lastTime - System.currentTimeMillis() + OPTIMAL_TIME);
+                if (sleep > 0) {
+                    Thread.sleep(sleep);
+                }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
         System.exit(0);
+    }
+
+    private void processInput() {
+        int command = panel.getController().getDirection();
+        switch (command) {
+            case -1, 1 -> gm.moveStaff(panel.getStaff(), command);
+            case 2 -> gm.launchBall();
+            case 9 -> saveAndExit();
+        }
     }
 
     public void lostBall(){
@@ -92,6 +108,7 @@ public class Game implements Serializable {
         if (ball.getSpeed() > 0){
             gm.moveBall();
         }
+        panel.refreshLevel();
     }
 
     public GamePanel getPanel(){

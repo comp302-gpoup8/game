@@ -9,6 +9,6 @@ public class Staff extends GameObject {
     
     public Staff(Point p, Dimension d){
         super(p, d, IMG_PATH);
-        speed = 120;
+        speed = 40;
     }
 }
