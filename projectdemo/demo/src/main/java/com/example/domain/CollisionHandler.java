@@ -33,7 +33,7 @@ public interface CollisionHandler {
                 return obj;
             }
         } else if (obj instanceof Staff){
-            PhysicsManager.bounceFromObject(ball, obj);
+            PhysicsManager.bounceFromStaff(ball, obj);
         }
         return null;
     }

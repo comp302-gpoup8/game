@@ -25,15 +25,24 @@ public interface PhysicsManager {
 
             return true;
         }
-
-
     }
-
+    
     public static void bounceFromObject(FireBall ball, GameObject e){
         Point ballCenter = getObjectCenter(ball);
         Point objectCenter = getObjectCenter(e);
         Point normal = ComputationHelper.normal(ballCenter, objectCenter);
         Point reflection = ComputationHelper.reflectionCalculator(ball.getDirection(), normal);
+        ball.setDirection(reflection);
+    }
+
+    public static void bounceFromStaff(FireBall ball, GameObject e) {
+        Point ballCenter = getObjectCenter(ball);
+        Point objectCenter = getObjectCenter(e);
+        Point normal = ComputationHelper.normal(ballCenter, objectCenter);
+        Point reflection = ComputationHelper.reflectionCalculator(ball.getDirection(), normal);
+        if (reflection.getY() < 0){
+            reflection.y *= -1;
+        }
         ball.setDirection(reflection);
     }
 

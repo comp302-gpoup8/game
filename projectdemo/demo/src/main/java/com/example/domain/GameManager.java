@@ -3,59 +3,60 @@ package com.example.domain;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.GameObject;
 import com.example.domain.gameObject.Staff;
+
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class GameManager {
+public class GameManager implements BallManager, CollisionHandler, PhysicsManager, StaffManager {
     private Game game;
     private List<GameObject> elements;
-    private BallManager ballManager;
-    private StaffManager staffManager;
+    private FireBall ball;
+
 
     public GameManager(Game g, List<GameObject> e){
         game = g;
         elements = e;
-        ballManager = new BallManager(g.getPanel().getBall());
-        staffManager = new StaffManager(g.getPanel().getStaff());
+        ball = game.getPanel().getBall();
     }
 
-    public void launchBall(FireBall f){
-        ballManager.launchFireBall(game.getPanel().getMousePosition());
+    public void launchBall(){
+        BallManager.launchFireBall(ball, new Point(-1, -1));
     }
 
-    public void moveBall(FireBall f){
-        ballManager.moveFireBall();
+    public void moveBall(){
+        BallManager.moveFireBall(ball);
+        checkBounds();
     }
 
     public void moveStaff(Staff s, int x) {
-        staffManager.moveStaff(x);
-        if (ballManager.ball.getSpeed() == 0){
-            reinitiateBall(ballManager.ball);
+        StaffManager.moveStaff(s,x, game.getPanel().getWidth());
+        moveBallBeforeLaunch();
+    }
+
+    private void moveBallBeforeLaunch(){
+        if (ball. getSpeed() == 0){
+            reinitiateBall(ball);
         }
     }
     
     public void updateElements() {
-        for (GameObject obj : elements) {
-            if (obj instanceof FireBall) {
-                FireBall ball = (FireBall) obj;
-                moveBall(ball);
-                checkBounds(ball);
-            }
-        }
+        BallManager.moveFireBall(ball);
+        PhysicsManager.checkBounds(ball, game.getPanel().getHeight(), game.getPanel().getWidth());
     }
 
-    public void checkBounds(FireBall f) {
-        boolean inGame = PhysicsManager.checkBounds(f, game.getPanel().getHeight(), game.getPanel().getWidth());
+    public void checkBounds() {
+        boolean inGame = PhysicsManager.checkBounds(ball, game.getPanel().getHeight(), game.getPanel().getWidth());
         if (!inGame){
             game.lostBall();
-            reinitiateBall(f);
+            reinitiateBall(ball);
         }
     }
 
     private void reinitiateBall(FireBall f) {
-        ballManager.placeBallAtStaff(game.getPanel().getStaff());
+        BallManager.placeBallAtStaff(ball, game.getPanel().getStaff());
     }
 
     public void checkCollisions() {
@@ -73,10 +74,12 @@ public class GameManager {
         game.getPanel().refreshLevel();
 
     }
-
     public void bounce(FireBall f, GameObject e) {
-        PhysicsManager.bounceFromObject(f, e);
+        if (e instanceof Staff){
+            PhysicsManager.bounceFromStaff(f, e);
+        } else {
+            PhysicsManager.bounceFromObject(f, e);
+        }
     }
-    
 
 }

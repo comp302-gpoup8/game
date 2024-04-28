@@ -1,52 +1,39 @@
 package com.example.domain;
 
 import java.awt.Point;
-import java.io.Serializable;
-
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.Staff;
 
-public class BallManager implements Serializable {
+public interface BallManager {
 
-    FireBall ball;
-    
-    public BallManager(FireBall b){
-        ball = b;
-    }
-    public void placeBallAtStaff(Staff s){
+    public static void placeBallAtStaff(FireBall ball, Staff s){
         int staffCenterX = s.getX() + s.getWidth() / 2;
         int staffCenterY = s.getY() + s.getHeight() / 2;
-        Point p = new Point(staffCenterX, staffCenterY + 5); //+5 so it doesn't get in the staff.
-        resetBall(p);
+        Point p = new Point(staffCenterX - 10, staffCenterY - 30); //+5 so it doesn't get in the staff.
+        resetBall(ball, p);
     }
 
-    public void resetBall(Point p){
+    public static void resetBall(FireBall ball, Point p){
         ball.setSpeed(0);
         ball.setLocation(p);
         ball.getHitBox().setLocation(p);
         ball.setDirection(new Point(-1, -1));
     }
-    /**
-     * Launches the FireBall at the mouse direction.
-     */
-    public void launchFireBall(Point p){
+
+    public static void launchFireBall(FireBall ball, Point p){
         ball.setDirection(p);
         ball.setSpeed(4);
-        moveFireBall();
+        moveFireBall(ball);
     }
 
-    /**
-     * Computes the next point that the ball will move towards.
-     * @return
-     */
-    public Point nextPoint(){
-        Point ballDirection = validateBallDirection();
+    public static Point nextPoint(FireBall ball){
+        Point ballDirection = validateBallDirection(ball);
         int x = ball.getX() + (ballDirection.x * ball.getSpeed());
         int y = ball.getY() + (ballDirection.y * ball.getSpeed());
         return new Point(x, y);
     }
 
-    public Point validateBallDirection(){
+    public static Point validateBallDirection(FireBall ball){
         Point direction = ball.getDirection();
         if (direction == null){
             direction = new Point(-1, -1);
@@ -55,8 +42,8 @@ public class BallManager implements Serializable {
         return direction;
     }
 
-    public void moveFireBall(){
-        Point p = nextPoint();
+    public static void moveFireBall(FireBall ball){
+        Point p = nextPoint(ball);
         ball.setLocation(p);
         ball.getHitBox().setLocation(p);
     }

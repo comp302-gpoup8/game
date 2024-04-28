@@ -26,7 +26,7 @@ public interface ComputationHelper {
 
     public static Point normal(Point v, Point w){
         Point normal;
-        if (Math.abs(v.x - w.x) > Math.abs(v.y - w.y)){
+        if (Math.abs(v.x - w.x) >= Math.abs(v.y - w.y)){
             normal = new Point(v.x < w.x ? -1 : 1, 0);
         } else {
             normal = new Point(0, v.y < w.y ? -1 : 1);

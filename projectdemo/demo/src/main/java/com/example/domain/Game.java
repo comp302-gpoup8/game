@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.example.SaveManager;
+import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.GameObject;
 import com.example.domain.levels.Level;
 import com.example.visual.GamePanel;
@@ -31,27 +32,16 @@ public class Game implements Serializable {
     public void run() {
         while (continuePlaying()) {
             panel.displayGamePanel();
+            int command = panel.getController().getDirection();
 
             gm.updateElements();
             gm.checkCollisions();
-            if (panel.getBall().getSpeed() > 0) {
-                gm.moveBall(panel.getBall());
-            }
-            int command = panel.getController().getDirection();
-            switch (command) {
-                case -1:
-                    gm.moveStaff(panel.getStaff(), -1);
-                    break;
-                case 1:
-                    gm.moveStaff(panel.getStaff(), 1);
-                    break;
-                case 2:
-                    gm.launchBall(panel.getBall());
-                    break;
-                case 9:
-                    saveAndExit();
-                default:
-                    break;
+            keepMotion();
+            switch(command){
+                case -1 -> gm.moveStaff(panel.getStaff(), command);
+                case 1 -> gm.moveStaff(panel.getStaff(), command);
+                case 2 -> gm.launchBall();
+                case 9 -> saveAndExit();
             }
             panel.refreshLevel();
             try {
@@ -60,6 +50,7 @@ public class Game implements Serializable {
                 Thread.currentThread().interrupt();
             }
         }
+        System.exit(0);
     }
 
     public void lostBall(){
@@ -94,6 +85,13 @@ public class Game implements Serializable {
         return player.remainingLives > 0 && !level.isCleared();
     }
 
+    private void keepMotion(){
+        FireBall ball = panel.getBall();
+        if (ball.getSpeed() > 0){
+            gm.moveBall();
+        }
+    }
+
     public GamePanel getPanel(){
         return panel;
     }
@@ -109,10 +107,3 @@ public class Game implements Serializable {
         System.exit(0);
     }
 }
-
-
-
-
-
-
-// }
