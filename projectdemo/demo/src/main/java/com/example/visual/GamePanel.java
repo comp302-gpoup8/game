@@ -165,6 +165,34 @@ public class GamePanel extends JFrame{
 
 
 
+    private void initLivesDisplay() {
+        for (int i = 0; i < lifeIcons.length; i++) {
+            lifeIcons[i] = new JLabel(new ImageIcon("projectdemo/demo/src/main/java/com/example/Graphical-Assets/Heart.png"));
+            lifeIcons[i].setBounds(1100 + (i * 30), 610,28, 28);
+            add(lifeIcons[i]);
+        }
+        updateLivesDisplay();
+    }
+
+    public void updateLivesDisplay() {
+        for (int i = 0; i < lifeIcons.length; i++) {
+            if (i < getRemainingLives()) {
+                lifeIcons[i].setVisible(true);
+            } else {
+                lifeIcons[i].setVisible(false);
+            }
+        }
+    }
+
+    public int getRemainingLives(){
+        if (player == null){
+            player = new Player("New Player");
+        }
+        return player.remainingLives;
+    }
+
+
+
     /**
      * Initializes the Background image for the panel.
      */

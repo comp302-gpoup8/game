@@ -26,11 +26,7 @@ public class LevelBuilder {
     public Level prompt(){
         Scanner sc = new Scanner(System.in);
         Level level = new Level("Single-Player Level");
-        askDifficulty(sc);
-        switch (difficulty) {
-            case 1,2,3 -> randomizeLevel(level, difficulty);
-            case 0 -> buildMode(level, sc);
-        }
+        buildMode(level, sc);
         sc.close();
         return level;
     }
@@ -63,6 +59,7 @@ public class LevelBuilder {
         addBarriers(level);
     }
 
+    @Deprecated
     /**
      * Prompts the user to choose the difficulty of the level when appropriate.
      * @param s
@@ -100,10 +97,7 @@ public class LevelBuilder {
         System.out.println("Please enter the number of Rewarding Barriers: ");
         rewCount = s.nextInt();
 
-        int barrierCount = simpleCount + firmCount + expCount + rewCount;
-        while (barrierCount < 100) {
-         simpleCount++;   
-        }
+        System.out.println("Barrier counts have been received");
     }
 
     /**
