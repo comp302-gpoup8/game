@@ -44,4 +44,10 @@ public interface ComputationHelper {
         int y = p.y - 2 * dotProduct * q.y;
         return new Point(x, y);
     }
+
+    public static void normalize(Point p){
+        double len = Math.sqrt(p.x * p.x + p.y * p.y);
+        p.x /= len;
+        p.y /= len;
+    }
 }

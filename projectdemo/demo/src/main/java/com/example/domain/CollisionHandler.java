@@ -8,8 +8,7 @@ import com.example.domain.gameObject.barriers.ExplosiveBarrier;
 import com.example.domain.gameObject.barriers.ReinforcedBarrier;
 import com.example.domain.gameObject.barriers.RewardingBarrier;
 import com.example.domain.gameObject.barriers.SimpleBarrier;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public interface CollisionHandler {
 

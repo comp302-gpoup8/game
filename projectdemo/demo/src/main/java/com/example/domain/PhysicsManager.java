@@ -37,14 +37,15 @@ public interface PhysicsManager {
 
     public static void bounceFromStaff(FireBall ball, GameObject e) {
         Point ballCenter = getObjectCenter(ball);
-        Point objectCenter = getObjectCenter(e);
-        Point normal = ComputationHelper.normal(ballCenter, objectCenter);
-        Point reflection = ComputationHelper.reflectionCalculator(ball.getDirection(), normal);
-        if (reflection.getY() < 0){
-            reflection.y *= -1;
-        }
-        ball.setDirection(reflection);
+        Point staffCenter = getObjectCenter(e);
+
+        int hitPoint = ballCenter.x - staffCenter.x;
+        ball.getDirection().x += 2 * hitPoint / e.getWidth();
+        ball.getDirection().y *= -1;
+
+        // ComputationHelper.normalize(ball.getDirection());
     }
+
 
     private static Point getObjectCenter(GameObject e){
         int centerX = e.getX() + e.getWidth() / 2;
