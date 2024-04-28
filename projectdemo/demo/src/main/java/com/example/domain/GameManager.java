@@ -15,33 +15,32 @@ import java.util.List;
 
 
 
-public class GameManager extends BallMovementManager {
+public class GameManager {
     private Game game;
     private List<GameObject> elements;
+    private BallManager ballManager;
+    private StaffManager staffManager;
 
     public GameManager(Game g, List<GameObject> e){
-        super(g.getPanel().getBall());
         game = g;
         elements = e;
+        ballManager = new BallManager(g.getPanel().getBall());
+        staffManager = new StaffManager(g.getPanel().getStaff());
     }
 
     public void launchBall(FireBall f){
-        super.launchFireBall();
+        ballManager.launchFireBall(game.getPanel().getMousePosition());
     }
 
     public void moveBall(FireBall f){
-        super.moveFireBall();
+        ballManager.moveFireBall();
     }
 
     public void moveStaff(Staff s, int x) {
-        int staffX = s.getX() + (x * s.getSpeed());
-        int screenWidth = 1200;
-        int staffWidth = s.getSize().width;
-
-        staffX = Math.max(0, Math.min(staffX, screenWidth - staffWidth));
-
-        s.setLocation(new Point(staffX, s.getY()));
-        s.getHitBox().setLocation(s.getLocation());
+        staffManager.moveStaff(x);
+        if (ballManager.ball.getSpeed() == 0){
+            reinitiateBall(ballManager.ball);
+        }
     }
     
     public void updateElements() {
@@ -74,12 +73,7 @@ public class GameManager extends BallMovementManager {
     }
 
     private void reinitiateBall(FireBall f) {
-        Staff staff = game.getPanel().getStaff();
-        int staffCenterX = staff.getX() + staff.getWidth() / 2;
-        int staffCenterY = staff.getY() - f.getSize().height / 2; // Place ball just above the staff
-        f.setLocation(new Point(staffCenterX, staffCenterY));
-        f.setSpeed(0);
-        f.setDirection(new Point(1, -1)); // Set initial direction upwards
+        ballManager.placeBallAtStaff(game.getPanel().getStaff());
     }
 
     public void checkCollisions() {

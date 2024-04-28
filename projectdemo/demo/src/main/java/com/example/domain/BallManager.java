@@ -4,19 +4,33 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import com.example.domain.gameObject.FireBall;
+import com.example.domain.gameObject.Staff;
 
-public class BallMovementManager implements Serializable {
+public class BallManager implements Serializable {
 
     FireBall ball;
     
-    public BallMovementManager(FireBall b){
+    public BallManager(FireBall b){
         ball = b;
+    }
+    public void placeBallAtStaff(Staff s){
+        int staffCenterX = s.getX() + s.getWidth() / 2;
+        int staffCenterY = s.getY() + s.getHeight() / 2;
+        Point p = new Point(staffCenterX, staffCenterY + 5); //+5 so it doesn't get in the staff.
+        resetBall(p);
+    }
+
+    public void resetBall(Point p){
+        ball.setSpeed(0);
+        ball.setLocation(p);
+        ball.getHitBox().setLocation(p);
+        ball.setDirection(new Point(-1, -1));
     }
     /**
      * Launches the FireBall at the mouse direction.
      */
-    public void launchFireBall(){
-        ball.setDirection(ball.getMousePosition());
+    public void launchFireBall(Point p){
+        ball.setDirection(p);
         ball.setSpeed(4);
         moveFireBall();
     }
