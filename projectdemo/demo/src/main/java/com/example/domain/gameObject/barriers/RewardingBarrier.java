@@ -3,6 +3,10 @@ package com.example.domain.gameObject.barriers;
 import java.awt.Dimension;
 import java.awt.Point;
 
+/**
+ * Rewarding Barrier Class
+ * A barrier type that rewards the player with a spell once it is destroyed.
+ */
 public class RewardingBarrier extends Barrier {
 
     protected static Integer DEFAULT_HP = 1;

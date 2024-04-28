@@ -2,6 +2,10 @@ package com.example.domain.gameObject.barriers;
 
 import java.awt.Point;
 
+/**
+ * Simple Barrier Class
+ * The basic barrier type, which has no special traits and only 1 hitpoint.
+ */
 public class SimpleBarrier extends Barrier {
 
     protected static Integer DEFAULT_HP = 1;

@@ -1,7 +1,11 @@
 package com.example.domain.gameObject.barriers;
 
 import java.awt.Point;
-
+/**
+ * Reinforced Barrier Class
+ * Also referred as Firm Barrier
+ * Has 3 hitPoints instead of the default 1, making it harder to destroy.
+ */
 public class ReinforcedBarrier extends Barrier {
     
 
