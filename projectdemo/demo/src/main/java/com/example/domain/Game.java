@@ -153,8 +153,9 @@ public class Game implements Serializable {
      * Saves the game state and exits the program.
      */
     public void saveAndExit() {
-        //UNCOMMENT THE LINE BELOW TO TEST IT. 
-        // save();
+        //UNCOMMENT THE LINE BELOW TO TEST IT.
+        //Works fine when uncommented. Use x to save.
+         save();
         System.out.println("Saved! Exitting!");
         System.exit(0);
     }
