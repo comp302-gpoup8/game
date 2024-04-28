@@ -168,3 +168,4 @@ public void destroyBarrier(Barrier barrier) {
 private SpellEffects spellEffects = new SpellEffects(context);
 
 addKeyListener(spellEffects);
+*/
