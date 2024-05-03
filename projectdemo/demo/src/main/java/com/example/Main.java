@@ -1,19 +1,25 @@
 package com.example;
 
-import com.example.domain.Game;
 import com.example.domain.levels.Level;
-import com.example.domain.levels.LevelInterface;
-import com.example.domain.levels.LevelRandomizer;
-import com.example.visual.GamePanel;
+import com.example.domain.levels.LevelBuilder;
+import com.example.visual.MainMenuPanel;
+import com.example.domain.Game;
 
 public class Main {
 
     public static void main(String[] args) {
-        Level level = new Level("RandomLevel");
-        LevelRandomizer.randomizeLevel(level, 75);
-        Game gp = new Game(level);
-        gp.run();
-        
+        MainMenuPanel mainMenu = new MainMenuPanel();
+        while (mainMenu.getGame() == null){
+            mainMenu.run();
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+        Game game = mainMenu.getGame();
+        mainMenu = null;
+        game.run();
     }
 
 

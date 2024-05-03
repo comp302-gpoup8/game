@@ -3,6 +3,10 @@ package com.example.visual;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/**
+ * Background Label class
+ * Pretty simple but GamePanel is too big so this improves readability a lot. 
+ */
 public class BackgroundLabel extends JLabel {
 
     protected ImageIcon backgroundImage;
