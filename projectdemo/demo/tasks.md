@@ -1,0 +1,33 @@
+- Most Important Issues
+  - The Visual and the Domain are not in sync, which causes the ball to act weird. The issue is due to the use of Thread.sleep().
+    - If we cannot solve this issue properly it is going to cause a bigger headache when implementing multiplayer; Which will use multithreading.
+    - It also prevents us from implementing the new spell that will change the ball speed.
+- Important Issues
+  - The Game and GamePanel classes are built in a confusing way, making it difficult to maintain and fix the code.
+  - Main Menu crashes when switching to other panels. It also opens multiple instances of itself on some PCs.
+    - We did manage to get it to work for single-player but it will likely cause issues when we add more windows.
+- Missing Parts
+  - Database should connect with the rest of the code.
+  - The spells should work with the rest of the code.
+  - Building mode should have its own GUI and should not be done on the terminal.
+    - We should probably fix the main menu issues before doing this part.
+  - Load Game should lead to its own screen with options.
+    - Again, after main menu is fixed.
+- Misc
+  - Collision & Reflections have a lot of room for improvement.
+  - The barriers should be placed better on the screen and have room to move.
+  - Explosive & Rewarding barriers should be implemented to full function but let’s do that after we improve the threading issues.
+    - Because multiple moving elements can make it worse.
+  - We need assets for the new barrier type and the projectiles.
+  - GUI can improve.
+- Ideas
+  - New Barrier Types & Spells:
+    - Cursed Barrier - Puts a random malevolent spell on the player that destroys it.
+    - Blinking Barrier - A barrier that appears and disappears at certain times.
+    - Shuffle - A malevolent spell that switches the controls of the player (right button would move left etc).
+  - Achievement System
+    - Player-Progression would be more meaningful instead of just storing the high score.
+    - Sample Achievements:
+      - “Flawless Victory”: Clear a level without losing any lives.
+      - “The Old Fashioned Way”: Win a multiplayer game without activating any spells (but your opponent does)
+      - “Chain Reaction”: Have at least 4 explosive barrier projectiles on the screen at the same time.
