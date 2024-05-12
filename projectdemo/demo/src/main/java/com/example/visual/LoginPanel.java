@@ -46,20 +46,23 @@ public class LoginPanel extends JPanel {
     }
 
     public void loginClicked(){
-        if(login(usernameField.getText(), usernameField.getText())){
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        if(login(username, password)){
             LoginSuccessful = true;
             MainMenuPanel mainMenu = new MainMenuPanel();
-            while (mainMenu.getGame() == null){
-                mainMenu.run();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-            Game game = mainMenu.getGame();
-            mainMenu = null;
-            game.run();
+//            while (mainMenu.getGame() == null){
+//                mainMenu.run();
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//            Game game = mainMenu.getGame();
+//            mainMenu = null;
+//            game.run();
+            mainMenu.run();
         }
     }
 
