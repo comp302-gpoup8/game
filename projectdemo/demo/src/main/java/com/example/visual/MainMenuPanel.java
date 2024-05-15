@@ -34,6 +34,7 @@ public class MainMenuPanel extends JPanel {
     private void makeGameWithRandomDifficulty() {
         int difficultyLevel = (int) (Math.random() * 3) + 1; // Generates a random number between 1 and 3
         makeGame(difficultyLevel);
+        game.run();
     }
 
     public void makeGame(int difficultyLevel) {

@@ -7,6 +7,7 @@ import com.example.domain.Game;
 import javax.swing.*;
 import java.awt.*;
 
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.util.Scanner;
 import java.sql.Connection;
@@ -21,8 +22,10 @@ public class LoginPanel extends JPanel {
     public JTextField usernameField;
     public JTextField passwordField;
     public boolean LoginSuccessful;
+    public JFrame loginFrame;
 
     public LoginPanel(){
+        loginFrame = new JFrame("Login Menu");
         LoginSuccessful = false;
         setLayout(new GridLayout(4,1));
 
@@ -43,6 +46,7 @@ public class LoginPanel extends JPanel {
     public void openRegistration(){
         RegisterPanel openRegistrationWindow = new RegisterPanel();
         openRegistrationWindow.run();
+        loginFrame.dispose();
     }
 
     public void loginClicked(){
@@ -67,12 +71,11 @@ public class LoginPanel extends JPanel {
     }
 
     public void run() {
-        JFrame frame = new JFrame("Login Menu");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.add(this);
-        frame.setSize(300, 200);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+        loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        loginFrame.add(this);
+        loginFrame.setSize(300, 200);
+        loginFrame.setVisible(true);
+        loginFrame.setLocationRelativeTo(null);
     }
 
 
