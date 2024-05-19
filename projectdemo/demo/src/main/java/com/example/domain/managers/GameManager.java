@@ -72,7 +72,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
      * Allows the FireBall to move along with the staff before it is launched.
      */
     private void moveBallBeforeLaunch(){
-        if (ball. getSpeed() == 0){
+        if (ball.getSpeed() == 0){
             reinitiateBall(ball);
         }
     }

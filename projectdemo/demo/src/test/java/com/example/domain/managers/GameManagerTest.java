@@ -14,12 +14,11 @@ import com.example.domain.Game;
 
 
 public class GameManagerTest {
-    
+
     private Level lv = new Level("a");
     private Game g = new Game("a", lv);
     private ArrayList<GameObject> elements = new ArrayList<>();
     private GameManager gm = new GameManager(g, elements);
-    
     
     @Test
     public void testIncreaseScoreSimpleBarrier(){
@@ -78,5 +77,20 @@ public class GameManagerTest {
     }
 
     
+    @Test
+    public void testMoveStaffInScreen(){
+        Point beforeP = g.getPanel().getStaff().getHitBox().getLocation();
+        gm.moveStaff(g.getPanel().getStaff(), 10);
+        Point afterP = g.getPanel().getStaff().getHitBox().getLocation();
+        assertTrue(afterP.getX()-beforeP.getX() == 10*g.getPanel().getStaff().getSpeed());
+    }
+
+    @Test
+    public void testMoveStaffOutScreen(){
+        Point beforeP = g.getPanel().getStaff().getHitBox().getLocation();
+        gm.moveStaff(g.getPanel().getStaff(), 100000);
+        Point afterP = g.getPanel().getStaff().getHitBox().getLocation();
+        assertTrue(afterP.getX()-beforeP.getX() == g.getPanel().getWidth()/2);
+    }
 
 }
