@@ -21,63 +21,6 @@ public class GameManagerTest {
     private GameManager gm = new GameManager(g, elements);
     
     @Test
-    public void testIncreaseScoreSimpleBarrier(){
-
-        int beforeS = g.getPlayer().score;
-        List<GameObject> toRemove = new ArrayList<>();
-        toRemove.add(new SimpleBarrier(new Point(1,1)));
-        gm.increaseScore(toRemove);
-        int afterS = g.getPlayer().score;
-
-        assertTrue(afterS-beforeS == 10);
-    }
-
-    @Test
-    public void testIncreaseScoreReinforcedBarrier(){
-        int beforeS = g.getPlayer().score;
-        List<GameObject> toRemove = new ArrayList<>();
-        toRemove.add(new ReinforcedBarrier(new Point(1,1)));
-        gm.increaseScore(toRemove);
-        int afterS = g.getPlayer().score;
-
-        assertTrue(afterS-beforeS == 20);
-    }
-
-    @Test
-    public void testIncreaseScoreExplosiveBarrier(){
-        int beforeS = g.getPlayer().score;
-        List<GameObject> toRemove = new ArrayList<>();
-        toRemove.add(new ExplosiveBarrier(new Point(1,1)));
-        gm.increaseScore(toRemove);
-        int afterS = g.getPlayer().score;
-
-        assertTrue(afterS-beforeS == 15);
-    }
-
-    @Test
-    public void testIncreaseScoreRewardingBarrier(){
-        int beforeS = g.getPlayer().score;
-        List<GameObject> toRemove = new ArrayList<>();
-        toRemove.add(new RewardingBarrier(new Point(1,1)));
-        gm.increaseScore(toRemove);
-        int afterS = g.getPlayer().score;
-
-        assertTrue(afterS-beforeS == 15);
-    }
-
-    @Test
-    public void testIncreaseScoreNotBarrier(){
-        int beforeS = g.getPlayer().score;
-        List<GameObject> toRemove = new ArrayList<>();
-        toRemove.add(new FireBall(new Point(1,1), new Dimension(1,1)));
-        gm.increaseScore(toRemove);
-        int afterS = g.getPlayer().score;
-
-        assertTrue(afterS-beforeS == 0);
-    }
-
-    
-    @Test
     public void testMoveStaffInScreen(){
         Point beforeP = g.getPanel().getStaff().getHitBox().getLocation();
         gm.moveStaff(g.getPanel().getStaff(), 10);
@@ -92,5 +35,58 @@ public class GameManagerTest {
         Point afterP = g.getPanel().getStaff().getHitBox().getLocation();
         assertTrue(afterP.getX()-beforeP.getX() == g.getPanel().getWidth()/2);
     }
+
+    @Test
+    public void testIncreaseScoreSimpleBarrier(){
+        int beforeS = g.getPlayer().score;
+        List<GameObject> toRemove = new ArrayList<>();
+        toRemove.add(new SimpleBarrier(new Point(1,1)));
+        gm.increaseScore(toRemove);
+        int afterS = g.getPlayer().score;
+        assertTrue(afterS-beforeS == 10);
+    }
+
+    @Test
+    public void testIncreaseScoreReinforcedBarrier(){
+        int beforeS = g.getPlayer().score;
+        List<GameObject> toRemove = new ArrayList<>();
+        toRemove.add(new ReinforcedBarrier(new Point(1,1)));
+        gm.increaseScore(toRemove);
+        int afterS = g.getPlayer().score;
+        assertTrue(afterS-beforeS == 20);
+    }
+
+    @Test
+    public void testIncreaseScoreExplosiveBarrier(){
+        int beforeS = g.getPlayer().score;
+        List<GameObject> toRemove = new ArrayList<>();
+        toRemove.add(new ExplosiveBarrier(new Point(1,1)));
+        gm.increaseScore(toRemove);
+        int afterS = g.getPlayer().score;
+        assertTrue(afterS-beforeS == 15);
+    }
+
+    @Test
+    public void testIncreaseScoreRewardingBarrier(){
+        int beforeS = g.getPlayer().score;
+        List<GameObject> toRemove = new ArrayList<>();
+        toRemove.add(new RewardingBarrier(new Point(1,1)));
+        gm.increaseScore(toRemove);
+        int afterS = g.getPlayer().score;
+        assertTrue(afterS-beforeS == 15);
+    }
+
+    @Test
+    public void testIncreaseScoreNotBarrier(){
+        int beforeS = g.getPlayer().score;
+        List<GameObject> toRemove = new ArrayList<>();
+        toRemove.add(new FireBall(new Point(1,1), new Dimension(1,1)));
+        gm.increaseScore(toRemove);
+        int afterS = g.getPlayer().score;
+        assertTrue(afterS-beforeS == 0);
+    }
+
+    
+   
 
 }
