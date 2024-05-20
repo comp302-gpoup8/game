@@ -4,18 +4,12 @@ import com.example.domain.Game;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.GameObject;
 import com.example.domain.gameObject.Staff;
-import com.example.domain.gameObject.barriers.Barrier;
-import com.example.domain.gameObject.barriers.ExplosiveBarrier;
-import com.example.domain.gameObject.barriers.ReinforcedBarrier;
-import com.example.domain.gameObject.barriers.RewardingBarrier;
-import com.example.domain.gameObject.barriers.SimpleBarrier;
 import com.example.domain.interfaces.BallManager;
 import com.example.domain.interfaces.CollisionHandler;
 import com.example.domain.interfaces.PhysicsManager;
 import com.example.domain.interfaces.StaffManager;
 
 import java.awt.Point;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +19,10 @@ import java.util.List;
  * Contains the main game logic.
  * TODO: Used to be too long and now partitioned, so definitely needs to be cleaned up but let's not break anything today.
  */
-public class GameManager implements BallManager, CollisionHandler, PhysicsManager, StaffManager, Serializable {
+public class GameManager implements BallManager, CollisionHandler, PhysicsManager, StaffManager {
     private Game game;
     private List<GameObject> elements;
     private FireBall ball;
-    private boolean collisionsChecked;
 
 
     public GameManager(Game g, List<GameObject> e){
@@ -109,11 +102,8 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         BallManager.placeBallAtStaff(ball, game.getPanel().getStaff());
     }
 
-   /**
+    /**
      * Uses the CollisionHandler to check for collisions and removes destroyed objects as a result, when appropriate.
-     * Requires: A list of game elements including barriers and the fireball.
-     * Modifies: The state of the game elements list and the player's score.
-     * Effects: Detects collisions among game elements, updates the score, and removes destroyed elements from the list.
      */
     public void checkCollisions() {
         List<GameObject> toRemove = new ArrayList<>();
@@ -126,36 +116,8 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
                 }
             }
         }
-        increaseScore(toRemove);
         elements.removeAll(toRemove);
         game.getPanel().refreshLevel();
-        collisionsChecked = true;
     }
-
-    /**
-     * Adjusts the player's score when they destroy barriers.
-     * @param toRemove
-     */
-    public void increaseScore(List<GameObject> toRemove){
-        for (GameObject obj : toRemove){
-            if (!(obj instanceof Barrier)){
-                continue;
-            }
-            Barrier bar = (Barrier) obj;
-            if (bar instanceof SimpleBarrier){
-                game.getPlayer().score += 10;
-            } else if (bar instanceof ReinforcedBarrier){
-                game.getPlayer().score += 20;
-            } else if (bar instanceof ExplosiveBarrier){
-                game.getPlayer().score += 15;
-            } else if (bar instanceof RewardingBarrier) {
-                game.getPlayer().score += 15;
-            }
-        }
-    }
-    public boolean isCollisionsChecked() {
-        return collisionsChecked;
-    }
-
 
 }
