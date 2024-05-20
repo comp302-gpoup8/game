@@ -1,11 +1,9 @@
 package com.example.visual;
 
+import com.example.database.AuthenticationFacade;
+
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class RegisterPanel extends JPanel{
     public JButton loginButton;
@@ -47,17 +45,10 @@ public class RegisterPanel extends JPanel{
     }
 
     private void registerClicked(){
-        String sql = "INSERT INTO users(username, password) VALUES(?,?)";
+        AuthenticationFacade authenticationFacade = new AuthenticationFacade();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:projectdemo/demo/src/main/java/com/example/players.db");
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, usernameField.getText());
-            pstmt.setString(2, passwordField.getText());
-            pstmt.executeUpdate();
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        authenticationFacade.register(username, password);
     }
 }
