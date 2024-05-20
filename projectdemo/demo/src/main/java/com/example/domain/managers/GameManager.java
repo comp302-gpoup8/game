@@ -4,6 +4,11 @@ import com.example.domain.Game;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.GameObject;
 import com.example.domain.gameObject.Staff;
+import com.example.domain.gameObject.barriers.Barrier;
+import com.example.domain.gameObject.barriers.ExplosiveBarrier;
+import com.example.domain.gameObject.barriers.ReinforcedBarrier;
+import com.example.domain.gameObject.barriers.RewardingBarrier;
+import com.example.domain.gameObject.barriers.SimpleBarrier;
 import com.example.domain.interfaces.BallManager;
 import com.example.domain.interfaces.CollisionHandler;
 import com.example.domain.interfaces.PhysicsManager;
@@ -118,6 +123,28 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         }
         elements.removeAll(toRemove);
         game.getPanel().refreshLevel();
+    }
+
+     /**
+     * Adjusts the player's score when they destroy barriers.
+     * @param toRemove
+     */
+    public void increaseScore(List<GameObject> toRemove){
+        for (GameObject obj : toRemove){
+            if (!(obj instanceof Barrier)){
+                continue;
+            }
+            Barrier bar = (Barrier) obj;
+            if (bar instanceof SimpleBarrier){
+                game.getPlayer().score += 10;
+            } else if (bar instanceof ReinforcedBarrier){
+                game.getPlayer().score += 20;
+            } else if (bar instanceof ExplosiveBarrier){
+                game.getPlayer().score += 15;
+            } else if (bar instanceof RewardingBarrier) {
+                game.getPlayer().score += 15;
+            }
+        }
     }
 
 }
