@@ -29,6 +29,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
     private Game game;
     private List<GameObject> elements;
     private FireBall ball;
+    private boolean collisionsChecked;
 
 
     public GameManager(Game g, List<GameObject> e){
@@ -108,8 +109,11 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         BallManager.placeBallAtStaff(ball, game.getPanel().getStaff());
     }
 
-    /**
+   /**
      * Uses the CollisionHandler to check for collisions and removes destroyed objects as a result, when appropriate.
+     * Requires: A list of game elements including barriers and the fireball.
+     * Modifies: The state of the game elements list and the player's score.
+     * Effects: Detects collisions among game elements, updates the score, and removes destroyed elements from the list.
      */
     public void checkCollisions() {
         List<GameObject> toRemove = new ArrayList<>();
@@ -125,6 +129,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         increaseScore(toRemove);
         elements.removeAll(toRemove);
         game.getPanel().refreshLevel();
+        collisionsChecked = true;
     }
 
     /**
@@ -148,5 +153,9 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
             }
         }
     }
+    public boolean isCollisionsChecked() {
+        return collisionsChecked;
+    }
+
 
 }
