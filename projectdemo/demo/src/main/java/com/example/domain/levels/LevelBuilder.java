@@ -15,7 +15,7 @@ import com.example.domain.gameObject.barriers.RewardingBarrier;
  */
 public class LevelBuilder {
     
-    private Integer difficulty, simpleCount, expCount, firmCount, rewCount;
+     Integer difficulty, simpleCount, expCount, firmCount, rewCount;
 
     /**
      * Asks the user input to determine the operation.
@@ -115,7 +115,7 @@ public class LevelBuilder {
      * So they are placed randomly.
      * @param l
      */
-    private void addBarriers(Level l){
+     void addBarriers(Level l){
         for (int i = 0; i < simpleCount; i++) {
             l.addBarrier(new SimpleBarrier(new Point()));
         }
