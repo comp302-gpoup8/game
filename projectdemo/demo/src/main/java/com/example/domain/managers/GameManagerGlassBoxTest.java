@@ -26,7 +26,7 @@ public class GameManagerGlassBoxTest {
         elements.add(new SimpleBarrier(null));
         elements.add(new ReinforcedBarrier(null));
         gameManager.checkCollisions();
-        assertTrue(gameManager.isCollisionsChecked());
+        assertTrue("Collisions not checked as expected", gameManager.isCollisionsChecked());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class GameManagerGlassBoxTest {
         elements.add(barrier);
         elements.add(new FireBall(null, null));
         gameManager.checkCollisions();
-        assertEquals(1, elements.size());
+        assertEquals("SimpleBarrier was not removed after collision", 1, elements.size());
     }
 
     @Test
@@ -45,6 +45,6 @@ public class GameManagerGlassBoxTest {
         elements.add(new FireBall(null, null));
         int initialScore = game.getPlayer().score;
         gameManager.checkCollisions();
-        assertTrue(game.getPlayer().score > initialScore);
+        assertTrue("Score was not updated correctly", game.getPlayer().score > initialScore);
     }
 }
