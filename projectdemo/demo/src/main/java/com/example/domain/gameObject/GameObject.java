@@ -94,5 +94,23 @@ public abstract class GameObject extends JLabel {
     public void setDirection(Point p){
         direction = p;
     }
+    
+    /**
+     * @return true if the representation invariant is OK
+     */
+    public boolean repOk() {
+        return checkHitBox() && icon != null && speed != null && speed >= 0 && direction != null;
+    }
+
+    /**
+     * Helper method for repOK to check the hitBox.
+     * @return true if hitBox is not null, has a non-negative width and height.
+     */
+    private boolean checkHitBox() {
+        if (hitBox == null) {
+            return false;
+        }
+        return hitBox.width >= 0 && hitBox.height >= 0;
+    }
 
 }
