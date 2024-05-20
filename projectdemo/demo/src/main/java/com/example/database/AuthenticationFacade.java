@@ -16,4 +16,8 @@ public class AuthenticationFacade {
         return SQLSubsystem.registerSQL(username, password);
     }
 
+    public boolean isUsernameAvailable(String username) {return SQLSubsystem.isUsernameTaken(username);}
+
+    public String getMessage() {return SQLSubsystem.getErrorMessage();}
+
 }

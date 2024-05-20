@@ -11,10 +11,14 @@ public class RegisterPanel extends JPanel{
     public JTextField usernameField;
     public JTextField passwordField;
     public JFrame registerFrame;
+    public JDialog registerDialog;
+    public JButton okButton;
 
     public RegisterPanel(){
         registerFrame = new JFrame("Registration Menu");
         setLayout(new GridLayout(4,1));
+
+        registerDialog = new JDialog();
 
         usernameField = new JTextField();
         passwordField = new JTextField();
@@ -49,6 +53,16 @@ public class RegisterPanel extends JPanel{
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        authenticationFacade.register(username, password);
+        if(authenticationFacade.isUsernameAvailable(username)){
+            authenticationFacade.register(username, password);
+//            registerDialog = new JDialog();
+//            registerDialog.add(okButton);
+//            registerDialog.add(new JLabel("Registration Successful!"));
+        }
+        else{
+            ErrorDialog errorDialog = new ErrorDialog();
+            errorDialog.showErrorDialog();
+        }
+
     }
 }
