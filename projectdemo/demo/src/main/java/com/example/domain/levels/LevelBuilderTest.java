@@ -24,6 +24,7 @@ public class LevelBuilderTest {
      * MODIFIES: this.level
      * EFFECTS: Populates the level with barriers according to the given difficulty
      */
+
     @Test
     public void testRandomizeLevelEasy() {
         levelBuilder.randomizeLevel(level, 1);
@@ -35,6 +36,7 @@ public class LevelBuilderTest {
      * MODIFIES: this.level
      * EFFECTS: Populates the level with barriers according to the given difficulty
      */
+
     @Test
     public void testRandomizeLevelNormal() {
         levelBuilder.randomizeLevel(level, 2);
@@ -46,6 +48,7 @@ public class LevelBuilderTest {
      * MODIFIES: this.level
      * EFFECTS: Populates the level with barriers according to the given difficulty
      */
+
     @Test
     public void testRandomizeLevelHard() {
         levelBuilder.randomizeLevel(level, 3);
@@ -57,12 +60,13 @@ public class LevelBuilderTest {
      * MODIFIES: this.level
      * EFFECTS: Populates the level with custom barrier counts as specified
      */
+
     @Test
     public void testCustomBarrierCounts() {
-        levelBuilder.simpleCount = 30;
-        levelBuilder.firmCount = 20;
-        levelBuilder.expCount = 25;
-        levelBuilder.rewCount = 25;
+        levelBuilder.setSimpleCount(30);
+        levelBuilder.setFirmCount(20);
+        levelBuilder.setExpCount(25);
+        levelBuilder.setRewCount(25);
         levelBuilder.addBarriers(level);
         validateBarrierCounts(level, 30, 25, 25, 20);
     }
@@ -73,13 +77,14 @@ public class LevelBuilderTest {
      * EFFECTS: Populates the level with barriers ensuring total count is 100
      */
 
+
     @Test
     public void testCustomBarrierCountsLessThanHundred() {
         // Set custom barrier counts that sum to less than 100
-        levelBuilder.simpleCount = 60;
-        levelBuilder.firmCount = 20;
-        levelBuilder.expCount = 10;
-        levelBuilder.rewCount = 5;
+        levelBuilder.setSimpleCount(60);
+        levelBuilder.setFirmCount(20);
+        levelBuilder.setExpCount(10);
+        levelBuilder.setRewCount(5);
 
         // Add barriers to the level
         levelBuilder.addBarriers(level);
@@ -91,7 +96,7 @@ public class LevelBuilderTest {
         long simpleBarrierCount = level.getBarriers().stream().filter(b -> b instanceof SimpleBarrier).count();
 
         // Ensure that the number of simple barriers is the difference between 100 and the total count of other barriers
-        assertEquals(100 - (levelBuilder.firmCount + levelBuilder.expCount + levelBuilder.rewCount), simpleBarrierCount);
+        assertEquals(100 - (levelBuilder.getFirmCount() + levelBuilder.getExpCount() + levelBuilder.getRewCount()), simpleBarrierCount);
     }
 
 
@@ -103,12 +108,13 @@ public class LevelBuilderTest {
 
 
 
+
     @Test
     public void testBarrierCountsAddUpToHundred() {
-        levelBuilder.simpleCount = 60;
-        levelBuilder.firmCount = 10;
-        levelBuilder.expCount = 10;
-        levelBuilder.rewCount = 10;
+        levelBuilder.setSimpleCount(60);
+        levelBuilder.setFirmCount(10);
+        levelBuilder.setExpCount(10);
+        levelBuilder.setRewCount(10);
         levelBuilder.addBarriers(level);
         validateBarrierCounts(level, 60, 10, 10, 10);
     }

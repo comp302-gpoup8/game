@@ -15,7 +15,7 @@ import com.example.domain.gameObject.barriers.RewardingBarrier;
  */
 public class LevelBuilder {
     
-     Integer difficulty, simpleCount, expCount, firmCount, rewCount;
+    private Integer difficulty, simpleCount, expCount, firmCount, rewCount;
 
     /**
      * Asks the user input to determine the operation.
@@ -115,7 +115,7 @@ public class LevelBuilder {
      * So they are placed randomly.
      * @param l
      */
-     void addBarriers(Level l){
+    void addBarriers(Level l){
         for (int i = 0; i < simpleCount; i++) {
             l.addBarrier(new SimpleBarrier(new Point()));
         }
@@ -132,5 +132,45 @@ public class LevelBuilder {
             l.addBarrier(new RewardingBarrier(new Point()));
         }
         Collections.shuffle(l.barriers);
+    }
+
+    public Integer getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Integer getSimpleCount() {
+        return simpleCount;
+    }
+
+    public void setSimpleCount(Integer simpleCount) {
+        this.simpleCount = simpleCount;
+    }
+
+    public Integer getExpCount() {
+        return expCount;
+    }
+
+    public void setExpCount(Integer expCount) {
+        this.expCount = expCount;
+    }
+
+    public Integer getFirmCount() {
+        return firmCount;
+    }
+
+    public void setFirmCount(Integer firmCount) {
+        this.firmCount = firmCount;
+    }
+
+    public Integer getRewCount() {
+        return rewCount;
+    }
+
+    public void setRewCount(Integer rewCount) {
+        this.rewCount = rewCount;
     }
 }

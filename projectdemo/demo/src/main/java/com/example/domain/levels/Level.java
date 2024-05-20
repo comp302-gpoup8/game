@@ -45,4 +45,12 @@ public class Level implements Serializable{
     public boolean isCleared(){
         return barriers.isEmpty();
     }
+
+    public ArrayList<Barrier> getBarriers() {
+        return barriers;
+    }
+
+    public void setBarriers(ArrayList<Barrier> barriers) {
+        this.barriers = barriers;
+    }
 }

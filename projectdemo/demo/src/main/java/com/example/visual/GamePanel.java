@@ -215,4 +215,20 @@ public class GamePanel extends JFrame{
     public FireBall getBall() {
         return ball;
     }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public void setBall(FireBall ball) {
+        this.ball = ball;
+    }
+
+    public void setcLevel(Level cLevel) {
+        this.cLevel = cLevel;
+    }
 }
