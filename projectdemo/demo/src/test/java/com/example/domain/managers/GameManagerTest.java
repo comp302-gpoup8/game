@@ -20,6 +20,13 @@ public class GameManagerTest {
     private ArrayList<GameObject> elements = new ArrayList<>();
     private GameManager gm = new GameManager(g, elements);
     
+
+
+
+     /**
+     * REQUIRES: movement amount is smaller than screen width/2
+     * Verifies that staff moved required amount
+     */
     @Test
     public void testMoveStaffInScreen(){
         Point beforeP = g.getPanel().getStaff().getHitBox().getLocation();
@@ -28,6 +35,10 @@ public class GameManagerTest {
         assertTrue(afterP.getX()-beforeP.getX() == 10*g.getPanel().getStaff().getSpeed());
     }
 
+     /**
+     * REQUIRES: movement amount is bigger than screen width/2
+     * Verifies that staff moved until it reaches screen borders
+     */
     @Test
     public void testMoveStaffOutScreen(){
         Point beforeP = g.getPanel().getStaff().getHitBox().getLocation();
@@ -36,6 +47,10 @@ public class GameManagerTest {
         assertTrue(afterP.getX()-beforeP.getX() == g.getPanel().getWidth()/2);
     }
 
+     /**
+     * REQUIRES: breaked barier is SimpleBarrier
+     * Verifies that players score increases by 10 points
+     */
     @Test
     public void testIncreaseScoreSimpleBarrier(){
         int beforeS = g.getPlayer().score;
@@ -46,6 +61,10 @@ public class GameManagerTest {
         assertTrue(afterS-beforeS == 10);
     }
 
+     /**
+     * REQUIRES: breaked barier is ReinforcedBarrier
+     * Verifies that players score increases by 20 points
+     */
     @Test
     public void testIncreaseScoreReinforcedBarrier(){
         int beforeS = g.getPlayer().score;
@@ -56,6 +75,10 @@ public class GameManagerTest {
         assertTrue(afterS-beforeS == 20);
     }
 
+     /**
+     * REQUIRES: breaked barier is ExplosiveBarrier
+     * Verifies that players score increases by 15 points
+     */
     @Test
     public void testIncreaseScoreExplosiveBarrier(){
         int beforeS = g.getPlayer().score;
@@ -66,6 +89,10 @@ public class GameManagerTest {
         assertTrue(afterS-beforeS == 15);
     }
 
+     /**
+     * REQUIRES: breaked barier is RewardingBarrier
+     * Verifies that players score increases by 15 points
+     */
     @Test
     public void testIncreaseScoreRewardingBarrier(){
         int beforeS = g.getPlayer().score;
@@ -76,6 +103,10 @@ public class GameManagerTest {
         assertTrue(afterS-beforeS == 15);
     }
 
+     /**
+     * REQUIRES: breaked object is not a Barrier
+     * Verifies that players score does not increase
+     */
     @Test
     public void testIncreaseScoreNotBarrier(){
         int beforeS = g.getPlayer().score;
