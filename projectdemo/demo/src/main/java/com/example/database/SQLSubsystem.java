@@ -55,6 +55,7 @@ class SQLSubsystem {
         } catch (SQLException e) {
             this.errorMessage = e.getMessage();
             return false;
+
         }
     }
 
