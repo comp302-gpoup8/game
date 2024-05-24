@@ -67,4 +67,12 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
         }
     }
+
+    public ObjectInputStream getInputStream(){
+        return input;
+    }
+
+    public ObjectOutputStream getOutputStream(){
+        return output;
+    }
 }

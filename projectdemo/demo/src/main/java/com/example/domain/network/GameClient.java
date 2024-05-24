@@ -18,5 +18,11 @@ public class GameClient extends ClientHandler {
         super(new Socket(address, port));
         serverAdress = address;
         serverPort = port;
-    }    
+    }
+
+    public GameClient(Socket socket) {
+        super(socket);
+        serverAdress = socket.getLocalAddress().toString();
+        serverPort = socket.getLocalPort();
+    }
 }
