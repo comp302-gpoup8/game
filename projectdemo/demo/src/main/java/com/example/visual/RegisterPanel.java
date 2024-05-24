@@ -12,7 +12,6 @@ public class RegisterPanel extends JPanel{
     public JTextField passwordField;
     public JFrame registerFrame;
     public JDialog registerDialog;
-    public JButton okButton;
 
     public RegisterPanel(){
         registerFrame = new JFrame("Registration Menu");
@@ -53,16 +52,25 @@ public class RegisterPanel extends JPanel{
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if(authenticationFacade.isUsernameAvailable(username)){
+        if(validation(username, password, authenticationFacade)){
             authenticationFacade.register(username, password);
-//            registerDialog = new JDialog();
-//            registerDialog.add(okButton);
-//            registerDialog.add(new JLabel("Registration Successful!"));
         }
-        else{
-            ErrorDialog errorDialog = new ErrorDialog();
-            errorDialog.showErrorDialog();
+    }
+
+    private boolean validation(String username, String password, AuthenticationFacade authenticationFacade) {
+        if (username.equals("")|| password.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please fill out all fields!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
 
+        else if (authenticationFacade.isUsernameAvailable(username)) {
+            JOptionPane. showMessageDialog(null, "The username is already taken", "Error", JOptionPane. ERROR_MESSAGE);
+            return false;
+        }
+
+        else{
+            JOptionPane. showMessageDialog(null, "You have been successfully registered", "Success", JOptionPane. PLAIN_MESSAGE);
+            return true;
+        }
     }
 }
