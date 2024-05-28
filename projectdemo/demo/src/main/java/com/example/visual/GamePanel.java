@@ -1,6 +1,5 @@
 package com.example.visual;
 
-import com.example.domain.Game;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.Staff;
 import com.example.domain.gameObject.barriers.Barrier;
@@ -17,7 +16,7 @@ import java.awt.*;
  * GamePanel Class
  * The Panel for the Single Player Game
  */
-public class GamePanel extends JFrame{
+public class GamePanel extends JPanel{
     private BackgroundLabel backgroundLabel;
     private transient Controller controller;
     private Staff staff;
@@ -43,8 +42,6 @@ public class GamePanel extends JFrame{
      */
     private void initGameFrame(){
         setSize(1200, 680);
-        setTitle("Single Player");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
     }
 
@@ -56,7 +53,6 @@ public class GamePanel extends JFrame{
         repaint();
         setVisible(true);
         setFocusable(true);
-        setResizable(false);
     }
 
     /**
@@ -97,8 +93,7 @@ public class GamePanel extends JFrame{
      * @param level
      */
     public void addLevel(Level level){
-        getContentPane().removeAll();
-
+        removeAll();
         addFireBall();
         addStaff();
         BallManager.placeBallAtStaff(ball, staff);

@@ -9,17 +9,17 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class LobbyHostGUI extends JFrame {
+public class LobbyHostGUI extends JPanel {
     private JTextField hostField;
     private JTextField guestField;
     private JButton startButton;
     private JLabel statusLabel;
+    @SuppressWarnings("unused")
     private Socket socket;
     private ObjectOutputStream output;
 
@@ -31,9 +31,7 @@ public class LobbyHostGUI extends JFrame {
             e.printStackTrace();
         }
 
-        setTitle("Lobby Host");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         JPanel playerPanel = new JPanel();

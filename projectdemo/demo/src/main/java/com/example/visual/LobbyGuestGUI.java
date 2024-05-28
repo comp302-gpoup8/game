@@ -11,15 +11,15 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class LobbyGuestGUI extends JFrame {
+public class LobbyGuestGUI extends JPanel {
     private JTextField hostField;
     private JTextField guestField;
     private JButton readyButton;
     private boolean isReady;
+    @SuppressWarnings("unused")
     private Socket socket;
     private ObjectOutputStream output;
 
@@ -32,9 +32,7 @@ public class LobbyGuestGUI extends JFrame {
             e.printStackTrace();
         }
 
-        setTitle("Lobby Guest");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         JPanel playerPanel = new JPanel();
