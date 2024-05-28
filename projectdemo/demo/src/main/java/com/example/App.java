@@ -35,9 +35,11 @@ public class App implements Runnable{
      */
     private final int targetTime = 16; 
 
+    private JFrame frame;
+
     public App(){
         panel = new GamePanel(null);
-        JFrame frame = initializeAppFrame();
+        frame = initializeAppFrame();
         start();
     }
 
@@ -109,5 +111,9 @@ public class App implements Runnable{
         if (waitTime < 0){
             waitTime = 5;
         }
+    }
+
+    public JFrame getFrame(){
+        return frame;
     }
 }
