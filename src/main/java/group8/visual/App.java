@@ -7,6 +7,7 @@ public class App {
     private JFrame mainFrame;
     private MainMenu mainMenu;
     private SinglePlayerMenu singlePlayerMenu;
+    private BuildModeMenu buildModeMenu;
 
     public App() {
         mainFrame = new JFrame("Game Application");
@@ -32,7 +33,9 @@ public class App {
         displayMenu(singlePlayerMenu.getPanel());
     }
 
-    public static void main(String[] args) {
-        new App();
+    public void showBuildModeMenu(){
+        buildModeMenu = new BuildModeMenu(800, 600);
+        buildModeMenu.setApp(this);
+        displayMenu(buildModeMenu.panel);
     }
 }
