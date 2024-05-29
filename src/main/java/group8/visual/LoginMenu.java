@@ -50,7 +50,7 @@ public class LoginMenu extends Menu {
 
     private void registerClicked() {
         Authenticator auth = new Authenticator();
-
+        auth.register(usernameField.getText(), passwordField.getSelectedText());
     }
 
     private void loginClicked() {
@@ -58,7 +58,8 @@ public class LoginMenu extends Menu {
         authenticated = auth.login(usernameField.getText(), passwordField.getText());
     }
 
-        private boolean validateCredentials(String username, String password, Authenticator auth) {
+    @SuppressWarnings("unused")
+    private boolean validateCredentials(String username, String password, Authenticator auth) {
         if (username.isBlank() || password.isBlank()) {
             JOptionPane.showMessageDialog(
                     null,
@@ -102,7 +103,6 @@ public class LoginMenu extends Menu {
 
     @Override
     public void publish() {
-        // TODO Auto-generated method stub
 
     }
 
