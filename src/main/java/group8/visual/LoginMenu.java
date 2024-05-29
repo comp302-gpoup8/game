@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import group8.database.Authenticator;
@@ -19,6 +20,7 @@ public class LoginMenu extends Menu {
     private JTextField usernameField;
     private JTextField passwordField;
     private JDialog registerDialog;
+    private App app;
     private boolean authenticated;
     
     public LoginMenu(int width, int height){
@@ -89,6 +91,9 @@ public class LoginMenu extends Menu {
 
     @Override
     public void buildPanel() {
+        this.panel = new JPanel();
+        panel.setSize(size);
+        panel.setName("Login Menu");
         panel.setLayout(new GridLayout(4, 1));
         setupComponents();
         addComponents();
@@ -103,8 +108,7 @@ public class LoginMenu extends Menu {
 
     @Override
     public void publish() {
-
+        app.displayMenu(panel);
     }
-
     
 }

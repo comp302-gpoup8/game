@@ -9,14 +9,11 @@ import lombok.Setter;
 @Getter @Setter
 public abstract class Menu implements MenuInterface {
     
-    protected JPanel panel;
+    public JPanel panel;
+    public Dimension size;
+    public App app;
 
     public Menu (int width, int height){
-        this(new Dimension(width, height));
-    }
-
-    public Menu(Dimension bounds){
-        panel = new JPanel();
-        panel.setSize(bounds);
+        this.size = new Dimension(width, height);
     }
 }

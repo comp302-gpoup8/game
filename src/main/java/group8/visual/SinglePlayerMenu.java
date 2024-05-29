@@ -19,6 +19,8 @@ public class SinglePlayerMenu extends Menu {
 
     public void buildPanel() {
         panel = new JPanel();
+        panel.setSize(size);
+        panel.setName("Singleplayer Menu");
         panel.setLayout(new GridLayout(3, 1));
         setupComponents();
 
