@@ -38,7 +38,7 @@ public class SinglePlayerMenu extends Menu {
         buildModeButton = new JButton("Build Mode");
         loadGameButton = new JButton("Load Game");
 
-        quickPlayButton.addActionListener(e->app.setGame(new Game1P(new Level(2), app.getPlayer())));
+        quickPlayButton.addActionListener(e->app.showGamePanel());
         buildModeButton.addActionListener(e->app.showBuildModeMenu());
         loadGameButton.addActionListener(e->System.out.println("todo"));
     }

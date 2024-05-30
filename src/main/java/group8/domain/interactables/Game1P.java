@@ -28,8 +28,8 @@ public class Game1P implements Serializable, Runnable {
     public Game1P(Level lv, Player p){
         level = lv;
         player = p;
-        staff = new Staff(new Point(680, 100), new Dimension(120,16));
-        ball = new Fireball(new Point (640, 10), new Dimension(16, 16));
+        staff = new Staff(new Point(100, 500), new Dimension(120,16));
+        ball = new Fireball(new Point (100, 500), new Dimension(16, 16));
         ball.reset(staff);
     }
     @Override

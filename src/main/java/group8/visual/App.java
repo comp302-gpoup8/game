@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import group8.domain.interactables.Game1P;
+import group8.domain.managers.Level;
 import group8.domain.managers.Player;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +22,9 @@ public class App {
         mainFrame = new JFrame("Game Application");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(1200, 680);
+        mainFrame.setResizable(false);
 
-        mainMenu = new MainMenu(800, 600);
+        mainMenu = new MainMenu(1200, 680);
         mainMenu.setApp(this); 
         displayMenu(mainMenu.getPanel());
     }
@@ -36,21 +38,25 @@ public class App {
     }
 
     public void showSinglePlayerMenu() {
-        singlePlayerMenu = new SinglePlayerMenu(800, 600);
+        singlePlayerMenu = new SinglePlayerMenu(1200, 680);
         singlePlayerMenu.setApp(this); 
         displayMenu(singlePlayerMenu.getPanel());
     }
 
     public void showBuildModeMenu(){
-        buildModeMenu = new BuildModeMenu(800, 600);
+        buildModeMenu = new BuildModeMenu(1200, 680);
         buildModeMenu.setApp(this);
         displayMenu(buildModeMenu.panel);
     }
 
     public void showGamePanel(){
+        if (game == null) {
+            game = new Game1P(new Level(2), player);
+        }
         gamePanel = new GamePanel();
         gamePanel.setApp(this);
+        gamePanel.setupGame(game);
         displayMenu(gamePanel.getPanel());
-        // game.run();
+        mainFrame.setFocusable(true);
     }
 }

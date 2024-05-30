@@ -26,9 +26,7 @@ public class GamePanel {
 
 
     public GamePanel(){
-        game = app.getGame();
         initPanel();
-        setupVisuals();
     }
 
     private void initPanel(){
@@ -36,7 +34,11 @@ public class GamePanel {
         panel.setSize(1200, 680);
         panel.setLayout(null);
         background = new JLabel(new ImageIcon("src/main/java/group8/Graphical-Assets/200Background.png"));
-        panel.add(background);
+    }
+
+    public void setupGame(Game1P g){
+        game = g;
+        setupVisuals();
     }
 
     private void setupVisuals(){
@@ -52,5 +54,7 @@ public class GamePanel {
         panel.add(staff.getLabel());
         fireball = new ObjectVisual(game.getBall(), 5);
         panel.add(fireball.getLabel());
+        panel.add(background);
+        background.setBounds(0, 0, 1200, 680);
     }
 }
