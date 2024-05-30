@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import group8.domain.interactables.Controller;
-import group8.domain.interactables.Game1P;
+import group8.domain.interactables.Game;
 import group8.domain.objects.Barrier;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ public class GamePanel {
     private JPanel panel;
     private JLabel background;
     private transient Controller cont;
-    private Game1P game;
+    private Game game;
     private JLabel[] lifeIcons;
     private ObjectVisual[] objectVisuals;
     private ObjectVisual staff;
@@ -36,7 +36,7 @@ public class GamePanel {
         background = new JLabel(new ImageIcon("src/main/java/group8/Graphical-Assets/200Background.png"));
     }
 
-    public void setupGame(Game1P g){
+    public void setupGame(Game g){
         game = g;
         setupVisuals();
     }

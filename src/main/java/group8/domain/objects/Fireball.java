@@ -21,14 +21,6 @@ public class Fireball extends GameObject implements BallMovement, CollisionListe
         BallMovement.placeBallOnStaff(this, staff);
     }
 
-    public void launch(){
-        BallMovement.launchBall(this, new Point(0, -1));
-    }
-
-    public void move(){
-        BallMovement.moveBall(this);
-    }
-
     public GameObject checkCollision(GameObject obj) {
         return CollisionListener.checkCollision(this, obj);
     }

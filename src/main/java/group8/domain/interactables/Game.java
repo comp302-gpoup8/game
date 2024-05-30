@@ -16,7 +16,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 @Getter @Setter
-public class Game1P implements Serializable, Runnable {
+public class Game implements Serializable, Runnable {
     private App app;
     private Level level;
     private Player player;
@@ -25,7 +25,7 @@ public class Game1P implements Serializable, Runnable {
     private GamePanel gp;
     private final Dimension bounds  = new Dimension(1200,  680);
     
-    public Game1P(Level lv, Player p){
+    public Game(Level lv, Player p){
         level = lv;
         player = p;
         staff = new Staff(new Point(100, 500), new Dimension(120,16));

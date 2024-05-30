@@ -3,7 +3,7 @@ package group8.visual;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import group8.domain.interactables.Game1P;
+import group8.domain.interactables.Game;
 import group8.domain.managers.Level;
 import group8.domain.managers.Player;
 import lombok.Getter;
@@ -15,7 +15,7 @@ public class App {
     private SinglePlayerMenu singlePlayerMenu;
     private BuildModeMenu buildModeMenu;
     private GamePanel gamePanel;
-    private Game1P game;
+    private Game game;
     private Player player; 
 
     public App() {
@@ -51,7 +51,7 @@ public class App {
 
     public void showGamePanel(){
         if (game == null) {
-            game = new Game1P(new Level(2), player);
+            game = new Game(new Level(2), player);
         }
         gamePanel = new GamePanel();
         gamePanel.setApp(this);
