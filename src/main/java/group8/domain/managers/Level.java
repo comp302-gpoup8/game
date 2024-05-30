@@ -1,5 +1,6 @@
 package group8.domain.managers;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,6 +108,23 @@ public class Level implements Serializable {
             }
 
             Collections.shuffle(barriers);
+            barriers = placeBarriers(barriers);
+            return barriers;
+        }
+
+        private List<Barrier> placeBarriers(List<Barrier> barriers){
+            Point p = new Point(23, 0);
+            int maxHeight = 0;
+            for (Barrier b : barriers){
+                if (p.x + b.getSize().width > 1200){
+                    p.x = 23;
+                    p.y += maxHeight;
+                    maxHeight = 0;
+                }
+                b.getHitbox().setLocation(p);
+                p.x += b.getSize().width + 10;
+                maxHeight = 26;
+            }
             return barriers;
         }
     }

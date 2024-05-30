@@ -5,6 +5,10 @@ import lombok.Setter;
 import java.awt.*;
 import javax.swing.*;
 
+import group8.domain.interactables.Game1P;
+import group8.domain.managers.Level;
+import group8.domain.managers.Player;
+
 @Getter @Setter
 public class SinglePlayerMenu extends Menu {
     private JPanel panel;
@@ -34,7 +38,7 @@ public class SinglePlayerMenu extends Menu {
         buildModeButton = new JButton("Build Mode");
         loadGameButton = new JButton("Load Game");
 
-        quickPlayButton.addActionListener(e->System.out.println("Todo"));
+        quickPlayButton.addActionListener(e->app.setGame(new Game1P(new Level(2), app.getPlayer())));
         buildModeButton.addActionListener(e->app.showBuildModeMenu());
         loadGameButton.addActionListener(e->System.out.println("todo"));
     }

@@ -3,16 +3,24 @@ package group8.visual;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import group8.domain.interactables.Game1P;
+import group8.domain.managers.Player;
+import lombok.Getter;
+import lombok.Setter;
+@Getter @Setter
 public class App {
     private JFrame mainFrame;
     private MainMenu mainMenu;
     private SinglePlayerMenu singlePlayerMenu;
     private BuildModeMenu buildModeMenu;
+    private GamePanel gamePanel;
+    private Game1P game;
+    private Player player; 
 
     public App() {
         mainFrame = new JFrame("Game Application");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(800, 600);
+        mainFrame.setSize(1200, 680);
 
         mainMenu = new MainMenu(800, 600);
         mainMenu.setApp(this); 
@@ -37,5 +45,12 @@ public class App {
         buildModeMenu = new BuildModeMenu(800, 600);
         buildModeMenu.setApp(this);
         displayMenu(buildModeMenu.panel);
+    }
+
+    public void showGamePanel(){
+        gamePanel = new GamePanel();
+        gamePanel.setApp(this);
+        displayMenu(gamePanel.getPanel());
+        // game.run();
     }
 }
