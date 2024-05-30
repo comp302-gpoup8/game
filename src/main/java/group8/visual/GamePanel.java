@@ -20,7 +20,7 @@ public class GamePanel {
     private transient Controller cont;
     private Game game;
     private JLabel[] lifeIcons;
-    private ObjectVisual[] objectVisuals;
+    private ArrayList<ObjectVisual> objectVisuals;
     private ObjectVisual staff;
     private ObjectVisual fireball;
 
@@ -34,6 +34,7 @@ public class GamePanel {
         panel.setSize(1200, 680);
         panel.setLayout(null);
         background = new JLabel(new ImageIcon("src/main/java/group8/Graphical-Assets/200Background.png"));
+        panel.addKeyListener(cont.getKeyListener());
     }
 
     public void setupGame(Game g){
@@ -42,19 +43,41 @@ public class GamePanel {
     }
 
     private void setupVisuals(){
-        ArrayList<Barrier> barriers = new ArrayList<>(game.getLevel().getBarriers());
-        objectVisuals = new ObjectVisual[barriers.size()];
-        for (int i = 0; i < barriers.size(); i++){
-            ObjectVisual v = new ObjectVisual(barriers.get(i), barriers.get(i).getType());
-            objectVisuals[i] = v;
-            panel.add(v.getLabel());
-        }
+        setupBarrierVisuals();
+        setupPlayerVisuals();
+        setupBackgroundVisuals();
+    }
 
+    private void setupBarrierVisuals(){
+        ArrayList<Barrier> barriers = new ArrayList<>(game.getLevel().getBarriers());
+        objectVisuals = new ArrayList<>();
+        barriers.forEach(e -> objectVisuals.add((new ObjectVisual(e, e.getType()))));
+        objectVisuals.forEach(e -> panel.add(e.getLabel()));
+    }
+
+    private void setupPlayerVisuals(){
         staff = new ObjectVisual(game.getStaff(), 4);
         panel.add(staff.getLabel());
         fireball = new ObjectVisual(game.getBall(), 5);
         panel.add(fireball.getLabel());
+    }
+
+    private void setupBackgroundVisuals(){
+        //TODO: Life Icons added here (Before background)
         panel.add(background);
-        background.setBounds(0, 0, 1200, 680);
+        background.setBounds(panel.getBounds());
+    }
+
+    public void refresh(){
+        ArrayList<ObjectVisual> removeList = new ArrayList<>();
+        for (ObjectVisual visual : objectVisuals){
+            Barrier barrier = (Barrier) visual.getObject();
+            if (barrier.isDestroyed()){
+                game.getLevel().removeBarrier(barrier);
+                removeList.add(visual);
+            }
+        }
+        removeList.forEach(e -> panel.remove(e.getLabel()));
+
     }
 }

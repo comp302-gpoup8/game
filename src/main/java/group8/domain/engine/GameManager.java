@@ -6,6 +6,7 @@ import group8.domain.interactables.Game;
 import group8.domain.objects.Fireball;
 import group8.domain.objects.Staff;
 
+import java.awt.Dimension;
 import java.awt.Point;
 
 import lombok.Getter;
@@ -22,6 +23,8 @@ public class GameManager implements BallMovement, CollisionListener{
 
     private static final Integer SCREEN_WIDTH = 1200;
     private static final Integer SCREEN_HEIGHT = 680;
+    private static final Dimension SCREEN_DIMENSIONS = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
+
     
     public GameManager (@NotNull Game g){
         this.game = g;
@@ -46,11 +49,13 @@ public class GameManager implements BallMovement, CollisionListener{
         staff.getDirection().x = movementSignal;
         int staffX = staff.getLocation().x;
         int staffDX = movementSignal * staff.getSpeed();
-
         int nextX = Math.max(0, Math.min(staffX + staffDX, SCREEN_WIDTH - staff.getSize().width));
         staff.setLocation(new Point(nextX, staff.getLocation().y));
         if (!launched) BallMovement.placeBallOnStaff(ball, staff);
     }
 
-
+    public void updateElements(){
+        BallMovement.checkBounds(ball, SCREEN_DIMENSIONS);
+        game.getGp().refresh();
+    }
 }
