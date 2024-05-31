@@ -16,7 +16,7 @@ public abstract class GameObject extends JLabel {
     /**
      *  Hitbox of the object. Two gameobjects intersect if their hitBoxes intersect 
      */
-    protected Rectangle hitBox;
+    protected HitBox hitBox;
     /** 
      * ImageIcon of the GameObject. All GameObject classes have unique icons.  
      */
@@ -48,7 +48,7 @@ public abstract class GameObject extends JLabel {
      * @param d : Size
      */
     protected void createHitbox(Point p, Dimension d){
-        hitBox = new Rectangle(p, d);
+        hitBox = new HitBox(p, d);
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class GameObject extends JLabel {
     }
 
     // Getters / Setters  
-    public Rectangle getHitBox(){
+    public HitBox getHitBox(){
         return hitBox;
     }
 
