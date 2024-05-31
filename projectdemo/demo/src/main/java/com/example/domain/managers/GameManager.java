@@ -80,7 +80,19 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
     
     public void rotateStaff(Staff s, int x){
         System.out.println(s.getRotation());
-        StaffManager.rotateStaff(s, x);
+        double dw = StaffManager.rotateStaff(s, x);
+        double srot = s.getRotation();
+        double rot = 0;
+        if (srot > 0 && dw > 0){
+            rot = Math.min(45, dw + srot);
+        }
+        else if (srot < 0 && dw < 0){
+            rot = Math.max(-45, srot + dw);
+        }
+        else{
+            rot = srot + dw;
+        }
+        s.setRotation(rot);
     }
 
 

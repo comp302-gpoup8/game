@@ -28,7 +28,7 @@ public interface StaffManager {
 
 
 
-    public static void rotateStaff(Staff staff, int x){
+    public static double rotateStaff(Staff staff, int x){
         double staffDw;
         if(x == 0){
             if (staff.getRotation() > 0) {
@@ -38,7 +38,7 @@ public interface StaffManager {
                 staffDw = 45;
             }
             else{
-                return;
+                staffDw = 0;
             }
         }
         else if (staff.getRotation() < 45 && staff.getRotation() > -45){
@@ -47,6 +47,6 @@ public interface StaffManager {
         else{
             staffDw = 0;
         }
-        staff.rotate(staffDw/(2*Math.PI));
+        return staffDw/30;
     }
 }
