@@ -43,14 +43,15 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
      * TODO: The ball should be launched in the Mouse Direction. Right now when I try it, it results in a null pointer exception.
      */
     public void launchBall(){
+        ball.getHitBox().setLocation(ball.getX(), ball.getY()-10);
         Staff s = game.getPanel().getStaff();
         double cx = s.getHitBox().getCenterX();
         double cy = s.getHitBox().getCenterY();
         double mx = (s.getHitBox().getP3().x + s.getHitBox().getP4().x)/2;
         double my = (s.getHitBox().getP3().y + s.getHitBox().getP4().y)/2;
-        Point direction = new Point((int)(2*(my-cy)/(mx-cx)), 2);
+        Point direction = new Point((int)(3*(my-cy)/(mx-cx)), 3);
         if(s.getRotation() == 0){
-            direction = new Point(0,1);
+            direction = new Point(0,2);
         }
         BallManager.launchFireBall(ball, direction);
     }
@@ -58,7 +59,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
     /**
      * Allows the Ballmanager to move the ball.
      * TODO: All panel updates contain random checkBounds and checkCollision calls
-     * to prevent the ball from going through multiple barriers in a second.
+    ad * to prevent the ball from going through multiple barriers in a second.
      * TODO: We should figure out the appropriate placement.
      */
     public void moveBall(){
