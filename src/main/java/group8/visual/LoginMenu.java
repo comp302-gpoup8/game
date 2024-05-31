@@ -34,8 +34,8 @@ public class LoginMenu extends Menu {
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
 
-        registerButton.addActionListener(e -> loginClicked());
-        loginButton.addActionListener(e -> registerClicked());
+        registerButton.addActionListener(e -> registerClicked());
+        loginButton.addActionListener(e -> loginClicked());
     }
 
     private void setupTextFields() {
@@ -52,12 +52,15 @@ public class LoginMenu extends Menu {
 
     private void registerClicked() {
         Authenticator auth = new Authenticator();
-        auth.register(usernameField.getText(), passwordField.getSelectedText());
+        auth.register(usernameField.getText(), passwordField.getText());
     }
 
     private void loginClicked() {
         Authenticator auth = new Authenticator();
         authenticated = auth.login(usernameField.getText(), passwordField.getText());
+        if (authenticated){
+            app.showMainMenu();
+        }
     }
 
     @SuppressWarnings("unused")

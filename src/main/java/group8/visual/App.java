@@ -14,13 +14,14 @@ public class App {
     private MainMenu mainMenu;
     private SinglePlayerMenu singlePlayerMenu;
     private BuildModeMenu buildModeMenu;
+    private LoginMenu loginMenu;
     private GamePanel gamePanel;
     private Game game;
     private Player player; 
 
     public App() {
         buildMainFrame();
-        showMainMenu();
+        showLoginMenu();
     }
 
     public void buildMainFrame(){
@@ -38,6 +39,11 @@ public class App {
         mainFrame.setVisible(true);
     }
 
+    public void showLoginMenu(){
+        loginMenu = new LoginMenu(1200, 680);
+        loginMenu.setApp(this);
+        displayMenu(loginMenu.getPanel());
+    }
     public void showMainMenu(){
         mainMenu = new MainMenu(1200, 680);
         mainMenu.setApp(this);
