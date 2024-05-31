@@ -2,9 +2,14 @@ package com.example;
 
 import com.example.domain.levels.Level;
 import com.example.domain.levels.LevelBuilder;
-import com.example.visual.MainMenuPanel;
+import com.example.domain.managers.Player;
+import com.example.visual.BuildModeMenu;
+import com.example.visual.GamePanel;
+import com.example.visual.MainMenu;
+import com.example.visual.SinglePlayerMenu;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.example.domain.Game;
 
@@ -25,18 +30,33 @@ import com.example.domain.Game;
 //         game.run();
 //     }
 // }
-
 public class App {
     private JFrame mainFrame;
     private MainMenu mainMenu;
     private SinglePlayerMenu singlePlayerMenu;
     private BuildModeMenu buildModeMenu;
     private GamePanel gamePanel;
-    private Player player;
+    private Game game;
+    private Player player; 
 
-    public App(){
+    public App() {
         buildMainFrame();
         showMainMenu();
+    }
+
+    public void buildMainFrame(){
+        mainFrame = new JFrame("Game Application");
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setSize(1200, 680);
+        mainFrame.setResizable(false);
+    }
+
+    public void displayMenu(JPanel menuPanel) {
+        mainFrame.getContentPane().removeAll();
+        mainFrame.add(menuPanel);
+        mainFrame.revalidate();
+        mainFrame.repaint();
+        mainFrame.setVisible(true);
     }
 
     public void showMainMenu(){
@@ -45,20 +65,28 @@ public class App {
         displayMenu(mainMenu.getPanel());
     }
 
-    public void showSinglePlayerMenu(){
-        singlePlayerMenu = new BuildModeMenu(1200, 680);
-        singlePlayerMenu.setApp(this);
-        displayMenu(buildModeMenu.getPanel());
+    public void showSinglePlayerMenu() {
+        singlePlayerMenu = new SinglePlayerMenu(1200, 680);
+        singlePlayerMenu.setApp(this); 
+        displayMenu(singlePlayerMenu.getPanel());
     }
 
-    // public void showGamePanel(){
-    //     if (game == null){
-    //         game = new Game("Single-Player");
-    //         game.setApp(this);
-    //     }
+    public void showBuildModeMenu(){
+        buildModeMenu = new BuildModeMenu(1200, 680);
+        buildModeMenu.setApp(this);
+        displayMenu(buildModeMenu.panel);
+    }
 
-    //     gamePanel = new GamePanel();
-    //     gamePanel.setApp(this);
+    public void showGamePanel(){
+        Level level = new Level("@");
+        LevelBuilder levelBuilder = new LevelBuilder();
+        levelBuilder.randomizeLevel(level, 2);
+        game = new Game("single", level);
+        gamePanel = game.getPanel();
+        gamePanel.setApp(this);
+        displayMenu(gamePanel);
+        // gamePanel.requestFocus();
+        // game.run();
         
-    // }
+    }
 }

@@ -2,6 +2,11 @@ package com.example.visual;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import com.example.domain.Game;
+import com.example.domain.levels.Level;
+import com.example.domain.levels.LevelBuilder;
+
 import java.awt.GridLayout;
 
 public class SinglePlayerMenu extends Menu {
@@ -33,10 +38,11 @@ public class SinglePlayerMenu extends Menu {
         buildModeButton = new JButton("Build Mode");
         loadGameButton = new JButton("Load Game");
 
-        // quickPlayButton.addActionListener(e->app.showGamePanel());
+        quickPlayButton.addActionListener(e->app.showGamePanel());
         // buildModeButton.addActionListener(e->app.showBuildModeMenu());
         loadGameButton.addActionListener(e->System.out.println("todo"));
     }
+
 
     /**
      * @return the panel
