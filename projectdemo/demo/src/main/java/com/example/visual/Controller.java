@@ -29,7 +29,7 @@ public class Controller {
                 case KeyEvent.VK_P -> direction = 3;
                 case KeyEvent.VK_X -> direction = 9;
                 case KeyEvent.VK_A -> rotDirection = 1;
-                case KeyEvent.VK_D -> rotDirection = -11;
+                case KeyEvent.VK_D -> rotDirection = -1;
                }
             }
 

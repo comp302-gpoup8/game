@@ -38,7 +38,7 @@ public interface StaffManager {
                 staffDw = 45;
             }
             else{
-                staffDw = 0;
+                return;
             }
         }
         else if (staff.getRotation() < 45 && staff.getRotation() > -45){
