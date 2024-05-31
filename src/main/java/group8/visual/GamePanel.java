@@ -36,6 +36,7 @@ public class GamePanel implements Runnable {
 
     public void setupGame(){
         setupVisuals();
+        getApp().getGame().setPanel(this);
     }
 
     private void setupVisuals(){
@@ -64,29 +65,18 @@ public class GamePanel implements Runnable {
         background.setBounds(panel.getBounds());
     }
 
+    //GamePanel
     @Override
     public void run() {
         final int FPS = 30;
         final long frameTime = 1000 / FPS;
 
-        while (true){
-            long startTime = System.currentTimeMillis();
-            app.getGame().updateGameState();
-            refreshVisuals();
-            panel.repaint();
-
-            long endTime = System.currentTimeMillis();
-            long deltaTime = endTime - startTime;
-
-            long sleepTime = frameTime - deltaTime;
-
-            if (sleepTime > 0) {
-                try {
-                    Thread.sleep(sleepTime);
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
+        refreshVisuals();
+        panel.repaint();
+        try{
+            Thread.sleep(32);
+        } catch(InterruptedException e){
+            e.printStackTrace();
         }
     }
     
@@ -102,4 +92,9 @@ public class GamePanel implements Runnable {
             visual.updatePosition(visual.getObject().getLocation());
         }
     }
+    
+    public int getDirectionSignal() {
+        return cont.getDirectionSignal();
+    }
+
 }

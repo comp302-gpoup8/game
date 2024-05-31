@@ -35,24 +35,20 @@ public class Game implements Serializable, Runnable {
 
     }
 
+    //GAME
     @Override
     public void run() {
         while (true) {
-
-            // manager.moveStaff();
-            // manager.moveBallWithStaff();
-            manager.getBall().setLocation(new Point((int) manager.getBall().getHitbox().x -10, manager.getBall().getHitbox().y - 10));
-            if (manager.getBall().getSpeed() <= 0){
+            int directionSignal = panel.getDirectionSignal();
+            System.out.printf("Direction signal %d\n", directionSignal);
+            if (directionSignal == 2){
                 manager.launchBall();
+            } else {
+                manager.moveStaff(directionSignal);
             }
-            manager.moveBall();
 
-            // Update the game state periodically
-            updateGameState();
-
-            // Sleep to allow other processes to run (adjust as necessary)
             try {
-                Thread.sleep(30); // Adjust the sleep time for desired responsiveness
+                Thread.sleep(32); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -60,8 +56,7 @@ public class Game implements Serializable, Runnable {
     }
 
     public void updateGameState() {
-        System.out.printf("Current staff position: %d, %d\n", manager.getBall().getLocation().x, manager.getBall().getLocation().y);
-        System.out.printf("Current visual position: %d, %d\n\n", app.getGamePanel().getFireball().getLabel().getLocation().x, app.getGamePanel().getFireball().getLabel().getLocation().y);
+        
         app.getGamePanel().getPanel().revalidate();
         app.getGamePanel().getPanel().repaint();
     }
