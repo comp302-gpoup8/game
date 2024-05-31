@@ -21,6 +21,10 @@ public class Controller {
      */
     private volatile int directionSignal = 0;
     /**
+     * The rotation direction signal for movement.
+     */
+    private volatile int rotDirectionSignal = 0;
+    /**
      * The action signal for special actions (pause, save, use spell etc.).
      */
     private volatile int actionSignal = 0;
@@ -52,8 +56,11 @@ public class Controller {
     public void processAction(int keyCode){
         switch(keyCode){
             // Movement signals
-            case KeyEvent.VK_LEFT, KeyEvent.VK_A -> directionSignal = -1;
-            case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> directionSignal = 1;
+            case KeyEvent.VK_LEFT -> directionSignal = -1;
+            case KeyEvent.VK_RIGHT -> directionSignal = 1;
+            // Rotation signals
+            case KeyEvent.VK_A -> rotDirectionSignal = -1;
+            case KeyEvent.VK_D -> rotDirectionSignal = 1;
             // Action signals
             case KeyEvent.VK_SPACE -> actionSignal = 1; // Launch
             case KeyEvent.VK_P -> actionSignal = 2; // Pause / Unpause
@@ -72,6 +79,21 @@ public class Controller {
     public int getDirectionSignal(){
         int temp = directionSignal;
         directionSignal = 0;
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return temp;
+    }
+
+    /**
+     * Gets the rotation direction signal, then resets it.
+     * @return the rotation direction signal
+     */
+    public int getRotDirectionSignal(){
+        int temp = rotDirectionSignal;
+        rotDirectionSignal = 0;
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {

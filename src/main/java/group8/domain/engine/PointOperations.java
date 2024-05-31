@@ -1,6 +1,8 @@
 package group8.domain.engine;
 
 import group8.domain.objects.GameObject;
+import group8.domain.objects.HitBox;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -8,7 +10,7 @@ import java.awt.Rectangle;
 public interface PointOperations {
     
     public static Point getCenterPoint(GameObject object) {
-        Rectangle hitbox = object.getHitbox();
+        HitBox hitbox = object.getHitbox();
         int centerX = (int) hitbox.getCenterX();
         int centerY = (int) hitbox.getCenterY();
         return new Point(centerX, centerY);

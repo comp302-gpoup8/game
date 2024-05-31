@@ -156,4 +156,28 @@ public class GameManager {
         }
         game.getApp().getGamePanel().getStaff().updatePosition(staff.getLocation());
     }
+
+    public void rotateStaf(int rotationSignal){
+        int staffDw;
+        if(rotationSignal == 0){
+            if (staff.getRotation() > 0) {
+                staffDw = -45;
+            }
+            else if (staff.getRotation() < 0){
+                staffDw = 45;
+            }
+            else{
+                staffDw = 0;
+            }
+        }
+        else if (staff.getRotation() < 45 && staff.getRotation() > -45){
+            staffDw = rotationSignal * 20;
+        }
+        else{
+            staffDw = 0;
+        }
+        staff.rotate(staffDw);
+        // to do (update like move staff)
+    }
+
 }

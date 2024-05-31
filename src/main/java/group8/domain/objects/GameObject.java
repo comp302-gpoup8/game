@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public abstract class GameObject {
-    private Rectangle hitbox;
+    private HitBox hitbox;
     private Integer speed;
     private Point direction;
 
@@ -19,7 +19,7 @@ public abstract class GameObject {
     }
 
     public GameObject(@NonNull Point location, @NonNull Dimension size, @NonNull Integer speed, @NonNull Point direction) {
-        hitbox = new Rectangle(location, size);
+        hitbox = new HitBox(location, size);
         this.speed = speed;
         this.direction = direction;
     }
