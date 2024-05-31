@@ -5,7 +5,6 @@ import java.io.Serializable;
 import group8.domain.engine.GameManager;
 import group8.domain.managers.Level;
 import group8.domain.managers.Player;
-import group8.domain.objects.Barrier;
 import group8.domain.objects.Fireball;
 import group8.domain.objects.Staff;
 import group8.visual.GamePanel;
@@ -33,33 +32,14 @@ public class Game implements Serializable, Runnable {
         player = p;
         staff = new Staff(new Point(100, 500), new Dimension(120,16));
         ball = new Fireball(new Point (100, 500), new Dimension(16, 16));
-        ball.reset(staff);
+        // ball.reset(staff);
+
     }
     @Override
     public void run() {
         panel = app.getGamePanel();
-        /*
-         * START
-             * WHILE player has lives
-                * IF ball is launched
-                    * move ball
-                    * check for collisions
-                    * if collision (barrier, sides, staff or roof)
-                        * bounce ball
-                        * if collision was with barrier
-                            * reduce barrier hitpoint
-                            * if barrier hitpoint <= 0
-                                * destroy barrier
-                    * if collision (bottom)
-                        * reduce player life.
-                        * if player still has lives reset ball
-                    * get direction input
-                    * move staff (direction input)
-                        * control staff boundaries.
-                * Else
-                    * get direction input
-                    * move staff(direction input) with ball
-         */
+        
+
     }
 
     public boolean playerHasLives(){
@@ -70,19 +50,15 @@ public class Game implements Serializable, Runnable {
         return ball.getSpeed() > 0;
     }
 
-    public void gameLoop(){
-        if (ballInMotion()) {
-            boolean inGame = manager.moveBall();
-            if (!inGame) {
-                player.remainingLives--;
-                //RESETBALL
-            } else {
-                for (Barrier barrier : level.getBarriers()){
-                    if (barrier.getHitbox().intersects(ball.getHitbox())){
-                        
-                    }
-                }
-            }
+    public void playAttempt(){
+        int action = panel.getCont().getActionSignal();
+        int direction = panel.getCont().getDirectionSignal();
+
+        switch (action) {
+            case 1 -> manager.launchBall();
+            case 2 -> ball.setSpeed(0);
+            default -> System.out.printf("Current Signal : %d\n", action);
         }
     }
 }
+

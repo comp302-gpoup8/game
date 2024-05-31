@@ -25,8 +25,7 @@ public class GameManager {
 
     private static final Integer SCREEN_WIDTH = 1200;
     private static final Integer SCREEN_HEIGHT = 680;
-    private static final Dimension SCREEN_DIMENSIONS = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
-
+    
     
     public GameManager (@NotNull Game g){
         this.game = g;
@@ -34,36 +33,6 @@ public class GameManager {
         this.ball = game.getBall();
         launched = false;
     }
-
-    // /**
-    //  * Launches the ball at the specific direction.
-    //  * @param direction
-    //  */
-    // public void launch(Point direction){
-    //     BallMovement.launchBall(ball, direction);
-    // }
-
-    // public boolean moveBall(){
-
-    // }
-
-    // // public void handleCollisions(){
-    // //     if (ball.getHitbox().intersects(game.))
-    // // }
-
-    // public void moveStaff(int movementSignal){
-    //     staff.getDirection().x = movementSignal;
-    //     int staffX = staff.getLocation().x;
-    //     int staffDX = movementSignal * staff.getSpeed();
-    //     int nextX = Math.max(0, Math.min(staffX + staffDX, SCREEN_WIDTH - staff.getSize().width));
-    //     staff.setLocation(new Point(nextX, staff.getLocation().y));
-    //     if (!launched) BallMovement.placeBallOnStaff(ball, staff);
-    // }
-
-    // public void updateElements(){
-    //     BallMovement.checkBounds(ball, SCREEN_DIMENSIONS);
-    //     game.getPanel().refresh();
-    // }
 
     public void moveBallWithStaff(){
         Point staffCenter = PointOperations.getCenterPoint(staff);
@@ -150,8 +119,8 @@ public class GameManager {
      * Checks whether or not the ball is still in possession, meaning that it did not reach the bottom of the screen.
      * @return true if the ball is in appropriate boundaries, false otherwise.
      */
-    private boolean checkPossesion(Point center, int radius){
-        return center.y + radius <= SCREEN_HEIGHT;
+    public boolean checkPossesion(){
+        return PointOperations.getCenterPoint(ball).y + ball.getSize().width <= SCREEN_HEIGHT;
     }
 
     /**
