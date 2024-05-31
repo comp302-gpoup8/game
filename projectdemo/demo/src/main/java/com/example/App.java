@@ -5,6 +5,7 @@ import com.example.domain.levels.LevelBuilder;
 import com.example.domain.managers.Player;
 import com.example.visual.BuildModeMenu;
 import com.example.visual.GamePanel;
+import com.example.visual.LoginMenu;
 import com.example.visual.MainMenu;
 import com.example.visual.SinglePlayerMenu;
 
@@ -35,13 +36,15 @@ public class App {
     private MainMenu mainMenu;
     private SinglePlayerMenu singlePlayerMenu;
     private BuildModeMenu buildModeMenu;
+    private LoginMenu loginMenu;
+
     private GamePanel gamePanel;
     private Game game;
     private Player player; 
 
     public App() {
         buildMainFrame();
-        showMainMenu();
+        showLoginMenu();
     }
 
     public void buildMainFrame(){
@@ -75,6 +78,12 @@ public class App {
         buildModeMenu = new BuildModeMenu(1200, 680);
         buildModeMenu.setApp(this);
         displayMenu(buildModeMenu.panel);
+    }
+
+    public void showLoginMenu() {
+        loginMenu = new LoginMenu(1200, 680);
+        loginMenu.setApp(this);
+        displayMenu(loginMenu.panel);
     }
 
     public void showGamePanel(){

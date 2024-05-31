@@ -27,7 +27,7 @@ public class DBMS {
      * @throws SQLException if a database access error occurs
      */
     private static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:sqlite:src/main/java/group8/database/players.db");
+        return DriverManager.getConnection("jdbc:sqlite:src/main/java/com/example/database/players.db");
     }
 
     /**
