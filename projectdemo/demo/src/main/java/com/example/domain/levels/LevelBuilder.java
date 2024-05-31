@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.example.domain.gameObject.barriers.ExplosiveBarrier;
 import com.example.domain.gameObject.barriers.HollowBarrier;
+import com.example.domain.gameObject.barriers.ReinforcedBarrier;
 import com.example.domain.gameObject.barriers.SimpleBarrier;
 
 import lombok.Getter;
@@ -126,7 +127,7 @@ public class LevelBuilder {
         }
 
         for (int i = 0; i < firmCount; i++) {
-            l.addBarrier(new HollowBarrier(new Point()));
+            l.addBarrier(new ReinforcedBarrier(new Point()));
         }
 
         for (int i = 0; i < expCount; i++) {

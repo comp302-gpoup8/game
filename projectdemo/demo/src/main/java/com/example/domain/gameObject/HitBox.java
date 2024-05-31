@@ -4,11 +4,11 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Dimension;
 
-public class HitBox {
+public class HitBox implements java.io.Serializable{
 
     private Point p1,p2,p3,p4;
-    public int x,y,width,height;
-    private int rotation = 0;
+    public Integer x,y,width,height;
+    private Double rotation = 0.0;
 
     public HitBox(Point location, Dimension size){
         p1 = location;
@@ -94,7 +94,7 @@ public class HitBox {
         y = p1.y;
         width = (int) p1.distance(p2);
         height = (int) p1.distance(p4);
-
+        
         rotation += angle;
     }
 

@@ -40,7 +40,11 @@ public class SinglePlayerMenu extends Menu {
 
         quickPlayButton.addActionListener(e->app.showGamePanel());
         buildModeButton.addActionListener(e->app.showBuildModeMenu());
-        loadGameButton.addActionListener(e->System.out.println("todo"));
+        loadGameButton.addActionListener(e-> {
+            app.setGame(new Game());
+            System.out.println("Game Loaded. Use quick play to play the game.");
+            app.showSinglePlayerMenu();
+        });
     }
 
 

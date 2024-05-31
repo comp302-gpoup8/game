@@ -39,7 +39,7 @@ public class MainMenu extends Menu {
         singlePlayerButton.addActionListener(e -> app.showSinglePlayerMenu());
 
         multiplayerButton = new JButton("Multiplayer");
-        multiplayerButton.addActionListener(e -> System.out.println("TODO"));
+        multiplayerButton.addActionListener(e -> System.out.println("Didn't have time to implement this feature"));
     }
 
     public JPanel getPanel() {

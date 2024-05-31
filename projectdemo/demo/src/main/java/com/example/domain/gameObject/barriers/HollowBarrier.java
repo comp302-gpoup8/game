@@ -10,7 +10,7 @@ public class HollowBarrier extends Barrier {
     
 
     protected static Integer DEFAULT_HP = Integer.MAX_VALUE;
-    protected static String DEFAULT_IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/Purplegem.png";
+    protected static String DEFAULT_IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/Hollow.png";
 
     public HollowBarrier(Point p){
         super(p, DEFAULT_IMG_PATH, DEFAULT_HP);

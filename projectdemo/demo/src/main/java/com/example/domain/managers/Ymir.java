@@ -101,7 +101,7 @@ public class Ymir {
 
     private void activateHollowPurple() {
         List<Barrier> barriers = level.barriers;
-        Color purple = new Color(128, 0, 128);
+        // Color purple = new Color(128, 0, 128);
         for (int i = 0; i < MAX_BARRIERS; i++) {
             Barrier hollowPurpleBarrier = new HollowBarrier(new Point(random.nextInt(gamePanel.getWidth()), random.nextInt((gamePanel.getHeight()))));
             barriers.add(hollowPurpleBarrier);

@@ -31,11 +31,31 @@ public class Game implements Serializable {
     private Level level;
 
 
+    public Game(){
+        SaveManager sv = new SaveManager();
+        Game savedGame = sv.loadSave("projectdemo/demo/src/main/java/com/example/game.sr");
+        if (savedGame != null) {
+            level = savedGame.level;
+            panel = savedGame.panel;
+            panel.resetController();
 
+            player = savedGame.player;
+            loadGameManager();
+        } else {
+            level = new Level("Single-Player Level");
+            panel = new GamePanel(level);
+            player = new Player("Player");
+            panel.player = player;
+            loadGameManager();
+        }
+    }
 
     public Game (String pName){
-        load();
-
+        level = new Level("Single-Player Level");
+        panel = new GamePanel(level);
+        player = new Player("Player");
+        panel.player = player;
+        loadGameManager();
     }
 
     public Game (String pName, Level lv){
@@ -137,7 +157,6 @@ public class Game implements Serializable {
             panel.getBall().setSpeed(0);
             gm = savedGame.gm;
             level = savedGame.level;
-            player = savedGame.player;
             return true;
         } else {
             return false;

@@ -49,7 +49,8 @@ public class BuildModeMenu extends Menu {
             levelBuilder.addBarriers(level);
             Game game = new Game("Custom",level);
             app.setGame(game);
-            app.showGamePanel();
+            System.out.println("Success! Use quick game to play the level");
+            app.showSinglePlayerMenu();
         });
     }
 

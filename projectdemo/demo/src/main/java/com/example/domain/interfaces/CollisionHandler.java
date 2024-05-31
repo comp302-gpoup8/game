@@ -62,6 +62,9 @@ public interface CollisionHandler {
      * @return true if the objects intersect, false otherwise.
      */
     private static boolean intersects(GameObject p, GameObject q){
+        if (p.getHitBox() == null || q.getHitBox() == null){
+            return false;
+        }
         return p.getHitBox().intersects(q.getHitBox());
     }
 }
