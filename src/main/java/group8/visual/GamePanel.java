@@ -34,6 +34,7 @@ public class GamePanel {
         panel.setSize(1200, 680);
         panel.setLayout(null);
         background = new JLabel(new ImageIcon("src/main/java/group8/Graphical-Assets/200Background.png"));
+        this.cont = new Controller();
         panel.addKeyListener(cont.getKeyListener());
     }
 
