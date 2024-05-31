@@ -33,6 +33,7 @@ import com.example.domain.Game;
 // }
 public class App {
     private JFrame mainFrame;
+    private JFrame gameFrame;
     private MainMenu mainMenu;
     private SinglePlayerMenu singlePlayerMenu;
     private BuildModeMenu buildModeMenu;
@@ -44,7 +45,7 @@ public class App {
 
     public App() {
         buildMainFrame();
-        showLoginMenu();
+        showMainMenu();
     }
 
     public void buildMainFrame(){
@@ -87,15 +88,19 @@ public class App {
     }
 
     public void showGamePanel(){
+        mainFrame.dispose();
+        gameFrame = new JFrame("Game Application");
         Level level = new Level("@");
         LevelBuilder levelBuilder = new LevelBuilder();
         levelBuilder.randomizeLevel(level, 2);
-        game = new Game("single", level);
-        gamePanel = game.getPanel();
-        gamePanel.setApp(this);
-        displayMenu(gamePanel);
-        // gamePanel.requestFocus();
+        Game game = new Game("single", level);
+        gameFrame.add(game.getPanel());
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setSize(1200, 680);
+        gameFrame.setResizable(false);
+        gameFrame.setVisible(true);
+        // Thread gameThread = new Thread(game);
         // game.run();
-        
+
     }
 }
