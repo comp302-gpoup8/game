@@ -7,12 +7,17 @@ import java.util.Scanner;
 import com.example.domain.gameObject.barriers.ExplosiveBarrier;
 import com.example.domain.gameObject.barriers.ReinforcedBarrier;
 import com.example.domain.gameObject.barriers.SimpleBarrier;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import com.example.domain.gameObject.barriers.RewardingBarrier;
 
 /**
  * LevelBuilder Class
  * Creates a level with pre-determined inputs or allows the User to build their custom level.
  */
+@Getter @Setter
 public class LevelBuilder {
     
     private Integer difficulty, simpleCount, expCount, firmCount, rewCount;
@@ -115,7 +120,7 @@ public class LevelBuilder {
      * So they are placed randomly.
      * @param l
      */
-    private void addBarriers(Level l){
+    public void addBarriers(Level l){
         for (int i = 0; i < simpleCount; i++) {
             l.addBarrier(new SimpleBarrier(new Point()));
         }

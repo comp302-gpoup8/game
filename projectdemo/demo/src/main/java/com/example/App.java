@@ -95,11 +95,12 @@ public class App {
         SwingUtilities.invokeLater(() -> {
             mainFrame.dispose();
             gameFrame = new JFrame("Game Application");
+            if (game == null){
             Level level = new Level("@");
             LevelBuilder levelBuilder = new LevelBuilder();
             levelBuilder.randomizeLevel(level, 2);
-            Game game = new Game("single", level);
-            
+            game = new Game("single", level);
+            }
             gameFrame.add(game.getPanel());
             gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             gameFrame.setSize(1200, 680);

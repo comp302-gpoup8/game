@@ -3,6 +3,10 @@ package com.example.visual;
 
 import javax.swing.*;
 
+import com.example.domain.Game;
+import com.example.domain.levels.Level;
+import com.example.domain.levels.LevelBuilder;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -35,6 +39,18 @@ public class BuildModeMenu extends Menu {
         }
         totalBarrierCountLabel.setText("Total Barrier Count: " + totalBarrierCount);
         launchGameButton.setEnabled(totalBarrierCount >= 100);
+        launchGameButton.addActionListener(e -> {
+            Level level = new Level("level");
+            LevelBuilder levelBuilder = new LevelBuilder();
+            levelBuilder.setSimpleCount(Integer.parseInt(barrierCounts[0].getText()));
+            levelBuilder.setRewCount(Integer.parseInt(barrierCounts[1].getText()));
+            levelBuilder.setExpCount(Integer.parseInt(barrierCounts[2].getText()));
+            levelBuilder.setFirmCount(Integer.parseInt(barrierCounts[3].getText()));
+            levelBuilder.addBarriers(level);
+            Game game = new Game("Custom",level);
+            app.setGame(game);
+            app.showGamePanel();
+        });
     }
 
     public void buildPanel() {
@@ -46,10 +62,10 @@ public class BuildModeMenu extends Menu {
         for (int i = 0; i < barrierCounts.length; i++) {
             JPanel innerPanel = new JPanel(new BorderLayout());
             String[] IMG_PATHS = {
-                    "src/main/java/group8/Graphical-Assets/200Bluegem.png",
-                    "src/main/java/group8/Graphical-Assets/200Redgem.png",
-                    "src/main/java/group8/Graphical-Assets/200Greengem.png",
-                    "src/main/java/group8/Graphical-Assets/200Firm.png" };
+                    "projectdemo/demo/src/main/java/com/example/Graphical-Assets/200Bluegem.png",
+                    "projectdemo/demo/src/main/java/com/example/Graphical-Assets/200Redgem.png",
+                    "projectdemo/demo/src/main/java/com/example/Graphical-Assets/200Greengem.png",
+                    "projectdemo/demo/src/main/java/com/example/Graphical-Assets/200Firm.png" };
             JLabel label = new JLabel(new ImageIcon(IMG_PATHS[i]));
             barrierCounts[i] = new JTextField(3);
             barrierCounts[i].setHorizontalAlignment(JTextField.CENTER);
