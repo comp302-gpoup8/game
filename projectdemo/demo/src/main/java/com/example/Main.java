@@ -12,7 +12,7 @@ public class Main {
         while (mainMenu.getGame() == null){
             mainMenu.run();
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
