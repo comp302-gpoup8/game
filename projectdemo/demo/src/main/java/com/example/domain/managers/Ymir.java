@@ -1,14 +1,21 @@
-package com.example.domain.adversary;
+package com.example.domain.managers;
 
 import com.example.domain.gameObject.barriers.Barrier;
+import com.example.domain.gameObject.barriers.HollowBarrier;
 import com.example.domain.levels.Level;
 import com.example.visual.GamePanel;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.Timer;
 
+@Getter @Setter
 public class Ymir {
     private static final int INTERVAL = 30000; // 30 seconds
     private static final int ABILITY_DURATION = 15000; // 15 seconds
@@ -66,7 +73,7 @@ public class Ymir {
     }
 
     private void activateInfiniteVoid() {
-        List<Barrier> barriers = level.getBarriers();
+        List<Barrier> barriers = level.barriers;
         int freezeCount = Math.min(barriers.size(), MAX_BARRIERS);
         for (int i = 0; i < freezeCount; i++) {
             Barrier barrier = barriers.get(random.nextInt(barriers.size()));
@@ -93,10 +100,10 @@ public class Ymir {
     }
 
     private void activateHollowPurple() {
-        List<Barrier> barriers = level.getBarriers();
+        List<Barrier> barriers = level.barriers;
+        Color purple = new Color(128, 0, 128);
         for (int i = 0; i < MAX_BARRIERS; i++) {
-            Barrier hollowPurpleBarrier = new Barrier(new Point(random.nextInt(gamePanel.getWidth()), random.nextInt(gamePanel.getHeight())), new Dimension(50, 20), Color.PURPLE);
-            hollowPurpleBarrier.setHollowPurple(true);
+            Barrier hollowPurpleBarrier = new HollowBarrier(new Point(random.nextInt(gamePanel.getWidth()), random.nextInt((gamePanel.getHeight()))));
             barriers.add(hollowPurpleBarrier);
             gamePanel.add(hollowPurpleBarrier);
         }

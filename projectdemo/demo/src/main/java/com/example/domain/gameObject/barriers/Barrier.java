@@ -5,16 +5,21 @@ import java.awt.Point;
 
 import com.example.domain.gameObject.GameObject;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Barrier Class (Abstract)
  * Contains the common attributes shared by the different barrier types.
  */
+@Getter @Setter
 public abstract class Barrier extends GameObject {
 
     /**
      * Hitpoints of the barrier. A barrier is destroyed when it reaches 0 hitpoints.
      */
     protected Integer hitPoints;
+    protected Boolean frozen;
 
     /**
      * Default size for all barrier types. 
@@ -24,6 +29,7 @@ public abstract class Barrier extends GameObject {
     public Barrier(Point p, String imagePath, Integer hp){
         super(p, DEFAULT_BARRIER_SIZE, imagePath);
         hitPoints = hp;
+        frozen = false;
 
     }
 

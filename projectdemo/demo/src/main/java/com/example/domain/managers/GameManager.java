@@ -6,7 +6,7 @@ import com.example.domain.gameObject.GameObject;
 import com.example.domain.gameObject.Staff;
 import com.example.domain.gameObject.barriers.Barrier;
 import com.example.domain.gameObject.barriers.ExplosiveBarrier;
-import com.example.domain.gameObject.barriers.ReinforcedBarrier;
+import com.example.domain.gameObject.barriers.HollowBarrier;
 import com.example.domain.gameObject.barriers.RewardingBarrier;
 import com.example.domain.gameObject.barriers.SimpleBarrier;
 import com.example.domain.interfaces.BallManager;
@@ -146,7 +146,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
             Barrier bar = (Barrier) obj;
             if (bar instanceof SimpleBarrier){
                 game.getPlayer().score += 10;
-            } else if (bar instanceof ReinforcedBarrier){
+            } else if (bar instanceof HollowBarrier){
                 game.getPlayer().score += 20;
             } else if (bar instanceof ExplosiveBarrier){
                 game.getPlayer().score += 15;
