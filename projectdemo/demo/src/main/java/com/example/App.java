@@ -11,6 +11,7 @@ import com.example.visual.SinglePlayerMenu;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import com.example.domain.Game;
 
@@ -88,19 +89,24 @@ public class App {
     }
 
     public void showGamePanel(){
-        mainFrame.dispose();
-        gameFrame = new JFrame("Game Application");
-        Level level = new Level("@");
-        LevelBuilder levelBuilder = new LevelBuilder();
-        levelBuilder.randomizeLevel(level, 2);
-        Game game = new Game("single", level);
-        gameFrame.add(game.getPanel());
-        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.setSize(1200, 680);
-        gameFrame.setResizable(false);
-        gameFrame.setVisible(true);
-        // Thread gameThread = new Thread(game);
-        // game.run();
+        SwingUtilities.invokeLater(() -> {
+            mainFrame.dispose();
+            gameFrame = new JFrame("Game Application");
+            Level level = new Level("@");
+            LevelBuilder levelBuilder = new LevelBuilder();
+            levelBuilder.randomizeLevel(level, 2);
+            Game game = new Game("single", level);
+            
+            gameFrame.add(game.getPanel());
+            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gameFrame.setSize(1200, 680);
+            gameFrame.setResizable(false);
+            gameFrame.setVisible(true);
 
+            game.getPanel().requestFocusInWindow();
+            new Thread(() -> {
+                game.run();
+            }).start();
+        });
     }
 }

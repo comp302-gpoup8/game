@@ -4,6 +4,7 @@ import com.example.domain.levels.Level;
 import com.example.domain.levels.LevelBuilder;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import com.example.domain.Game;
 
@@ -21,6 +22,6 @@ public class Main {
         // mainFrame.setResizable(false);
         // mainFrame.setVisible(true);
         // game.run();
-        App app = new App();
+        SwingUtilities.invokeLater(App::new);
     }
 }
