@@ -1,6 +1,5 @@
 package com.example.visual;
 
-import com.example.App;
 import com.example.domain.Game;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.Staff;
@@ -8,16 +7,20 @@ import com.example.domain.gameObject.barriers.Barrier;
 import com.example.domain.interfaces.BallManager;
 import com.example.domain.levels.Level;
 import com.example.domain.managers.Player;
+import lombok.Getter;
+import lombok.Setter;
+
 
 import javax.swing.*;
 import java.awt.*;
+
 
 /**
  * GamePanel Class
  * The Panel for the Single Player Game
  */
-public class GamePanel extends JPanel {
-    private App app;
+@Getter @Setter
+public class GamePanel extends JFrame{
     private BackgroundLabel backgroundLabel;
     private transient Controller controller;
     private Staff staff;
@@ -26,7 +29,9 @@ public class GamePanel extends JPanel {
     public Player player;
     private JLabel[] lifeIcons = new JLabel[3];
 
-    public GamePanel(Level level) {
+
+
+    public GamePanel(Level level){
 
         initGameFrame();
         controller = new Controller();
@@ -39,27 +44,29 @@ public class GamePanel extends JPanel {
     /**
      * Initializes the main frame.
      */
-    private void initGameFrame() {
+    private void initGameFrame(){
         setSize(1200, 680);
+        setTitle("Single Player");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
     }
 
     /**
      * Makes the panel and its components visible.
      */
-    public void displayGamePanel() {
+    public void displayGamePanel(){
         revalidate();
         repaint();
         setVisible(true);
         setFocusable(true);
+        setResizable(false);
     }
 
     /**
      * Places the barriers on the Game Panel.
-     * 
      * @param level : The level that contains the Barriers.
      */
-    private void placeBarriers(Level level) {
+    private void placeBarriers(Level level){
         int x = 10;
         int y = 0;
         int maxHeightInRow = 0;
@@ -80,7 +87,6 @@ public class GamePanel extends JPanel {
 
     /**
      * Helper method for placing the barriers to the game panel appropriately.
-     * 
      * @param x
      * @param barrierWidth
      * @return
@@ -91,10 +97,10 @@ public class GamePanel extends JPanel {
 
     /**
      * Adds the level to the GamePanel and sets up the other required elements.
-     * 
      * @param level
      */
-    public void addLevel(Level level) {
+    public void addLevel(Level level){
+        getContentPane().removeAll();
 
         addFireBall();
         addStaff();
@@ -117,29 +123,33 @@ public class GamePanel extends JPanel {
     /**
      * Initializes the staff on the panel.
      */
-    public void addStaff() {
+    public void addStaff(){
         Point staffPosition = new Point((getWidth() / 2) - 85, getHeight() - 100);
         Dimension staffSize = new Dimension(85, 15);
         staff = new Staff(staffPosition, staffSize);
         add(staff);
     }
 
+
+
+    public void setinitStaffWidth(int w) {
+        this.staff.setWidth(w);
+    }
+
+
     /**
      * Initializes the heart images that represents players lives for the panel.
      */
     private void initLivesDisplay() {
         for (int i = 0; i < lifeIcons.length; i++) {
-            lifeIcons[i] = new JLabel(
-                    new ImageIcon("projectdemo/demo/src/main/java/com/example/Graphical-Assets/Heart.png"));
-            lifeIcons[i].setBounds(1100 + (i * 30), 610, 28, 28);
+            lifeIcons[i] = new JLabel(new ImageIcon("projectdemo/demo/src/main/java/com/example/Graphical-Assets/Heart.png"));
+            lifeIcons[i].setBounds(1100 + (i * 30), 610,28, 28);
             add(lifeIcons[i]);
         }
         updateLivesDisplay();
     }
-
     /**
-     * Updates the panel and number of hearts due to the remaining lives of the
-     * player.
+     * Updates the panel and number of hearts due to the remaining lives of the player.
      */
     public void updateLivesDisplay() {
         for (int i = 0; i < lifeIcons.length; i++) {
@@ -152,24 +162,27 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Gets the number of lives a player has in order to use it in methods that
-     * display hearts.
+     * Gets the number of lives a player has in order to use it in methods that display hearts.
      */
-    public int getRemainingLives() {
-        if (player == null) {
+    public int getRemainingLives(){
+        if (player == null){
             player = new Player("New Player");
         }
         return player.remainingLives;
     }
 
+
+
     /**
      * Initializes the Background image for the panel.
      */
-    public void addBackgroundImage() {
+    public void addBackgroundImage(){
         backgroundLabel = new BackgroundLabel();
         backgroundLabel.setBounds(0, 0, 1204, 678);
         add(backgroundLabel);
     }
+
+
 
     /**
      * Refreshes the panel to remove the barriers that are destroyed.
@@ -195,23 +208,15 @@ public class GamePanel extends JPanel {
     }
 
     // Get Methods
-    public Controller getController() {
+    public Controller getController(){
         return controller;
     }
 
-    public Staff getStaff() {
+    public Staff getStaff(){
         return staff;
     }
 
     public FireBall getBall() {
         return ball;
-    }
-
-    public App getApp() {
-        return app;
-    }
-
-    public void setApp(App app) {
-        this.app = app;
     }
 }
