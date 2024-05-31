@@ -2,8 +2,10 @@ package group8.domain.interactables;
 
 import java.io.Serializable;
 
+import group8.domain.engine.GameManager;
 import group8.domain.managers.Level;
 import group8.domain.managers.Player;
+import group8.domain.objects.Barrier;
 import group8.domain.objects.Fireball;
 import group8.domain.objects.Staff;
 import group8.visual.GamePanel;
@@ -22,7 +24,8 @@ public class Game implements Serializable, Runnable {
     private Player player;
     private Fireball ball;
     private Staff staff;
-    private GamePanel gp;
+    private GamePanel panel;
+    private GameManager manager;
     private final Dimension bounds  = new Dimension(1200,  680);
     
     public Game(Level lv, Player p){
@@ -34,6 +37,52 @@ public class Game implements Serializable, Runnable {
     }
     @Override
     public void run() {
-        gp = app.getGamePanel();
+        panel = app.getGamePanel();
+        /*
+         * START
+             * WHILE player has lives
+                * IF ball is launched
+                    * move ball
+                    * check for collisions
+                    * if collision (barrier, sides, staff or roof)
+                        * bounce ball
+                        * if collision was with barrier
+                            * reduce barrier hitpoint
+                            * if barrier hitpoint <= 0
+                                * destroy barrier
+                    * if collision (bottom)
+                        * reduce player life.
+                        * if player still has lives reset ball
+                    * get direction input
+                    * move staff (direction input)
+                        * control staff boundaries.
+                * Else
+                    * get direction input
+                    * move staff(direction input) with ball
+         */
+    }
+
+    public boolean playerHasLives(){
+        return player.getRemainingLives() > 0;
+    }
+
+    public boolean ballInMotion(){
+        return ball.getSpeed() > 0;
+    }
+
+    public void gameLoop(){
+        if (ballInMotion()) {
+            boolean inGame = manager.moveBall();
+            if (!inGame) {
+                player.remainingLives--;
+                //RESETBALL
+            } else {
+                for (Barrier barrier : level.getBarriers()){
+                    if (barrier.getHitbox().intersects(ball.getHitbox())){
+                        
+                    }
+                }
+            }
+        }
     }
 }

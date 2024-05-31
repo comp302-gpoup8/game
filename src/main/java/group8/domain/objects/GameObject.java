@@ -37,4 +37,8 @@ public abstract class GameObject {
     public Dimension getSize(){
         return hitbox.getSize();
     }
+
+    public boolean intersects(GameObject e){
+        return this.hitbox.intersects(e.hitbox);
+    }
 }

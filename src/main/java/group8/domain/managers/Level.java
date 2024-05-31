@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 import group8.domain.objects.Barrier;
@@ -14,7 +13,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Level implements Serializable {
 
-    private List<Barrier> barriers;
+    private ArrayList<Barrier> barriers;
 
     public Level(){
         this(2);
@@ -97,8 +96,8 @@ public class Level implements Serializable {
             return barrierCounts[0] + barrierCounts[1] + barrierCounts[2] + barrierCounts[3];
         }
 
-        private List<Barrier> buildLevel(){
-            List<Barrier> barriers = new ArrayList<>();
+        private ArrayList<Barrier> buildLevel(){
+            ArrayList<Barrier> barriers = new ArrayList<>();
             
             for (int i = 0; i < 3; i++){
                 while (barrierCounts[i] > 0){
@@ -112,7 +111,7 @@ public class Level implements Serializable {
             return barriers;
         }
 
-        private List<Barrier> placeBarriers(List<Barrier> barriers){
+        private ArrayList<Barrier> placeBarriers(ArrayList<Barrier> barriers){
             Point p = new Point(23, 0);
             int maxHeight = 0;
             for (Barrier b : barriers){

@@ -19,14 +19,15 @@ public class App {
     private Player player; 
 
     public App() {
+        buildMainFrame();
+        showMainMenu();
+    }
+
+    public void buildMainFrame(){
         mainFrame = new JFrame("Game Application");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(1200, 680);
         mainFrame.setResizable(false);
-
-        mainMenu = new MainMenu(1200, 680);
-        mainMenu.setApp(this); 
-        displayMenu(mainMenu.getPanel());
     }
 
     public void displayMenu(JPanel menuPanel) {
@@ -35,6 +36,12 @@ public class App {
         mainFrame.revalidate();
         mainFrame.repaint();
         mainFrame.setVisible(true);
+    }
+
+    public void showMainMenu(){
+        mainMenu = new MainMenu(1200, 680);
+        mainMenu.setApp(this);
+        displayMenu(mainMenu.getPanel());
     }
 
     public void showSinglePlayerMenu() {
@@ -50,13 +57,22 @@ public class App {
     }
 
     public void showGamePanel(){
+        /* If there is not a game, quickplay creates a new game with normal difficulty for the current player. */
         if (game == null) {
             game = new Game(new Level(2), player);
         }
+
+        /* Panel for the game is initialized */
         gamePanel = new GamePanel();
         gamePanel.setApp(this);
+
+        /* Game panel is filled with the content of the level and displayed. */
         gamePanel.setupGame(game);
         displayMenu(gamePanel.getPanel());
+
+        /* The mainframe is set 'focusable' to allow for game controls. */
         mainFrame.setFocusable(true);
+
+        //TODO: Game needs to run.
     }
 }
