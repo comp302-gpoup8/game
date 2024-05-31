@@ -38,7 +38,7 @@ public class Game implements Serializable, Runnable {
     public void run() {
         while (true) {
 
-            manager.moveStaff(1);
+            // manager.moveStaff();
             manager.moveBallWithStaff();
 
             // Update the game state periodically

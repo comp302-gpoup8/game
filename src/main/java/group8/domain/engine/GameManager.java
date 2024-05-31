@@ -29,7 +29,7 @@ public class GameManager {
     
     public GameManager (@NotNull Game g){
         this.game = g;
-        staff = new Staff(new Point(100, 500), new Dimension(120, 16));
+        staff = new Staff(new Point(580, 600), new Dimension(85, 16));
         ball = new Fireball(new Point(100, 500), new Dimension(16, 16));
         staff.setSpeed(4);
         launched = false;
@@ -37,7 +37,7 @@ public class GameManager {
 
     public void moveBallWithStaff(){
         Point staffCenter = PointOperations.getCenterPoint(staff);
-        ball.getHitbox().setLocation(staffCenter.x - 16, staffCenter.y - 20);
+        ball.getHitbox().setLocation(staffCenter.x - 6, staffCenter.y - 25);
     }
 
     public void launchBall(){
