@@ -2,6 +2,7 @@ package com.example.domain.gameObject.barriers;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.Random;
 
 import com.example.domain.gameObject.GameObject;
 
@@ -20,6 +21,7 @@ public abstract class Barrier extends GameObject {
      */
     protected Integer hitPoints;
     protected Boolean frozen;
+    protected boolean isMoving;
 
     /**
      * Default size for all barrier types. 
@@ -30,7 +32,12 @@ public abstract class Barrier extends GameObject {
         super(p, DEFAULT_BARRIER_SIZE, imagePath);
         hitPoints = hp;
         frozen = false;
-
+        Random rand = new Random();
+        isMoving = (rand.nextInt(1, 100) + 1) > 90;
+        if (isMoving){
+            setSpeed(rand.nextInt(1));
+            direction = new Point(-1, -1);
+        }
     }
 
     /**

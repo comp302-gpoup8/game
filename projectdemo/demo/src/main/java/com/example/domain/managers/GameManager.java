@@ -146,6 +146,19 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         game.getPanel().refreshLevel();
     }
 
+    public void moveBarriers(){
+        for (GameObject obj : elements){
+            if (obj instanceof Barrier){
+                Barrier bar = (Barrier) obj;
+                if (bar.isMoving()){
+                    bar.getLocation().translate(-1, -1);
+                    bar.getLocation().translate(2, 2);
+                    bar.getLocation().translate(-1, -1);
+                }
+            }
+        }
+    }
+
     /**
      * Adjusts the player's score when they destroy barriers.
      * @param toRemove
