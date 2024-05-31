@@ -3,6 +3,8 @@ package com.example.domain;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.GameObject;
@@ -30,6 +32,7 @@ public class Game implements Serializable {
     private GamePanel panel;
     private GameManager gm;
     private Level level;
+    private Map<String, Boolean> spells = new HashMap<>();
 
 
 
@@ -45,6 +48,8 @@ public class Game implements Serializable {
         player = new Player(pName);
         panel.player = player;
         loadGameManager();
+
+        initializeSpells();
 
     }
 
@@ -64,6 +69,11 @@ public class Game implements Serializable {
         return spells.getOrDefault(spellName, false);
     }
 
+    public void useSpell(String spellName) {
+        if (canUseSpell(spellName)) {
+            spells.put(spellName, false);
+        }
+    }
 
 
     /**
