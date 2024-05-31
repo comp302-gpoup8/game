@@ -1,16 +1,18 @@
-///////////////////////////////////////////////////////////////////////////////////////
-//The spell effects and implementations are under this class with needed merges to the other classes in further steps,
-//it will be fully implemented within other classes when it and reward barrier is required
-/*
+
+import com.example.domain.managers.Player;
+import com.example.domain.gameObject.Staff;
+import com.example.domain.managers.GameManager;
+
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.Timer;
 
 public class SpellEffects implements KeyListener {
 
-    private GameContext context;
+    private App app;
 
     public SpellEffects(GameContext context) {
         this.context = context;
@@ -52,15 +54,15 @@ public class SpellEffects implements KeyListener {
     }
 
     public void activateFelixFelicis() {
-        context.incrementChances();
+        Player.setRemainingLives(Player.getRemainingLives() + 1);
     }
 
+
     public void activateMagicalStaffExpansion() {
-        int originalLength = context.getMagicalStaffLength();
-        context.setMagicalStaffLength(originalLength * 2);
+        app.getGame().getManager().setinitStaffWidth(170);
         Timer timer = new Timer(30000, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                context.setMagicalStaffLength(originalLength);
+                app.getGame().getManager().setinitStaffWidth(85);
             }
         });
         timer.setRepeats(false);
@@ -89,6 +91,8 @@ public class SpellEffects implements KeyListener {
         timer.start();
     }
 }
+
+
 
 // For Game Environment
 private int chances = 3;
@@ -168,4 +172,3 @@ public void destroyBarrier(Barrier barrier) {
 private SpellEffects spellEffects = new SpellEffects(context);
 
 addKeyListener(spellEffects);
-*/
