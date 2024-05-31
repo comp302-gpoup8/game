@@ -39,7 +39,11 @@ public class Game implements Serializable, Runnable {
         while (true) {
 
             // manager.moveStaff();
-            manager.moveBallWithStaff();
+            // manager.moveBallWithStaff();
+            if (manager.getBall().getSpeed() <= 0){
+                manager.launchBall();
+            }
+            manager.moveBall();
 
             // Update the game state periodically
             updateGameState();
@@ -54,8 +58,8 @@ public class Game implements Serializable, Runnable {
     }
 
     public void updateGameState() {
-        System.out.printf("Current staff position: %d, %d\n", manager.getStaff().getLocation().x, manager.getStaff().getLocation().y);
-        System.out.printf("Current visual position: %d, %d\n\n", app.getGamePanel().getStaff().getLabel().getLocation().x, app.getGamePanel().getStaff().getLabel().getLocation().y);
+        System.out.printf("Current staff position: %d, %d\n", manager.getBall().getLocation().x, manager.getBall().getLocation().y);
+        System.out.printf("Current visual position: %d, %d\n\n", app.getGamePanel().getFireball().getLabel().getLocation().x, app.getGamePanel().getFireball().getLabel().getLocation().y);
         app.getGamePanel().getPanel().revalidate();
         app.getGamePanel().getPanel().repaint();
     }

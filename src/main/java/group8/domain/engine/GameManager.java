@@ -10,6 +10,7 @@ import group8.domain.objects.Staff;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.Random;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,8 +31,9 @@ public class GameManager {
     public GameManager (@NotNull Game g){
         this.game = g;
         staff = new Staff(new Point(580, 600), new Dimension(85, 16));
-        ball = new Fireball(new Point(100, 500), new Dimension(16, 16));
+        ball = new Fireball(new Point(580, 600), new Dimension(16, 16));
         staff.setSpeed(4);
+        ball.setSpeed(0);
         launched = false;
     }
 
@@ -54,7 +56,8 @@ public class GameManager {
          * It is going to be extended to receive mouse direction anyway.
          */
         if (ball.getDirection() == null){
-            ball.setDirection(new Point(-1, -1)); 
+            Random random = new Random();
+            ball.setDirection(new Point(-1 * random.nextInt(8), -1 * random.nextInt(8))); 
         }
 
         /* Now that the speed and direction is defined the ball should move. */
@@ -79,6 +82,7 @@ public class GameManager {
                 directionChanged = (ball.intersects(staff) ? bounce(center, staff) : bounceOfOffBarrier(center));
             }
         }
+        game.getApp().getGamePanel().getFireball().updatePosition(ball.getLocation());
         return directionChanged;
     }
 
@@ -94,7 +98,7 @@ public class GameManager {
     private void moveBallToNextPoint(){
         int dx = PointOperations.getDx(ball);
         int dy = PointOperations.getDy(ball);
-        ball.setLocation(new Point(dx, dy));
+        ball.getLocation().translate(dx, dy);
     }
 
     /**
@@ -157,7 +161,7 @@ public class GameManager {
         game.getApp().getGamePanel().getStaff().updatePosition(staff.getLocation());
     }
 
-    public void rotateStaf(int rotationSignal){
+    public void rotateStaff(int rotationSignal){
         int staffDw;
         if(rotationSignal == 0){
             if (staff.getRotation() > 0) {
