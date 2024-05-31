@@ -4,7 +4,6 @@ import group8.domain.objects.GameObject;
 import group8.domain.objects.HitBox;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 
 
 public interface PointOperations {

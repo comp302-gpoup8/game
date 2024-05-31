@@ -2,7 +2,6 @@ package group8.domain.objects;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Rectangle;
 
 import lombok.NonNull;
 import lombok.Getter;

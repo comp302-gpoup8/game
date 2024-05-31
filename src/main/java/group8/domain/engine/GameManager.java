@@ -37,7 +37,7 @@ public class GameManager {
 
     public void moveBallWithStaff(){
         Point staffCenter = PointOperations.getCenterPoint(staff);
-        ball.getHitbox().setLocation(staffCenter.x, staffCenter.y + 20);
+        ball.getHitbox().setLocation(staffCenter.x - 16, staffCenter.y - 20);
     }
 
     public void launchBall(){
