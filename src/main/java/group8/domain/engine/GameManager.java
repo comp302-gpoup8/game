@@ -98,7 +98,7 @@ public class GameManager {
     private void moveBallToNextPoint(){
         int dx = PointOperations.getDx(ball);
         int dy = PointOperations.getDy(ball);
-        ball.getLocation().translate(dx, dy);
+        ball.getHitbox().setLocation(ball.getLocation().x + dx, ball.getLocation().y + dy);
     }
 
     /**

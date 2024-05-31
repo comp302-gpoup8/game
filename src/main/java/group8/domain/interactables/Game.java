@@ -7,6 +7,7 @@ import group8.domain.managers.Level;
 
 import group8.visual.GamePanel;
 import group8.visual.App;
+import java.awt.Point;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,7 @@ public class Game implements Serializable, Runnable {
 
             // manager.moveStaff();
             // manager.moveBallWithStaff();
+            manager.getBall().setLocation(new Point((int) manager.getBall().getHitbox().x -10, manager.getBall().getHitbox().y - 10));
             if (manager.getBall().getSpeed() <= 0){
                 manager.launchBall();
             }

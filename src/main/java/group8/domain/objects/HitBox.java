@@ -2,11 +2,13 @@ package group8.domain.objects;
 
 import java.awt.Point;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import lombok.NonNull;
 
 public class HitBox {
 
     private Point p1,p2,p3,p4;
+    private int rotation;
     public int x,y,width,height;
 
     public HitBox(@NonNull Point location, @NonNull Dimension size){
@@ -18,43 +20,39 @@ public class HitBox {
         y = p1.y;
         width = (int) p1.distance(p2);
         height = (int) p1.distance(p4);
+        rotation = 0;
     }
 
     public boolean intersects(HitBox h){
-        Point closest1 = this.p1 ,closest2 = h.p1;
-        double distance = -1;
-        double tempd;
-        Point[] aa = {this.p1, this.p2, this.p3, this.p4};
-        Point[] ba = {h.p1, h.p2, h.p3, h.p4};
-        for(Point a : aa){
-            for(Point b : ba){
-                if(distance != -1){
-                    tempd = a.distance(b);
-                    if(tempd < distance){
-                        distance = tempd;
-                        closest1 = a;
-                        closest2 = b;
+        if (this.rotation == 0 && h.rotation == 0){
+            Rectangle a = new Rectangle(p1, getSize());
+            Rectangle b = new Rectangle(h.p1, h.getSize());
+            return a.intersects(b); 
+        }
+        else {
+            Point[] aa = {this.p1, this.p2, this.p3, this.p4};
+            Point[] ba = {h.p1, h.p2, h.p3, h.p4};
+
+            int intersections = 0;
+            for (Point p : ba){
+                intersections = 0;
+                Point prev = aa[aa.length - 1];
+                for (Point next : aa) {
+                    if ((prev.y <= p.y && p.y < next.y) || (prev.y >= p.y && p.y > next.y)) {
+                        double dy = next.y - prev.y;
+                        double dx = next.x - prev.x;
+                        double x = (p.y - prev.y) / dy * dx + prev.x;
+                        if (x > p.x) {
+                            intersections++;
+                        }
                     }
-                }
-                else{
-                    distance = a.distance(b);
-                    closest1 = a;
-                    closest2 = b;
+                    prev = next;
+                }   
+                if (intersections % 2 == 1){
+                    return true;
                 }
             }
-        }
-
-        double hArea = this.height*this.width;
-        double areaOfTriangles = 0.5*(Math.abs(closest2.x*(p1.y-p2.y) + p1.x*(p2.y-closest2.y) + p2.x*(p1.y-closest2.y)) +
-                                    Math.abs(closest2.x*(p2.y-p3.y) + p2.x*(p3.y-closest2.y) + p3.x*(p2.y-closest2.y)) +
-                                    Math.abs(closest2.x*(p3.y-p4.y) + p3.x*(p4.y-closest2.y) + p4.x*(p3.y-closest2.y)) +
-                                    Math.abs(closest2.x*(p1.y-p4.y) + p1.x*(p4.y-closest2.y) + p4.x*(p1.y-closest2.y)));
-        
-        if (areaOfTriangles > hArea){
             return false;
-        }
-        else{
-            return true;
         }
     }
 
@@ -90,8 +88,12 @@ public class HitBox {
         p4.x = (int) (x42 + cx);
         p4.y = (int) (y42 + cy);
 
+        x = p1.x;
+        y = p2.y;
         width = (int) p1.distance(p2);
         height = (int) p1.distance(p4);
+
+        rotation += angle;
     }
 
     public Point getLocation(){
@@ -105,6 +107,8 @@ public class HitBox {
         p2.setLocation(p2.x-dx, p2.y-dy);
         p3.setLocation(p3.x-dx, p3.y-dy);
         p4.setLocation(p4.x-dx, p4.y-dy);
+        x = p1.x;
+        y = p1.y;
         width = (int) p1.distance(p2);
         height = (int) p1.distance(p4);
     }
@@ -116,15 +120,17 @@ public class HitBox {
         p2.setLocation(p2.x-dx, p2.y-dy);
         p3.setLocation(p3.x-dx, p3.y-dy);
         p4.setLocation(p4.x-dx, p4.y-dy);
+        x = p1.x;
+        y = p1.x;
         width = (int) p1.distance(p2);
         height = (int) p1.distance(p4);
     }
 
-    public double getCenterX(){
+    public int getCenterX(){
         return (p1.x + p3.x)/2;
     }
 
-    public double getCenterY(){
+    public int getCenterY(){
         return (p1.y + p3.y)/2;
     }
 

@@ -37,6 +37,10 @@ public abstract class GameObject {
         return hitbox.getSize();
     }
 
+    public Point getCenter(){
+        return new Point(hitbox.getCenterX(), hitbox.getCenterY());
+    }
+
     public boolean intersects(GameObject e){
         return this.hitbox.intersects(e.hitbox);
     }
