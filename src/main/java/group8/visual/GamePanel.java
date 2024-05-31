@@ -8,10 +8,7 @@ import javax.swing.JPanel;
 
 import group8.domain.interactables.Controller;
 import group8.domain.objects.Barrier;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
 public class GamePanel implements Runnable {
     private App app; 
     private JPanel panel;
@@ -68,15 +65,12 @@ public class GamePanel implements Runnable {
     //GamePanel
     @Override
     public void run() {
-        final int FPS = 30;
-        final long frameTime = 1000 / FPS;
-
-        refreshVisuals();
-        panel.repaint();
-        try{
-            Thread.sleep(32);
-        } catch(InterruptedException e){
-            e.printStackTrace();
+        while (Thread.currentThread().isInterrupted()){
+            panel.repaint();
+        } try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
         }
     }
     
@@ -94,7 +88,106 @@ public class GamePanel implements Runnable {
     }
     
     public int getDirectionSignal() {
-        return cont.getDirectionSignal();
+        return cont.getSignal();
     }
 
+    /**
+     * @return the app
+     */
+    public App getApp() {
+        return app;
+    }
+
+    /**
+     * @param app the app to set
+     */
+    public void setApp(App app) {
+        this.app = app;
+    }
+
+    /**
+     * @return the panel
+     */
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    /**
+     * @param panel the panel to set
+     */
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
+    /**
+     * @return the lifeIcons
+     */
+    public JLabel[] getLifeIcons() {
+        return lifeIcons;
+    }
+
+    /**
+     * @param lifeIcons the lifeIcons to set
+     */
+    public void setLifeIcons(JLabel[] lifeIcons) {
+        this.lifeIcons = lifeIcons;
+    }
+
+    /**
+     * @return the objectVisuals
+     */
+    public ArrayList<ObjectVisual> getObjectVisuals() {
+        return objectVisuals;
+    }
+
+    /**
+     * @param objectVisuals the objectVisuals to set
+     */
+    public void setObjectVisuals(ArrayList<ObjectVisual> objectVisuals) {
+        this.objectVisuals = objectVisuals;
+    }
+
+    /**
+     * @return the staff
+     */
+    public ObjectVisual getStaff() {
+        return staff;
+    }
+
+    /**
+     * @param staff the staff to set
+     */
+    public void setStaff(ObjectVisual staff) {
+        this.staff = staff;
+    }
+
+    /**
+     * @return the fireball
+     */
+    public ObjectVisual getFireball() {
+        return fireball;
+    }
+
+    /**
+     * @param fireball the fireball to set
+     */
+    public void setFireball(ObjectVisual fireball) {
+        this.fireball = fireball;
+    }
+
+    /**
+     * @return the cont
+     */
+    public Controller getCont() {
+        return cont;
+    }
+
+    /**
+     * @param cont the cont to set
+     */
+    public void setCont(Controller cont) {
+        this.cont = cont;
+    }
+
+    
 }

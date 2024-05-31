@@ -2,55 +2,45 @@ package group8.domain.interactables;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 public class Controller {
-    private int directionSignal = 0;
-    private final Object signalLock = new Object();
+    /** Signal that'll  be shared across multiple threads so we use Atomic Integer */
+    private AtomicInteger signal = new AtomicInteger(0);
     private KeyListener keyListener;
 
-    public Controller() {
+    public Controller(){
         keyListener = new KeyListener() {
             @OverrideOnly
-            public void keyTyped(KeyEvent e) {
-                // Not used.
-            }
+            public void keyTyped(KeyEvent e){}; // Not used.
 
             @Override
-            public void keyPressed(KeyEvent e) {
-                processAction(e.getKeyCode());
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                synchronized (signalLock) {
-                    directionSignal = 0;
+            public void keyPressed(KeyEvent e){
+                /* Not going to add a separate function for clarity */
+                /* Because updates here are pretty crucial so lets not add +steps */
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_LEFT, KeyEvent.VK_A -> signal.set(-1);
+                    case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> signal.set(1);
+                    case KeyEvent.VK_SPACE -> signal.set(2);
+                    case KeyEvent.VK_X -> signal.set(9);
                 }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e){
+                // signal.set(0);
             }
         };
     }
 
-    private void processAction(int keyCode) {
-        synchronized (signalLock) {
-            switch (keyCode) {
-                case KeyEvent.VK_LEFT -> directionSignal = -1;
-                case KeyEvent.VK_RIGHT -> directionSignal = 1;
-                case KeyEvent.VK_SPACE -> directionSignal = 2;
-            }
-        }
-    }
-
-    public KeyListener getKeyListener() {
+    /* Manual getters because lombok might have caused issues (lazy). */
+    public KeyListener getKeyListener(){
         return keyListener;
     }
 
-    public int getDirectionSignal() {
-        synchronized (signalLock) {
-            return directionSignal;
-        }
+    public int getSignal(){
+        return signal.get();
     }
 }

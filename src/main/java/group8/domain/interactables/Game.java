@@ -1,6 +1,9 @@
 package group8.domain.interactables;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import group8.domain.engine.GameManager;
 import group8.domain.managers.Level;
@@ -18,6 +21,8 @@ public class Game implements Serializable, Runnable {
     private Level level;
     private GamePanel panel;
     private GameManager manager;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(2);
+
     
     public Game(Level lv){
         level = lv;
@@ -36,22 +41,35 @@ public class Game implements Serializable, Runnable {
     }
 
     //GAME
-    @Override
+   @Override
     public void run() {
-        while (true) {
-            int directionSignal = panel.getDirectionSignal();
-            System.out.printf("Direction signal %d\n", directionSignal);
-            if (directionSignal == 2){
-                manager.launchBall();
-            } else {
-                manager.moveStaff(directionSignal);
+        executorService.submit(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                int directionSignal = panel.getDirectionSignal();
+                System.out.printf("Direction signal %d\n", directionSignal);
+                if (directionSignal == 2) {
+                    manager.launchBall();
+                } else {
+                    manager.moveStaff(directionSignal);
+                }
+                try {
+                    Thread.sleep(1000); 
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
+        });
+    }
 
-            try {
-                Thread.sleep(32); 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void shutdown() {
+        executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                executorService.shutdownNow();
             }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+            Thread.currentThread().interrupt();
         }
     }
 
