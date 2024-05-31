@@ -7,22 +7,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import group8.domain.interactables.Controller;
-import group8.domain.interactables.Game;
 import group8.domain.objects.Barrier;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class GamePanel {
+public class GamePanel implements Runnable {
     private App app; 
     private JPanel panel;
-    private JLabel background;
-    private transient Controller cont;
-    private Game game;
     private JLabel[] lifeIcons;
     private ArrayList<ObjectVisual> objectVisuals;
     private ObjectVisual staff;
     private ObjectVisual fireball;
+    private transient Controller cont;
 
 
     public GamePanel(){
@@ -33,13 +30,11 @@ public class GamePanel {
         panel = new JPanel();
         panel.setSize(1200, 680);
         panel.setLayout(null);
-        background = new JLabel(new ImageIcon("src/main/java/group8/Graphical-Assets/200Background.png"));
         this.cont = new Controller();
         panel.addKeyListener(cont.getKeyListener());
     }
 
-    public void setupGame(Game g){
-        game = g;
+    public void setupGame(){
         setupVisuals();
     }
 
@@ -50,35 +45,61 @@ public class GamePanel {
     }
 
     private void setupBarrierVisuals(){
-        ArrayList<Barrier> barriers = new ArrayList<>(game.getLevel().getBarriers());
+        ArrayList<Barrier> barriers = new ArrayList<>(app.getGame().getLevel().getBarriers());
         objectVisuals = new ArrayList<>();
         barriers.forEach(e -> objectVisuals.add((new ObjectVisual(e, e.getType()))));
         objectVisuals.forEach(e -> panel.add(e.getLabel()));
     }
 
     private void setupPlayerVisuals(){
-        staff = new ObjectVisual(game.getStaff(), 4);
+        staff = new ObjectVisual(app.getGame().getManager().getStaff(), 4);
         panel.add(staff.getLabel());
-        fireball = new ObjectVisual(game.getBall(), 5);
+        fireball = new ObjectVisual(app.getGame().getManager().getBall(), 5);
         panel.add(fireball.getLabel());
     }
 
     private void setupBackgroundVisuals(){
-        //TODO: Life Icons added here (Before background)
+        JLabel background = new JLabel(new ImageIcon("src/main/java/group8/Graphical-Assets/200Background.png"));
         panel.add(background);
         background.setBounds(panel.getBounds());
     }
 
-    public void refresh(){
-        ArrayList<ObjectVisual> removeList = new ArrayList<>();
-        for (ObjectVisual visual : objectVisuals){
-            Barrier barrier = (Barrier) visual.getObject();
-            if (barrier.isDestroyed()){
-                game.getLevel().removeBarrier(barrier);
-                removeList.add(visual);
+    @Override
+    public void run() {
+        final int FPS = 30;
+        final long frameTime = 1000 / FPS;
+
+        while (true){
+            long startTime = System.currentTimeMillis();
+            app.getGame().updateGameState();
+            refreshVisuals();
+            panel.repaint();
+
+            long endTime = System.currentTimeMillis();
+            long deltaTime = endTime - startTime;
+
+            long sleepTime = frameTime - deltaTime;
+
+            if (sleepTime > 0) {
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         }
-        removeList.forEach(e -> panel.remove(e.getLabel()));
+    }
+    
+    public void refreshVisuals() {
+        // Update the position of the staff
+        staff.updatePosition(app.getGame().getManager().getStaff().getLocation());
 
+        // Update the position of the fireball
+        fireball.updatePosition(app.getGame().getManager().getBall().getLocation());
+
+        // Update the positions of the barriers
+        for (ObjectVisual visual : objectVisuals) {
+            visual.updatePosition(visual.getObject().getLocation());
+        }
     }
 }

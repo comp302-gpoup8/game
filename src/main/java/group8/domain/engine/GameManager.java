@@ -29,8 +29,9 @@ public class GameManager {
     
     public GameManager (@NotNull Game g){
         this.game = g;
-        this.staff = game.getStaff();
-        this.ball = game.getBall();
+        staff = new Staff(new Point(100, 500), new Dimension(120, 16));
+        ball = new Fireball(new Point(100, 500), new Dimension(16, 16));
+        staff.setSpeed(4);
         launched = false;
     }
 
@@ -50,7 +51,7 @@ public class GameManager {
 
         /*
          * There is a weird bug causing the initial ball direction to be null, so we use this if check here.
-         * It is going to be extended to receive mouse direction anyway, TODO.
+         * It is going to be extended to receive mouse direction anyway.
          */
         if (ball.getDirection() == null){
             ball.setDirection(new Point(-1, -1)); 
@@ -144,5 +145,15 @@ public class GameManager {
         bounce(center, barrier);
         barrier.reduceHp(1);
         return true;
+    }
+
+    public void moveStaff(int direction){
+        if (direction != 0){ // Default; No additional calculations are needed.
+            staff.getDirection().x = direction;
+            int x = staff.getLocation().x + PointOperations.getDx(staff);
+            x = Math.max(0, Math.min(x, SCREEN_WIDTH - staff.getSize().width));
+            staff.setLocation(new Point(x, staff.getLocation().y));
+        }
+        game.getApp().getGamePanel().getStaff().updatePosition(staff.getLocation());
     }
 }

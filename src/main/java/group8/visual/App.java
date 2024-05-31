@@ -59,7 +59,8 @@ public class App {
     public void showGamePanel(){
         /* If there is not a game, quickplay creates a new game with normal difficulty for the current player. */
         if (game == null) {
-            game = new Game(new Level(2), player);
+            game = new Game(new Level(2));
+            game.setApp(this);
         }
 
         /* Panel for the game is initialized */
@@ -67,12 +68,15 @@ public class App {
         gamePanel.setApp(this);
 
         /* Game panel is filled with the content of the level and displayed. */
-        gamePanel.setupGame(game);
+        gamePanel.setupGame();
         displayMenu(gamePanel.getPanel());
 
-        /* The mainframe is set 'focusable' to allow for game controls. */
-        mainFrame.setFocusable(true);
 
-        //TODO: Game needs to run.
+        mainFrame.setFocusable(true);
+        mainFrame.requestFocusInWindow();
+
+        // Start the game loop in a new thread
+        new Thread(gamePanel).start();
+        new Thread(game).start();    
     }
 }

@@ -4,61 +4,60 @@ import java.io.Serializable;
 
 import group8.domain.engine.GameManager;
 import group8.domain.managers.Level;
-import group8.domain.managers.Player;
-import group8.domain.objects.Fireball;
-import group8.domain.objects.Staff;
+
 import group8.visual.GamePanel;
 import group8.visual.App;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.Dimension;
-import java.awt.Point;
-
 @Getter @Setter
 public class Game implements Serializable, Runnable {
     private App app;
     private Level level;
-    private Player player;
-    private Fireball ball;
-    private Staff staff;
     private GamePanel panel;
     private GameManager manager;
-    private final Dimension bounds  = new Dimension(1200,  680);
     
-    public Game(Level lv, Player p){
+    public Game(Level lv){
         level = lv;
-        player = p;
-        staff = new Staff(new Point(100, 500), new Dimension(120,16));
-        ball = new Fireball(new Point (100, 500), new Dimension(16, 16));
-        // ball.reset(staff);
-
+        manager = new GameManager(this);
     }
-    @Override
-    public void run() {
-        panel = app.getGamePanel();
-        
 
-    }
 
     public boolean playerHasLives(){
-        return player.getRemainingLives() > 0;
+        return app.getPlayer().getRemainingLives() > 0;
     }
 
-    public boolean ballInMotion(){
-        return ball.getSpeed() > 0;
-    }
+
 
     public void playAttempt(){
-        int action = panel.getCont().getActionSignal();
-        int direction = panel.getCont().getDirectionSignal();
 
-        switch (action) {
-            case 1 -> manager.launchBall();
-            case 2 -> ball.setSpeed(0);
-            default -> System.out.printf("Current Signal : %d\n", action);
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+
+            manager.moveStaff(1);
+            manager.moveBallWithStaff();
+
+            // Update the game state periodically
+            updateGameState();
+
+            // Sleep to allow other processes to run (adjust as necessary)
+            try {
+                Thread.sleep(30); // Adjust the sleep time for desired responsiveness
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public void updateGameState() {
+        System.out.printf("Current staff position: %d, %d\n", manager.getStaff().getLocation().x, manager.getStaff().getLocation().y);
+        System.out.printf("Current visual position: %d, %d\n\n", app.getGamePanel().getStaff().getLabel().getLocation().x, app.getGamePanel().getStaff().getLabel().getLocation().y);
+        app.getGamePanel().getPanel().revalidate();
+        app.getGamePanel().getPanel().repaint();
     }
 }
 

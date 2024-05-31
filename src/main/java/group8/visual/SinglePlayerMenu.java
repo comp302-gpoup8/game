@@ -5,9 +5,6 @@ import lombok.Setter;
 import java.awt.*;
 import javax.swing.*;
 
-import group8.domain.interactables.Game;
-import group8.domain.managers.Level;
-import group8.domain.managers.Player;
 
 @Getter @Setter
 public class SinglePlayerMenu extends Menu {

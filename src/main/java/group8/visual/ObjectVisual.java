@@ -1,5 +1,7 @@
 package group8.visual;
 
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -31,8 +33,8 @@ public class ObjectVisual {
         return switch (type) {
             default -> "src/main/java/group8/Graphical-Assets/iconbluegem.png";
             case 1 -> "src/main/java/group8/Graphical-Assets/iconredgem.png";
-            case 2 -> "src/main/java/group8/Graphical-Assets/iconbluegem.png";
-            case 3 -> "src/main/java/group8/Graphical-Assets/iconfirm.png";
+            case 2 -> "src/main/java/group8/Graphical-Assets/icongreengem.png";
+            case 3 -> "src/main/java/group8/Graphical-Assets/firm.png";
             case 4 -> "src/main/java/group8/Graphical-Assets/Player.png";
             case 5 -> "src/main/java/group8/Graphical-Assets/Fireball.png";
         };
@@ -43,4 +45,9 @@ public class ObjectVisual {
         label.setSize(object.getSize());
         label.setLocation(object.getLocation());
     }
+
+    public void updatePosition(Point position) {
+        label.setLocation(position);
+    }
+
 }
