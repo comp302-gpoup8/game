@@ -37,9 +37,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         ball = game.getPanel().getBall();
     }
 
-    // public void setinitStaffWidth(int w) {
-    //     this.staff.getHitbox().setWidth(w);
-    // }
+
     /**
      * Allows the BallManager to launch the Ball.
      * TODO: The ball should be launched in the Mouse Direction. Right now when I try it, it results in a null pointer exception.

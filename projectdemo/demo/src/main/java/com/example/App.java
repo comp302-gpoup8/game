@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.example.domain.Game;
+import lombok.Getter;
+import lombok.Setter;
 
 // public class Main {
 
@@ -32,6 +34,7 @@ import com.example.domain.Game;
 //         game.run();
 //     }
 // }
+@Setter @Getter
 public class App {
     private JFrame mainFrame;
     private JFrame gameFrame;

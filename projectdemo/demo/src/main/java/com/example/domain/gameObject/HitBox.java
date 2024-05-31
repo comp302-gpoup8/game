@@ -21,6 +21,10 @@ public class HitBox {
         height = (int) p1.distance(p4);
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public boolean intersects(HitBox h){
         if (this.rotation == 0 && h.rotation == 0){
             Rectangle a = new Rectangle(p1, getSize());

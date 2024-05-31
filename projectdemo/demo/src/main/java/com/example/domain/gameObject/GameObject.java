@@ -42,6 +42,8 @@ public abstract class GameObject extends JLabel {
         defaultMovement();
     }
 
+
+
     /**
      * Creates the hitbox of the GameObject with the given values.
      * @param p : Initial Point

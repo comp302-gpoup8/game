@@ -1,6 +1,5 @@
 package com.example.visual;
 
-import com.example.App;
 import com.example.domain.Game;
 import com.example.domain.gameObject.FireBall;
 import com.example.domain.gameObject.Staff;
@@ -8,6 +7,8 @@ import com.example.domain.gameObject.barriers.Barrier;
 import com.example.domain.interfaces.BallManager;
 import com.example.domain.levels.Level;
 import com.example.domain.managers.Player;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import javax.swing.*;
@@ -18,8 +19,8 @@ import java.awt.*;
  * GamePanel Class
  * The Panel for the Single Player Game
  */
-public class GamePanel extends JPanel{
-    private App app;
+@Getter @Setter
+public class GamePanel extends JFrame{
     private BackgroundLabel backgroundLabel;
     private transient Controller controller;
     private Staff staff;
@@ -45,6 +46,8 @@ public class GamePanel extends JPanel{
      */
     private void initGameFrame(){
         setSize(1200, 680);
+        setTitle("Single Player");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
     }
 
@@ -56,6 +59,7 @@ public class GamePanel extends JPanel{
         repaint();
         setVisible(true);
         setFocusable(true);
+        setResizable(false);
     }
 
     /**
@@ -96,6 +100,7 @@ public class GamePanel extends JPanel{
      * @param level
      */
     public void addLevel(Level level){
+        getContentPane().removeAll();
 
         addFireBall();
         addStaff();
@@ -123,6 +128,12 @@ public class GamePanel extends JPanel{
         Dimension staffSize = new Dimension(85, 15);
         staff = new Staff(staffPosition, staffSize);
         add(staff);
+    }
+
+
+
+    public void setinitStaffWidth(int w) {
+        this.staff.setWidth(w);
     }
 
 
@@ -207,13 +218,5 @@ public class GamePanel extends JPanel{
 
     public FireBall getBall() {
         return ball;
-    }
-
-    public App getApp() {
-        return app;
-    }
-
-    public void setApp(App app) {
-        this.app = app;
     }
 }

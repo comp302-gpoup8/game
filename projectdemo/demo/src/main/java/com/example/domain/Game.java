@@ -11,6 +11,8 @@ import com.example.domain.managers.GameManager;
 import com.example.domain.managers.Player;
 import com.example.domain.managers.SaveManager;
 import com.example.visual.GamePanel;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -19,6 +21,7 @@ import com.example.visual.GamePanel;
  * Allows for the domain and the visual to interact with eachother.
  * Serializable so it can be saved and restored.
  */
+@Getter @Setter
 public class Game implements Serializable {
     @Serial
     private static final long serialVersionIUD = 1L;
@@ -27,8 +30,12 @@ public class Game implements Serializable {
     private GameManager gm;
     private Level level;
 
+
+
+
     public Game (String pName){
         load();
+
     }
 
     public Game (String pName, Level lv){
@@ -37,6 +44,7 @@ public class Game implements Serializable {
         player = new Player(pName);
         panel.player = player;
         loadGameManager();
+
     }
 
     /**

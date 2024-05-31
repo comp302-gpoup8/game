@@ -1,5 +1,8 @@
 package com.example.domain.gameObject;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.Dimension;
 import java.awt.Point;
 
@@ -8,6 +11,7 @@ import java.awt.Point;
  * The staff is controlled by the player and moves horizontally.
  * It is used to keep the FireBall in the game. 
  */
+@Getter @Setter
 public class Staff extends GameObject {
 
     private static String IMG_PATH = "projectdemo/demo/src/main/java/com/example/Graphical-Assets/Player.png";
@@ -25,6 +29,10 @@ public class Staff extends GameObject {
     public void rotate(double angle){
         this.getHitBox().rotate(angle);
         this.rotation += angle;
+    }
+
+    public void setWidth(int w){
+        this.getHitBox().setWidth(w);
     }
 
 }
