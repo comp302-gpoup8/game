@@ -22,7 +22,7 @@ public class Staff extends GameObject {
         return rotation;
     }
 
-    public void rotate(int angle){
+    public void rotate(double angle){
         this.getHitBox().rotate(angle);
         this.rotation += angle;
     }

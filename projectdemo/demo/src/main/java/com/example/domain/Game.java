@@ -85,6 +85,9 @@ public class Game implements Serializable {
             case 3 -> pauseUnpause();
             case 9 -> saveAndExit();
         }
+
+        int rotCommand = panel.getController().getRotDirection();
+        gm.rotateStaff(panel.getStaff(), rotCommand);
     }
 
     public void pauseUnpause(){

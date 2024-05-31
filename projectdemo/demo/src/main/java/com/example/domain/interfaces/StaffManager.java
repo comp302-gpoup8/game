@@ -25,4 +25,28 @@ public interface StaffManager {
     //TODO
     //Right now the staff jumps between point to point. It should have a more smooth movement.
     //Probably can be fixed by finding the optimal speed but it may be a more complex issue.
+
+
+
+    public static void rotateStaff(Staff staff, int x){
+        double staffDw;
+        if(x == 0){
+            if (staff.getRotation() > 0) {
+                staffDw = -45;
+            }
+            else if (staff.getRotation() < 0){
+                staffDw = 45;
+            }
+            else{
+                staffDw = 0;
+            }
+        }
+        else if (staff.getRotation() < 45 && staff.getRotation() > -45){
+            staffDw = x * 20;
+        }
+        else{
+            staffDw = 0;
+        }
+        staff.rotate(staffDw/(2*Math.PI));
+    }
 }

@@ -80,6 +80,12 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         }
     }
     
+    public void rotateStaff(Staff s, int x){
+        System.out.println(s.getRotation());
+        StaffManager.rotateStaff(s, x);
+    }
+
+
     /**
      * Updates the panel GUI.
      * TODO: All panel updates contain random checkBounds and checkCollision calls to prevent the ball from going through multiple barriers in a second.
