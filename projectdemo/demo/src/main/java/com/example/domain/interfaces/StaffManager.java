@@ -47,6 +47,6 @@ public interface StaffManager {
         else{
             staffDw = 0;
         }
-        return staffDw/(2*Math.PI);
+        return staffDw/10;
     }
 }

@@ -22,7 +22,6 @@ public class Staff extends GameObject {
     public Staff(Point p, Dimension d){
         super(p, d, IMG_PATH);
         speed = 40;
-        rotation = 0;
     }
 
     public int getRotation(){
@@ -47,7 +46,7 @@ public class Staff extends GameObject {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.rotate(rotation, getIcon().getIconWidth() / 2, getIcon().getIconHeight() / 2);
+        g2.rotate(rotation/(2*Math.PI), getIcon().getIconWidth() / 2, getIcon().getIconHeight() / 2);
         g2.drawImage(getIcon().getImage(), 0, 0, null);
     }
 

@@ -49,9 +49,6 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
         double mx = (s.getHitBox().getP3().x + s.getHitBox().getP4().x)/2;
         double my = (s.getHitBox().getP3().y + s.getHitBox().getP4().y)/2;
         Point direction = new Point((int)(2*(my-cy)/(mx-cx)), 2);
-        if(s.getRotation() == 0){
-            direction = new Point(0,1);
-        }
         BallManager.launchFireBall(ball, direction);
     }
 
