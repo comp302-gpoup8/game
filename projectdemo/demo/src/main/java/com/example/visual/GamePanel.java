@@ -7,6 +7,7 @@ import com.example.domain.gameObject.barriers.Barrier;
 import com.example.domain.interfaces.BallManager;
 import com.example.domain.levels.Level;
 import com.example.domain.managers.Player;
+import com.example.domain.managers.SpellEffects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,6 +40,8 @@ public class GamePanel extends JFrame{
         addKeyListener(controller.keyListener);
         addLevel(level);
         displayGamePanel();
+        addKeyListener(controller.getKeyListener());
+
     }
 
     /**

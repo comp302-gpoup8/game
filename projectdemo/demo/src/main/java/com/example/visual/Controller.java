@@ -1,5 +1,8 @@
 package com.example.visual;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -7,6 +10,7 @@ import java.awt.event.KeyListener;
  * Controller logic for the GamePanel
  * TODO: Extend it for additional keyboard and mouse inputs!
  */
+@Getter @Setter
 public class Controller {
     
     public volatile int direction = 0;

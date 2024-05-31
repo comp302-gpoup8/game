@@ -11,6 +11,7 @@ import com.example.domain.managers.GameManager;
 import com.example.domain.managers.Player;
 import com.example.domain.managers.SaveManager;
 import com.example.visual.GamePanel;
+import com.example.domain.managers.SpellEffects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,6 +47,24 @@ public class Game implements Serializable {
         loadGameManager();
 
     }
+
+    private void initializeSpells() {
+        spells.put("MagicalStaffExpansion", false);
+        spells.put("Hex", false);
+        spells.put("OverwhelmingFireBall", false);
+    }
+
+    public void acquireSpell(String spellName) {
+        if (spells.containsKey(spellName)) {
+            spells.put(spellName, true);
+        }
+    }
+
+    public boolean canUseSpell(String spellName) {
+        return spells.getOrDefault(spellName, false);
+    }
+
+
 
     /**
      * Main game logic
