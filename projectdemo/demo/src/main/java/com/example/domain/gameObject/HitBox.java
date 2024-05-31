@@ -3,11 +3,7 @@ package com.example.domain.gameObject;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Dimension;
-import lombok.Getter;
-import lombok.Setter;
 
-
-@Getter @Setter
 public class HitBox implements java.io.Serializable{
 
     private Point p1,p2,p3,p4;
@@ -63,7 +59,6 @@ public class HitBox implements java.io.Serializable{
     }
 
     public void rotate(double angle){
-        angle = angle/(2*Math.PI);
         double cx = this.getCenterX();
         double cy = this.getCenterY();
 
@@ -100,7 +95,7 @@ public class HitBox implements java.io.Serializable{
         width = (int) p1.distance(p2);
         height = (int) p1.distance(p4);
         
-        rotation += angle/(2*Math.PI);
+        rotation += angle;
     }
 
     public Point getLocation(){

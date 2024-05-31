@@ -43,13 +43,7 @@ public class GameManager implements BallManager, CollisionHandler, PhysicsManage
      * TODO: The ball should be launched in the Mouse Direction. Right now when I try it, it results in a null pointer exception.
      */
     public void launchBall(){
-        Staff s = game.getPanel().getStaff();
-        double cx = s.getHitBox().getCenterX();
-        double cy = s.getHitBox().getCenterY();
-        double mx = (s.getHitBox().getP3().x + s.getHitBox().getP4().x)/2;
-        double my = (s.getHitBox().getP3().y + s.getHitBox().getP4().y)/2;
-        Point direction = new Point((int)(2*(my-cy)/(mx-cx)), 2);
-        BallManager.launchFireBall(ball, direction);
+        BallManager.launchFireBall(ball, new Point(-1, -1));
     }
 
     /**
