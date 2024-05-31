@@ -63,7 +63,6 @@ public class HitBox implements java.io.Serializable{
     }
 
     public void rotate(double angle){
-        angle = angle/(2*Math.PI);
         double cx = this.getCenterX();
         double cy = this.getCenterY();
 
