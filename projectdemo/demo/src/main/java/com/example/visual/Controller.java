@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 public class Controller {
     
     public volatile int direction = 0;
+    public volatile int rotDirection = 0;
     public KeyListener keyListener;
 
     public Controller(){
@@ -22,11 +23,13 @@ public class Controller {
             public void keyPressed(KeyEvent e){
                int keyCode = e.getKeyCode();
                switch (keyCode){
-                case KeyEvent.VK_LEFT, KeyEvent.VK_A -> direction = -1;
-                case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> direction = 1;
+                case KeyEvent.VK_LEFT -> direction = -1;
+                case KeyEvent.VK_RIGHT -> direction = 1;
                 case KeyEvent.VK_SPACE -> direction = 2;
                 case KeyEvent.VK_P -> direction = 3;
                 case KeyEvent.VK_X -> direction = 9;
+                case KeyEvent.VK_A -> rotDirection = 1;
+                case KeyEvent.VK_D -> rotDirection = -11;
                }
             }
 
@@ -40,6 +43,12 @@ public class Controller {
     public int getDirection(){
         int temp = direction;
         direction = 0;
+        return temp;
+    }
+
+    public int getRotDirection(){
+        int temp = rotDirection;
+        rotDirection = 0;
         return temp;
     }
 }
