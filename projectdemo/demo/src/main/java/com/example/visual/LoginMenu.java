@@ -1,0 +1,102 @@
+package com.example.visual;
+
+
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.example.App;
+import com.example.database.Authenticator;
+import com.example.visual.Menu;
+
+public class LoginMenu extends Menu {
+
+    private JButton loginButton;
+    private JButton registerButton;
+    private JTextField usernameField;
+    private JTextField passwordField;
+    private JDialog registerDialog;
+    private App app;
+    private boolean authenticated;
+
+    public LoginMenu(int width, int height) {
+        super(width, height);
+        buildPanel();
+        setupComponents();
+    }
+
+    private void setupButtons() {
+        loginButton = new JButton("Login");
+        registerButton = new JButton("Register");
+
+        registerButton.addActionListener(e -> loginClicked());
+        loginButton.addActionListener(e -> registerClicked());
+    }
+
+    private void setupTextFields() {
+        usernameField = new JTextField();
+        passwordField = new JTextField();
+    }
+
+    private void addComponents() {
+        panel.add(usernameField);
+        panel.add(passwordField);
+        panel.add(loginButton);
+        panel.add(registerButton);
+    }
+
+    private void registerClicked() {
+        Authenticator auth = new Authenticator();
+        auth.register(usernameField.getText(), passwordField.getSelectedText());
+    }
+
+    private void loginClicked() {
+        Authenticator auth = new Authenticator();
+        authenticated = auth.login(usernameField.getText(), passwordField.getText());
+    }
+
+    @SuppressWarnings("unused")
+    private boolean validateCredentials(String username, String password, Authenticator auth) {
+        if (username.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Required fields cannot be left blank!",
+                    "Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (auth.usernameTaken(username)) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Username already taken. Please try a different one.",
+                    "Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Registration successful",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
+
+    public void buildPanel() {
+        this.panel = new JPanel();
+        panel.setSize(size);
+        panel.setName("Login Menu");
+        panel.setLayout(new GridLayout(4, 1));
+        setupComponents();
+        addComponents();
+
+    }
+
+    public void setupComponents() {
+        setupButtons();
+        setupTextFields();
+    }
+}
